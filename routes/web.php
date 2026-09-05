@@ -23,9 +23,11 @@ use App\Http\Controllers\Admin\EditorUploadController;
 use App\Http\Controllers\Admin\FaqController as AdminFaqController;
 use App\Http\Controllers\Admin\GalleryItemController;
 use App\Http\Controllers\Admin\LocationController;
+use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\PageController as AdminPageController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\SeoController;
+use App\Http\Controllers\Admin\ServiceAddonController;
 use App\Http\Controllers\Admin\ServiceCategoryController;
 use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
 use App\Http\Controllers\Admin\SystemSettingsController;
@@ -91,6 +93,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::resource('services', AdminServiceController::class)->except(['show']);
         Route::resource('service-categories', ServiceCategoryController::class)->except(['show']);
+        Route::resource('service-addons', ServiceAddonController::class)->except(['show']);
         Route::resource('locations', LocationController::class)->except(['show']);
         Route::resource('blocked-dates', BlockedDateController::class)->except(['show']);
 
@@ -102,6 +105,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::delete('blog-categories/{blogCategory}', [BlogTaxonomyController::class, 'destroyCategory'])->name('blog-categories.destroy');
         Route::post('blog-tags', [BlogTaxonomyController::class, 'storeTag'])->name('blog-tags.store');
         Route::delete('blog-tags/{blogTag}', [BlogTaxonomyController::class, 'destroyTag'])->name('blog-tags.destroy');
+        Route::resource('media', MediaController::class)->except(['show']);
         Route::resource('gallery-items', GalleryItemController::class)->except(['show']);
         Route::resource('testimonials', TestimonialController::class)->except(['show']);
 

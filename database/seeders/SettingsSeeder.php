@@ -64,5 +64,20 @@ class SettingsSeeder extends Seeder
             'ga_measurement_id' => '',
             'gtm_container_id' => '',
         ]);
+
+        $settings->setMany('sms', [
+            'enabled' => ['value' => false, 'type' => 'boolean'],
+            'provider' => 'null',
+            'api_key' => '',
+            'account_sid' => '',
+            'sender_id' => 'DSCW',
+            'from_number' => '',
+            'template_id' => '',
+            'confirmations_enabled' => ['value' => false, 'type' => 'boolean'],
+            'reminders_enabled' => ['value' => false, 'type' => 'boolean'],
+            'reminder_hours_before' => ['value' => 24, 'type' => 'integer'],
+            'confirmation_template' => 'Hi {name}, your DSCW booking {reference} is confirmed for {date} at {time}.',
+            'reminder_template' => 'Reminder: {name}, DSCW appointment {reference} on {date} at {time}.',
+        ]);
     }
 }

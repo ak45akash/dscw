@@ -264,6 +264,7 @@ document.addEventListener('alpine:init', () => {
         form: {
             location_id: null,
             service_id: config.preselectedServiceId || null,
+            addon_ids: [],
             booking_date: '',
             start_time: '',
             customer_name: '',
@@ -302,13 +303,24 @@ document.addEventListener('alpine:init', () => {
         get selectedService() {
             return this.services.find((s) => s.id === this.form.service_id);
         },
+        get availableAddons() {
+            return this.selectedService?.addons || [];
+        },
+        get selectedAddons() {
+            const ids = this.form.addon_ids || [];
+            return this.availableAddons.filter((a) => ids.includes(a.id));
+        },
+        get subtotal() {
+            const servicePrice = Number(this.selectedService?.price || 0);
+            const addonsPrice = this.selectedAddons.reduce((sum, a) => sum + Number(a.price || 0), 0);
+            return servicePrice + addonsPrice;
+        },
         get payableTotal() {
-            const price = Number(this.selectedService?.price || 0);
             if (!this.couponValid) {
-                return price;
+                return this.subtotal;
             }
 
-            return Math.max(0, price - Number(this.discount || 0));
+            return Math.max(0, this.subtotal - Number(this.discount || 0));
         },
         selectLocation(loc) {
             this.form.location_id = loc.id;
@@ -317,9 +329,22 @@ document.addEventListener('alpine:init', () => {
         },
         selectService(svc) {
             this.form.service_id = svc.id;
+            this.form.addon_ids = [];
             this.form.start_time = '';
             this.slots = [];
             this.resetCoupon();
+        },
+        toggleAddon(id) {
+            const ids = this.form.addon_ids || [];
+            if (ids.includes(id)) {
+                this.form.addon_ids = ids.filter((v) => v !== id);
+            } else {
+                this.form.addon_ids = [...ids, id];
+            }
+            this.resetCoupon();
+            if (this.form.booking_date) {
+                this.loadSlots();
+            }
         },
         resetCoupon() {
             this.couponValid = false;
@@ -351,6 +376,7 @@ document.addEventListener('alpine:init', () => {
                     body: JSON.stringify({
                         code,
                         service_id: this.form.service_id,
+                        addon_ids: this.form.addon_ids || [],
                     }),
                 });
                 const data = await res.json();
@@ -395,6 +421,7 @@ document.addEventListener('alpine:init', () => {
                     service_id: this.form.service_id,
                     date: this.form.booking_date,
                 });
+                (this.form.addon_ids || []).forEach((id) => params.append('addon_ids[]', id));
                 const res = await fetch(`${this.slotsUrl}?${params.toString()}`, {
                     headers: { Accept: 'application/json' },
                 });

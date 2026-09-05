@@ -30,7 +30,7 @@ class BookingController extends Controller
 
     public function index(Request $request): View
     {
-        $services = Service::query()->active()->with('category')->orderBy('display_order')->get();
+        $services = Service::query()->active()->with(['category', 'addons' => fn ($q) => $q->active()])->orderBy('display_order')->get();
         $locations = Location::query()->active()->with('workingHours')->get();
         $preselectedSlug = $request->string('service')->toString();
         $preselected = $services->firstWhere('slug', $preselectedSlug);
@@ -54,14 +54,18 @@ class BookingController extends Controller
             'location_id' => ['required', 'exists:locations,id'],
             'service_id' => ['required', 'exists:services,id'],
             'date' => ['required', 'date'],
+            'addon_ids' => ['nullable', 'array'],
+            'addon_ids.*' => ['integer', 'exists:service_addons,id'],
         ]);
 
         $location = Location::query()->active()->findOrFail($data['location_id']);
         $service = Service::query()->active()->findOrFail($data['service_id']);
         $date = Carbon::parse($data['date'])->startOfDay();
+        $addons = $this->bookingService->resolveAddons($service, $data['addon_ids'] ?? []);
+        $extra = (int) $addons->sum('duration_minutes');
 
         return response()->json([
-            'slots' => $this->availability->slotsFor($location, $service, $date),
+            'slots' => $this->availability->slotsFor($location, $service, $date, $extra),
         ]);
     }
 
@@ -80,6 +84,8 @@ class BookingController extends Controller
             'start_time' => ['required', 'date_format:H:i'],
             'payment_method' => ['required', 'in:online,at_location'],
             'coupon_code' => ['nullable', 'string', 'max:50'],
+            'addon_ids' => ['nullable', 'array'],
+            'addon_ids.*' => ['integer', 'exists:service_addons,id'],
         ]);
 
         try {
@@ -149,12 +155,16 @@ class BookingController extends Controller
         $data = $request->validate([
             'code' => ['required', 'string', 'max:50'],
             'service_id' => ['required', 'exists:services,id'],
+            'addon_ids' => ['nullable', 'array'],
+            'addon_ids.*' => ['integer', 'exists:service_addons,id'],
         ]);
 
         $service = Service::query()->active()->findOrFail($data['service_id']);
+        $addons = $this->bookingService->resolveAddons($service, $data['addon_ids'] ?? []);
+        $subtotal = (float) $service->price + (float) $addons->sum('price');
 
         try {
-            $applied = $this->coupons->apply($data['code'], (float) $service->price);
+            $applied = $this->coupons->apply($data['code'], $subtotal);
         } catch (InvalidArgumentException $e) {
             return response()->json(['message' => $e->getMessage()], 422);
         }
@@ -163,14 +173,14 @@ class BookingController extends Controller
             'code' => $applied['coupon']->code,
             'discount' => $applied['discount'],
             'total' => $applied['total'],
-            'subtotal' => (float) $service->price,
+            'subtotal' => $subtotal,
         ]);
     }
 
     public function confirmation(string $reference): View
     {
         $booking = Booking::query()
-            ->with(['location', 'service'])
+            ->with(['location', 'service', 'addons'])
             ->where('reference', $reference)
             ->firstOrFail();
 

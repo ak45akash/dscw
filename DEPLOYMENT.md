@@ -183,18 +183,18 @@ These are not all built yet (many show as “soon” in admin). When they land, 
 | Feature area | Extra production notes |
 |--------------|------------------------|
 | Blog / pages / FAQs / gallery CMS | More uploads under `storage/app/public/`; same `storage:link` |
-| Media library | Possibly larger files; raise PHP upload limits; consider S3 (`AWS_*` in `.env`) later |
+| Media library | Set `MEDIA_DISK=public` or `s3`; for S3 install `league/flysystem-aws-s3-v3` + `AWS_*`; raise PHP upload limits |
 | Booking calendar / reports | May need queued jobs + cron |
-| Email/SMS confirmations & reminders | Real `MAIL_*` / SMS provider keys; queue worker required |
+| Email/SMS confirmations & reminders | Real `MAIL_*`; SMS via System → Cache & Settings (MSG91/Twilio); cron for `bookings:send-sms-reminders` |
 | Coupons / marketing | Usually DB-only; clear caches after deploy |
-| SEO tools | Sitemap generation may use scheduler |
-| Users & roles / audit logs | Already partially present — keep DB backups |
+| SEO tools | Sitemap generation via scheduler (`sitemap:generate`) |
+| Users & roles / audit logs | Already present — keep DB backups |
 | Multi-server hosting | Shared storage (S3) for uploads; Redis for cache/session/queue; sticky sessions or central session store |
 
-When adding cloud file storage later:
-- Set `AWS_*` (or equivalent) in `.env`
-- Switch the `public` disk / upload services to S3
-- Existing local files need a one-time migration
+When using S3 for uploads:
+- Set `MEDIA_DISK=s3` and `AWS_*` in `.env`
+- `composer require league/flysystem-aws-s3-v3 "^3.0"`
+- Migrate existing `storage/app/public/{services,gallery,editor,media}` files once
 
 ---
 

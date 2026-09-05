@@ -15,6 +15,12 @@
                     <div><dt class="text-gray-500">Status</dt><dd class="font-semibold capitalize">{{ $booking->statusLabel() }}</dd></div>
                     <div><dt class="text-gray-500">Payment</dt><dd class="font-semibold">{{ $booking->payment_method === 'online' ? 'Online' : 'At location' }} ({{ $booking->payment_status }})</dd></div>
                     <div><dt class="text-gray-500">Service</dt><dd class="font-semibold">{{ $booking->service?->name }}</dd></div>
+                    @if($booking->addons->isNotEmpty())
+                        <div class="sm:col-span-2">
+                            <dt class="text-gray-500">Add-ons</dt>
+                            <dd class="font-semibold">{{ $booking->addons->map(fn ($a) => $a->name.' (₹'.number_format((float) $a->unit_price, 0).')')->join(', ') }}</dd>
+                        </div>
+                    @endif
                     <div><dt class="text-gray-500">Amount</dt><dd class="font-semibold text-blue-600">{{ $booking->formattedPrice() }}</dd></div>
                     <div><dt class="text-gray-500">Location</dt><dd class="font-semibold">{{ $booking->location?->name }}</dd></div>
                     <div><dt class="text-gray-500">Address</dt><dd>{{ $booking->location?->fullAddress() }}</dd></div>

@@ -35,10 +35,10 @@ Status inventory for Diamond Steam Car Wash (`dscw`).
 - [x] Sitemap + robots.txt (+ `sitemap:generate` scheduled daily)
 - [x] Booking reports + revenue reports (CSV export)
 
-### Phase 4b — Next (deferred)
+### Phase 4b — Complete
 
-- Service add-ons
-- Full media library / S3 cutover
-- SMS reminders (provider integration)
+- [x] Service add-ons (admin CRUD + booking pricing/duration/slots)
+- [x] Media library + configurable disk (`MEDIA_DISK` / S3-ready)
+- [x] SMS confirmations & reminders (MSG91 / Twilio + hourly schedule)
 
 See also [DEPLOYMENT.md](DEPLOYMENT.md) for production/shared-hosting steps.

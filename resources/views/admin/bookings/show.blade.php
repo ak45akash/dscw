@@ -16,6 +16,18 @@
                 <div><dt class="text-graphite-500">Email</dt><dd>{{ $booking->customer_email }}</dd></div>
                 <div><dt class="text-graphite-500">Vehicle</dt><dd>{{ $booking->vehicle_make_model }} @if($booking->vehicle_plate)({{ $booking->vehicle_plate }})@endif</dd></div>
                 <div><dt class="text-graphite-500">Service</dt><dd>{{ $booking->service?->name }} — {{ $booking->formattedPrice() }}</dd></div>
+                @if($booking->addons->isNotEmpty())
+                    <div class="sm:col-span-2">
+                        <dt class="text-graphite-500">Add-ons</dt>
+                        <dd>
+                            <ul class="list-inside list-disc">
+                                @foreach($booking->addons as $line)
+                                    <li>{{ $line->name }} — ₹{{ number_format((float) $line->unit_price, 0) }}@if($line->duration_minutes) (+{{ $line->duration_minutes }} min)@endif</li>
+                                @endforeach
+                            </ul>
+                        </dd>
+                    </div>
+                @endif
                 @if((float) $booking->discount_amount > 0)
                     <div><dt class="text-graphite-500">Discount</dt><dd>−₹{{ number_format((float) $booking->discount_amount, 0) }} @if($booking->coupon_code)({{ $booking->coupon_code }})@endif</dd></div>
                 @endif

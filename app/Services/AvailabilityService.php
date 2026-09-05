@@ -16,7 +16,7 @@ class AvailabilityService
     /**
      * @return array<int, array{start: string, end: string, label: string}>
      */
-    public function slotsFor(Location $location, Service $service, Carbon $date): array
+    public function slotsFor(Location $location, Service $service, Carbon $date, int $extraDurationMinutes = 0): array
     {
         if (! $this->settings->get('booking', 'online_bookings_enabled', true)) {
             return [];
@@ -53,7 +53,7 @@ class AvailabilityService
         $buffer = (int) $this->settings->get('booking', 'buffer_minutes', 15);
         $maxPerSlot = (int) $this->settings->get('booking', 'max_bookings_per_slot', 2);
         $maxPerDay = (int) $this->settings->get('booking', 'max_bookings_per_day', 20);
-        $duration = (int) $service->duration_minutes;
+        $duration = max(15, (int) $service->duration_minutes + max(0, $extraDurationMinutes));
 
         $dayBookings = Booking::query()
             ->where('location_id', $location->id)

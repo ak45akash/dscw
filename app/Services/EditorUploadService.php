@@ -4,40 +4,25 @@ namespace App\Services;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 use InvalidArgumentException;
 
 class EditorUploadService
 {
-    /**
-     * @var list<string>
-     */
-    private array $allowedMimes = [
-        'image/jpeg',
-        'image/png',
-        'image/gif',
-        'image/webp',
-    ];
+    public function __construct(private MediaLibraryService $media) {}
 
     /**
      * @return array{url: string, path: string, name: string}
      */
     public function store(UploadedFile $file): array
     {
-        if (! in_array($file->getMimeType(), $this->allowedMimes, true)) {
-            throw new InvalidArgumentException('Only JPEG, PNG, GIF, and WebP images are allowed.');
+        try {
+            $path = $this->media->storeFile($file, 'editor');
+        } catch (InvalidArgumentException $e) {
+            throw $e;
         }
-
-        if ($file->getSize() > 5 * 1024 * 1024) {
-            throw new InvalidArgumentException('Each image must be 5MB or smaller.');
-        }
-
-        $extension = strtolower($file->getClientOriginalExtension() ?: $file->extension() ?: 'jpg');
-        $filename = Str::uuid()->toString().'.'.$extension;
-        $path = $file->storeAs('editor/'.now()->format('Y/m'), $filename, 'public');
 
         return [
-            'url' => Storage::disk('public')->url($path),
+            'url' => Storage::disk($this->media->disk())->url($path),
             'path' => $path,
             'name' => $file->getClientOriginalName(),
         ];

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Booking extends Model
 {
@@ -38,6 +39,7 @@ class Booking extends Model
         'discount_amount', 'coupon_code',
         'status', 'payment_method', 'payment_status', 'razorpay_order_id',
         'razorpay_payment_id', 'confirmed_at', 'cancelled_at',
+        'sms_reminder_sent_at', 'sms_confirmation_sent_at',
     ];
 
     protected function casts(): array
@@ -48,6 +50,8 @@ class Booking extends Model
             'discount_amount' => 'decimal:2',
             'confirmed_at' => 'datetime',
             'cancelled_at' => 'datetime',
+            'sms_reminder_sent_at' => 'datetime',
+            'sms_confirmation_sent_at' => 'datetime',
         ];
     }
 
@@ -64,6 +68,11 @@ class Booking extends Model
     public function coupon(): BelongsTo
     {
         return $this->belongsTo(Coupon::class);
+    }
+
+    public function addons(): HasMany
+    {
+        return $this->hasMany(BookingServiceAddon::class);
     }
 
     public function scopeActive($query)

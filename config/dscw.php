@@ -61,6 +61,13 @@ return [
         'payment',
         'email',
         'analytics',
+        'sms',
     ],
+
+    /*
+    | Media uploads disk: "public" (local) or "s3".
+    | For S3, set AWS_* env vars and `composer require league/flysystem-aws-s3-v3`.
+    */
+    'media_disk' => env('MEDIA_DISK', 'public'),
 
 ];

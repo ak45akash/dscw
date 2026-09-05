@@ -57,6 +57,68 @@
                 </div>
             </x-card>
 
+            <x-card class="space-y-4">
+                <h3 class="font-semibold">SMS (Msg91 / Twilio)</h3>
+                <p class="text-xs text-graphite-500">Media disk: <code>{{ $mediaDisk }}</code> (<code>MEDIA_DISK</code>). Reminders run hourly via scheduler.</p>
+                <div class="flex flex-wrap gap-4">
+                    <label class="flex items-center gap-2 text-sm">
+                        <input type="checkbox" name="sms_enabled" value="1" @checked(old('sms_enabled', $sms['enabled'] ?? false))>
+                        Enable SMS
+                    </label>
+                    <label class="flex items-center gap-2 text-sm">
+                        <input type="checkbox" name="sms_confirmations_enabled" value="1" @checked(old('sms_confirmations_enabled', $sms['confirmations_enabled'] ?? false))>
+                        Booking confirmations
+                    </label>
+                    <label class="flex items-center gap-2 text-sm">
+                        <input type="checkbox" name="sms_reminders_enabled" value="1" @checked(old('sms_reminders_enabled', $sms['reminders_enabled'] ?? false))>
+                        Reminders
+                    </label>
+                </div>
+                <div class="grid gap-4 sm:grid-cols-2">
+                    <div>
+                        <x-label for="sms_provider">Provider</x-label>
+                        <select name="sms_provider" id="sms_provider" class="form-input">
+                            @foreach(['null' => 'None', 'msg91' => 'MSG91', 'twilio' => 'Twilio'] as $value => $label)
+                                <option value="{{ $value }}" @selected(old('sms_provider', $sms['provider'] ?? 'null') === $value)>{{ $label }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div>
+                        <x-label for="sms_reminder_hours_before">Reminder hours before</x-label>
+                        <x-input type="number" min="1" max="168" name="sms_reminder_hours_before" id="sms_reminder_hours_before" :value="old('sms_reminder_hours_before', $sms['reminder_hours_before'] ?? 24)" />
+                    </div>
+                    <div>
+                        <x-label for="sms_api_key">API key / Auth token</x-label>
+                        <x-input name="sms_api_key" id="sms_api_key" :value="old('sms_api_key', $sms['api_key'] ?? '')" />
+                    </div>
+                    <div>
+                        <x-label for="sms_account_sid">Twilio Account SID</x-label>
+                        <x-input name="sms_account_sid" id="sms_account_sid" :value="old('sms_account_sid', $sms['account_sid'] ?? '')" />
+                    </div>
+                    <div>
+                        <x-label for="sms_sender_id">MSG91 sender ID</x-label>
+                        <x-input name="sms_sender_id" id="sms_sender_id" :value="old('sms_sender_id', $sms['sender_id'] ?? 'DSCW')" />
+                    </div>
+                    <div>
+                        <x-label for="sms_from_number">Twilio from number</x-label>
+                        <x-input name="sms_from_number" id="sms_from_number" :value="old('sms_from_number', $sms['from_number'] ?? '')" />
+                    </div>
+                    <div class="sm:col-span-2">
+                        <x-label for="sms_template_id">MSG91 template ID (optional)</x-label>
+                        <x-input name="sms_template_id" id="sms_template_id" :value="old('sms_template_id', $sms['template_id'] ?? '')" />
+                    </div>
+                    <div class="sm:col-span-2">
+                        <x-label for="sms_confirmation_template">Confirmation template</x-label>
+                        <textarea name="sms_confirmation_template" id="sms_confirmation_template" rows="2" class="form-input">{{ old('sms_confirmation_template', $sms['confirmation_template'] ?? '') }}</textarea>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <x-label for="sms_reminder_template">Reminder template</x-label>
+                        <textarea name="sms_reminder_template" id="sms_reminder_template" rows="2" class="form-input">{{ old('sms_reminder_template', $sms['reminder_template'] ?? '') }}</textarea>
+                        <x-form-hint>Placeholders: {name} {reference} {date} {time} {service} {location}</x-form-hint>
+                    </div>
+                </div>
+            </x-card>
+
             <x-button type="submit">Save settings</x-button>
         </form>
 

@@ -7,7 +7,9 @@ use App\Mail\NewBookingAdminMail;
 use App\Models\Booking;
 use App\Models\Location;
 use App\Models\Service;
+use App\Models\ServiceAddon;
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
@@ -23,6 +25,7 @@ class BookingService
         private RazorpayService $razorpay,
         private AuditLogService $auditLog,
         private CouponService $coupons,
+        private SmsService $sms,
     ) {}
 
     /**
@@ -39,6 +42,7 @@ class BookingService
      *     start_time: string,
      *     payment_method: string,
      *     coupon_code?: ?string,
+     *     addon_ids?: list<int>|null,
      * }  $data
      * @return array{booking: Booking, razorpay_order?: array{id: string, amount: int, currency: string, key: string}}
      */
@@ -50,10 +54,12 @@ class BookingService
 
         $location = Location::query()->active()->findOrFail($data['location_id']);
         $service = Service::query()->active()->findOrFail($data['service_id']);
+        $addons = $this->resolveAddons($service, $data['addon_ids'] ?? []);
         $date = Carbon::parse($data['booking_date'])->startOfDay();
         $startTime = Carbon::parse($data['booking_date'].' '.$data['start_time']);
+        $extraDuration = (int) $addons->sum('duration_minutes');
 
-        $slots = $this->availability->slotsFor($location, $service, $date);
+        $slots = $this->availability->slotsFor($location, $service, $date, $extraDuration);
         $match = collect($slots)->firstWhere('start', $startTime->format('H:i'));
 
         if (! $match) {
@@ -81,7 +87,7 @@ class BookingService
         }
 
         $endTime = Carbon::parse($data['booking_date'].' '.$match['end']);
-        $basePrice = (float) $service->price;
+        $basePrice = (float) $service->price + (float) $addons->sum('price');
         $discount = 0.0;
         $couponId = null;
         $couponCode = null;
@@ -94,8 +100,9 @@ class BookingService
         }
 
         $finalPrice = max(0, round($basePrice - $discount, 2));
+        $totalDuration = (int) $service->duration_minutes + $extraDuration;
 
-        $booking = DB::transaction(function () use ($data, $location, $service, $date, $startTime, $endTime, $status, $paymentMethod, $paymentStatus, $finalPrice, $discount, $couponId, $couponCode) {
+        $booking = DB::transaction(function () use ($data, $location, $service, $addons, $date, $startTime, $endTime, $status, $paymentMethod, $paymentStatus, $finalPrice, $discount, $couponId, $couponCode, $totalDuration) {
             $booking = Booking::query()->create([
                 'reference' => $this->generateReference(),
                 'location_id' => $location->id,
@@ -110,7 +117,7 @@ class BookingService
                 'booking_date' => $date->toDateString(),
                 'start_time' => $startTime->format('H:i:s'),
                 'end_time' => $endTime->format('H:i:s'),
-                'duration_minutes' => $service->duration_minutes,
+                'duration_minutes' => $totalDuration,
                 'price' => $finalPrice,
                 'discount_amount' => $discount,
                 'coupon_code' => $couponCode,
@@ -120,6 +127,16 @@ class BookingService
                 'confirmed_at' => $status === Booking::STATUS_CONFIRMED ? now() : null,
             ]);
 
+            foreach ($addons as $addon) {
+                $booking->addons()->create([
+                    'service_addon_id' => $addon->id,
+                    'name' => $addon->name,
+                    'unit_price' => $addon->price,
+                    'duration_minutes' => $addon->duration_minutes,
+                    'quantity' => 1,
+                ]);
+            }
+
             if ($couponId) {
                 \App\Models\Coupon::query()->whereKey($couponId)->increment('used_count');
             }
@@ -127,7 +144,7 @@ class BookingService
             return $booking;
         });
 
-        $result = ['booking' => $booking->load(['location', 'service', 'coupon'])];
+        $result = ['booking' => $booking->load(['location', 'service', 'coupon', 'addons'])];
 
         if ($paymentMethod === Booking::PAYMENT_ONLINE) {
             $order = $this->razorpay->createOrder($booking);
@@ -141,6 +158,10 @@ class BookingService
         }
 
         $this->sendBookingEmails($result['booking']);
+
+        if ($status === Booking::STATUS_CONFIRMED) {
+            $this->sms->sendConfirmation($result['booking']);
+        }
 
         return $result;
     }
@@ -166,7 +187,13 @@ class BookingService
             'confirmed_at' => $status === Booking::STATUS_CONFIRMED ? now() : null,
         ]);
 
-        return $booking->fresh(['location', 'service', 'coupon']);
+        $booking = $booking->fresh(['location', 'service', 'coupon', 'addons']);
+
+        if ($status === Booking::STATUS_CONFIRMED) {
+            $this->sms->sendConfirmation($booking);
+        }
+
+        return $booking;
     }
 
     public function updateStatus(Booking $booking, string $status): Booking
@@ -198,7 +225,41 @@ class BookingService
             newValues: ['status' => $status, 'reference' => $booking->reference],
         );
 
-        return $booking->fresh(['location', 'service', 'coupon']);
+        $booking = $booking->fresh(['location', 'service', 'coupon', 'addons']);
+
+        if ($status === Booking::STATUS_CONFIRMED && $old !== Booking::STATUS_CONFIRMED && ! $booking->sms_confirmation_sent_at) {
+            $this->sms->sendConfirmation($booking);
+        }
+
+        return $booking;
+    }
+
+    /**
+     * @param  list<int|string>|null  $addonIds
+     * @return Collection<int, ServiceAddon>
+     */
+    public function resolveAddons(Service $service, ?array $addonIds): Collection
+    {
+        $ids = collect($addonIds ?? [])
+            ->map(fn ($id) => (int) $id)
+            ->filter()
+            ->unique()
+            ->values();
+
+        if ($ids->isEmpty()) {
+            return collect();
+        }
+
+        $addons = $service->addons()
+            ->where('service_addons.is_active', true)
+            ->whereIn('service_addons.id', $ids)
+            ->get();
+
+        if ($addons->count() !== $ids->count()) {
+            throw new InvalidArgumentException('One or more selected add-ons are not available for this service.');
+        }
+
+        return $addons;
     }
 
     private function sendBookingEmails(Booking $booking): void

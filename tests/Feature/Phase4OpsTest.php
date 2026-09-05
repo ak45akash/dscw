@@ -240,6 +240,6 @@ class Phase4OpsTest extends TestCase
             ->get(route('admin.dashboard'))
             ->assertOk()
             ->assertSee('Phase 4 Complete', false)
-            ->assertSee('ops slice', false);
+            ->assertSee('Add-ons, media library', false);
     }
 }

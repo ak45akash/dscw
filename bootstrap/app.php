@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withSchedule(function (\Illuminate\Console\Scheduling\Schedule $schedule): void {
         $schedule->command('sitemap:generate')->daily();
+        $schedule->command('bookings:send-sms-reminders')->hourly();
     })
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->web(append: [

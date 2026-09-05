@@ -30,7 +30,7 @@ class AdminNavigation
                 'items' => [
                     ['label' => 'Services', 'route' => 'admin.services.index', 'permission' => 'services.view'],
                     ['label' => 'Categories', 'route' => 'admin.service-categories.index', 'permission' => 'services.view'],
-                    ['label' => 'Add-ons', 'route' => 'admin.dashboard', 'permission' => 'services.manage', 'badge' => 'soon'],
+                    ['label' => 'Add-ons', 'route' => 'admin.service-addons.index', 'permission' => 'services.manage', 'active' => ['admin.service-addons.*']],
                 ],
             ],
             [
@@ -39,7 +39,7 @@ class AdminNavigation
                     ['label' => 'Pages', 'route' => 'admin.pages.index', 'permission' => 'content.view'],
                     ['label' => 'Posts', 'route' => 'admin.blog-posts.index', 'permission' => 'content.view', 'active' => ['admin.blog-posts.*']],
                     ['label' => 'Categories & Tags', 'route' => 'admin.blog-taxonomies.index', 'permission' => 'content.manage'],
-                    ['label' => 'Media Library', 'route' => 'admin.dashboard', 'permission' => 'content.manage', 'badge' => 'soon'],
+                    ['label' => 'Media Library', 'route' => 'admin.media.index', 'permission' => 'content.manage', 'active' => ['admin.media.*']],
                     ['label' => 'Testimonials', 'route' => 'admin.testimonials.index', 'permission' => 'content.view'],
                     ['label' => 'Gallery', 'route' => 'admin.gallery-items.index', 'permission' => 'content.view'],
                     ['label' => 'FAQs', 'route' => 'admin.faqs.index', 'permission' => 'content.view'],

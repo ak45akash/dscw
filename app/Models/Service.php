@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Support\Duration;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Storage;
 
@@ -33,6 +34,13 @@ class Service extends Model
     public function bookings(): HasMany
     {
         return $this->hasMany(Booking::class);
+    }
+
+    public function addons(): BelongsToMany
+    {
+        return $this->belongsToMany(ServiceAddon::class, 'service_service_addon')
+            ->orderBy('display_order')
+            ->orderBy('name');
     }
 
     public function scopeActive($query)
@@ -67,8 +75,8 @@ class Service extends Model
                 return $this->image;
             }
 
-            if (str_starts_with($this->image, 'services/')) {
-                return Storage::disk('public')->url($this->image);
+            if (str_starts_with($this->image, 'services/') || str_starts_with($this->image, 'media/')) {
+                return Storage::disk(\App\Services\MediaDisk::name())->url($this->image);
             }
 
             return asset($this->image);

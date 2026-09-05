@@ -21,7 +21,21 @@
                     class="mx-auto max-w-4xl"
                     x-data="bookingWizard(@js([
                         'locations' => $locations->map(fn ($l) => ['id' => $l->id, 'name' => $l->name, 'city' => $l->city, 'address' => $l->fullAddress()])->values(),
-                        'services' => $services->map(fn ($s) => ['id' => $s->id, 'name' => $s->name, 'price' => (float) $s->price, 'duration' => $s->formattedDuration(), 'short' => $s->short_description, 'category' => $s->category?->name])->values(),
+                        'services' => $services->map(fn ($s) => [
+                            'id' => $s->id,
+                            'name' => $s->name,
+                            'price' => (float) $s->price,
+                            'duration' => $s->formattedDuration(),
+                            'short' => $s->short_description,
+                            'category' => $s->category?->name,
+                            'addons' => $s->addons->map(fn ($a) => [
+                                'id' => $a->id,
+                                'name' => $a->name,
+                                'price' => (float) $a->price,
+                                'duration' => $a->formattedDuration(),
+                                'description' => $a->description,
+                            ])->values(),
+                        ])->values(),
                         'preselectedServiceId' => $preselectedServiceId,
                         'razorpayEnabled' => $razorpayEnabled,
                         'maxAdvanceDays' => $maxAdvanceDays,
@@ -91,6 +105,24 @@
                         <div x-show="step === 3" x-cloak>
                             <h2 class="mb-2 text-2xl font-bold text-gray-800">Pick date & time</h2>
                             <p class="mb-6 text-gray-600">Available slots update based on location hours and existing bookings.</p>
+
+                            <div class="mb-6" x-show="availableAddons.length" x-cloak>
+                                <h3 class="mb-2 text-sm font-semibold text-gray-800">Optional add-ons</h3>
+                                <div class="space-y-2">
+                                    <template x-for="addon in availableAddons" :key="addon.id">
+                                        <label class="flex cursor-pointer items-start gap-3 rounded-xl border border-gray-200 p-3 hover:border-blue-300">
+                                            <input type="checkbox" class="mt-1" :value="addon.id" @change="toggleAddon(addon.id)" :checked="form.addon_ids.includes(addon.id)">
+                                            <span class="flex-1">
+                                                <span class="font-medium text-gray-900" x-text="addon.name"></span>
+                                                <span class="mt-0.5 block text-xs text-gray-500" x-text="addon.duration"></span>
+                                                <span class="mt-1 block text-sm text-gray-500" x-show="addon.description" x-text="addon.description"></span>
+                                            </span>
+                                            <span class="shrink-0 font-semibold text-blue-600" x-text="'₹' + Number(addon.price).toLocaleString('en-IN')"></span>
+                                        </label>
+                                    </template>
+                                </div>
+                            </div>
+
                             <div class="mb-6">
                                 <label class="mb-1.5 block text-sm font-medium text-gray-700">Date</label>
                                 <input type="date" class="form-input max-w-xs" x-model="form.booking_date" :min="minDate" :max="maxDate" @change="loadSlots()">
@@ -148,6 +180,9 @@
                             <h2 class="mb-2 text-2xl font-bold text-gray-800">Confirm & pay</h2>
                             <div class="mt-6 rounded-xl bg-gray-50 p-5 text-sm text-gray-700">
                                 <p><span class="text-gray-500">Service:</span> <span class="font-medium" x-text="selectedService?.name"></span></p>
+                                <template x-if="selectedAddons.length">
+                                    <p class="mt-2"><span class="text-gray-500">Add-ons:</span> <span class="font-medium" x-text="selectedAddons.map(a => a.name).join(', ')"></span></p>
+                                </template>
                                 <p class="mt-2"><span class="text-gray-500">Location:</span> <span class="font-medium" x-text="selectedLocation?.name"></span></p>
                                 <p class="mt-2"><span class="text-gray-500">When:</span> <span class="font-medium" x-text="form.booking_date + ' at ' + form.start_time"></span></p>
                                 <div class="mt-4 space-y-2">
@@ -159,7 +194,7 @@
                                     <p x-show="couponMessage" class="text-sm" :class="couponValid ? 'text-green-600' : 'text-red-600'" x-text="couponMessage"></p>
                                 </div>
                                 <p class="mt-2 text-sm text-gray-500" x-show="couponValid && discount > 0">
-                                    Subtotal <span x-text="'₹' + Number(selectedService?.price || 0).toLocaleString('en-IN')"></span>
+                                    Subtotal <span x-text="'₹' + Number(subtotal).toLocaleString('en-IN')"></span>
                                     − discount <span x-text="'₹' + Number(discount).toLocaleString('en-IN')"></span>
                                 </p>
                                 <p class="mt-2 text-lg font-bold text-blue-600" x-text="'₹' + Number(payableTotal).toLocaleString('en-IN')"></p>

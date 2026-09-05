@@ -54,13 +54,11 @@
                     </ul>
                 </div>
                 <div>
-                    <p class="font-semibold text-graphite-900 dark:text-white">✓ Phase 4 Complete (ops slice)</p>
+                    <p class="font-semibold text-graphite-900 dark:text-white">✓ Phase 4 Complete</p>
                     <ul class="mt-2 space-y-1">
-                        <li>✓ Audit logs, users &amp; admins, cache/settings</li>
-                        <li>✓ SEO sitemap + robots.txt</li>
-                        <li>✓ Booking &amp; revenue reports</li>
+                        <li>✓ Ops: audit logs, users, settings, SEO, reports</li>
+                        <li>✓ Add-ons, media library, SMS reminders</li>
                     </ul>
-                    <p class="mt-3 text-xs text-graphite-500">Next (4b): add-ons, media/S3, SMS.</p>
                 </div>
             </div>
         </x-card>
