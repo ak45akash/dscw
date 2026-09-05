@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactRequest;
+use App\Mail\ContactEnquiryMail;
 use App\Models\ContactEnquiry;
 use App\Models\Faq;
 use App\Services\SettingsService;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
+use Throwable;
 
 class ContactController extends Controller
 {
@@ -27,7 +30,16 @@ class ContactController extends Controller
 
     public function store(ContactRequest $request): RedirectResponse
     {
-        ContactEnquiry::query()->create($request->validated());
+        $enquiry = ContactEnquiry::query()->create($request->validated());
+
+        $adminEmail = $this->settings->get('business', 'email');
+        if (filled($adminEmail)) {
+            try {
+                Mail::to($adminEmail)->send(new ContactEnquiryMail($enquiry));
+            } catch (Throwable) {
+                // Do not fail the contact form if mail is misconfigured.
+            }
+        }
 
         return back()->with('success', 'Thank you for your message. Our team will respond within 24 hours.');
     }

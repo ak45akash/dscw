@@ -11,7 +11,15 @@
     <section class="border-b border-graphite-200 py-12 dark:border-graphite-800">
         <div class="container-site">
             <div class="card overflow-hidden lg:flex">
-                <div class="aspect-[16/9] bg-gradient-to-br from-brand-100 to-brand-200 lg:aspect-auto lg:w-1/2 dark:from-brand-900 dark:to-brand-800"></div>
+                <a href="{{ route('blog.show', $featured->slug) }}" class="block aspect-[16/9] overflow-hidden bg-gradient-to-br from-brand-100 to-brand-200 lg:aspect-auto lg:min-h-[280px] lg:w-1/2 dark:from-brand-900 dark:to-brand-800">
+                    @if($featured->featuredImageUrl())
+                        <img
+                            src="{{ $featured->featuredImageUrl() }}"
+                            alt="{{ $featured->featured_image_alt ?: $featured->title }}"
+                            class="h-full w-full object-cover"
+                        >
+                    @endif
+                </a>
                 <div class="flex flex-col justify-center p-8 lg:w-1/2 lg:p-12">
                     <span class="text-xs font-semibold uppercase tracking-wide text-brand-600">Featured Article</span>
                     <h2 class="mt-3 text-2xl font-bold text-graphite-900 dark:text-white">

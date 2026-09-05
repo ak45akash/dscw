@@ -37,13 +37,27 @@ class BlogPost extends Model
     public function scopePublished($query)
     {
         return $query->where('status', 'published')
-            ->where('published_at', '<=', now());
+            ->where(function ($q) {
+                $q->whereNull('published_at')
+                    ->orWhere('published_at', '<=', now());
+            });
+    }
+
+    public function isPublished(): bool
+    {
+        return $this->status === 'published'
+            && ($this->published_at === null || $this->published_at->lte(now()));
     }
 
     public function readingTime(): int
     {
-        $words = str_word_count(strip_tags($this->content));
+        $words = str_word_count(strip_tags((string) $this->content));
 
         return max(1, (int) ceil($words / 200));
+    }
+
+    public function featuredImageUrl(): ?string
+    {
+        return app(\App\Services\ServiceImageService::class)->url($this->featured_image);
     }
 }

@@ -7,6 +7,7 @@ use App\Models\Location;
 use App\Models\Service;
 use App\Services\AvailabilityService;
 use App\Services\BookingService;
+use App\Services\CouponService;
 use App\Services\RazorpayService;
 use App\Services\SettingsService;
 use Carbon\Carbon;
@@ -24,6 +25,7 @@ class BookingController extends Controller
         private AvailabilityService $availability,
         private BookingService $bookingService,
         private RazorpayService $razorpay,
+        private CouponService $coupons,
     ) {}
 
     public function index(Request $request): View
@@ -77,6 +79,7 @@ class BookingController extends Controller
             'booking_date' => ['required', 'date'],
             'start_time' => ['required', 'date_format:H:i'],
             'payment_method' => ['required', 'in:online,at_location'],
+            'coupon_code' => ['nullable', 'string', 'max:50'],
         ]);
 
         try {
@@ -138,6 +141,29 @@ class BookingController extends Controller
 
         return response()->json([
             'confirmation_url' => route('booking.confirmation', $booking->reference),
+        ]);
+    }
+
+    public function validateCoupon(Request $request): JsonResponse
+    {
+        $data = $request->validate([
+            'code' => ['required', 'string', 'max:50'],
+            'service_id' => ['required', 'exists:services,id'],
+        ]);
+
+        $service = Service::query()->active()->findOrFail($data['service_id']);
+
+        try {
+            $applied = $this->coupons->apply($data['code'], (float) $service->price);
+        } catch (InvalidArgumentException $e) {
+            return response()->json(['message' => $e->getMessage()], 422);
+        }
+
+        return response()->json([
+            'code' => $applied['coupon']->code,
+            'discount' => $applied['discount'],
+            'total' => $applied['total'],
+            'subtotal' => (float) $service->price,
         ]);
     }
 

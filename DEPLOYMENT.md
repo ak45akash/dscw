@@ -154,7 +154,13 @@ Add one crontab entry:
 Use this later for booking reminders, cleanup of expired holds, report digests, etc.
 
 ### Mail
-Replace `MAIL_MAILER=log` with SMTP/API (SES, Postmark, Resend, host SMTP). Test booking + contact form emails after DNS SPF/DKIM are set.
+Replace `MAIL_MAILER=log` with SMTP/API (SES, Postmark, Resend, host SMTP). Phase 3 sends:
+
+- Booking confirmation to the customer
+- New booking notice to **Business Settings → email**
+- New contact enquiry notice to the same business email
+
+Test booking + contact form emails after DNS SPF/DKIM are set. Locally, `MAIL_MAILER=log` writes messages to `storage/logs/laravel.log`.
 
 ---
 

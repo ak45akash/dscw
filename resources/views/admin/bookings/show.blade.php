@@ -16,6 +16,9 @@
                 <div><dt class="text-graphite-500">Email</dt><dd>{{ $booking->customer_email }}</dd></div>
                 <div><dt class="text-graphite-500">Vehicle</dt><dd>{{ $booking->vehicle_make_model }} @if($booking->vehicle_plate)({{ $booking->vehicle_plate }})@endif</dd></div>
                 <div><dt class="text-graphite-500">Service</dt><dd>{{ $booking->service?->name }} — {{ $booking->formattedPrice() }}</dd></div>
+                @if((float) $booking->discount_amount > 0)
+                    <div><dt class="text-graphite-500">Discount</dt><dd>−₹{{ number_format((float) $booking->discount_amount, 0) }} @if($booking->coupon_code)({{ $booking->coupon_code }})@endif</dd></div>
+                @endif
                 <div><dt class="text-graphite-500">Location</dt><dd>{{ $booking->location?->name }}</dd></div>
                 <div><dt class="text-graphite-500">Date</dt><dd>{{ $booking->booking_date->format('l, d M Y') }}</dd></div>
                 <div><dt class="text-graphite-500">Time</dt><dd>{{ \Carbon\Carbon::parse($booking->start_time)->format('g:i A') }} – {{ \Carbon\Carbon::parse($booking->end_time)->format('g:i A') }}</dd></div>

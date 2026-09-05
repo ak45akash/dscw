@@ -23,6 +23,16 @@
                 @endif
             </div>
 
+            @if($post->featuredImageUrl())
+                <figure class="mb-10 overflow-hidden rounded-xl">
+                    <img
+                        src="{{ $post->featuredImageUrl() }}"
+                        alt="{{ $post->featured_image_alt ?: $post->title }}"
+                        class="w-full object-cover"
+                    >
+                </figure>
+            @endif
+
             @if($post->tags->isNotEmpty())
                 <div class="mb-8 flex flex-wrap gap-2">
                     @foreach($post->tags as $tag)

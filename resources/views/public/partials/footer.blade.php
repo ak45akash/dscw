@@ -31,6 +31,9 @@
                 <ul class="space-y-2">
                     <li><a href="{{ route('home') }}" class="text-gray-400 transition-colors hover:text-white">Home</a></li>
                     <li><a href="{{ route('services.index') }}" class="text-gray-400 transition-colors hover:text-white">Services</a></li>
+                    <li><a href="{{ route('blog.index') }}" class="text-gray-400 transition-colors hover:text-white">Blog</a></li>
+                    <li><a href="{{ route('gallery.index') }}" class="text-gray-400 transition-colors hover:text-white">Gallery</a></li>
+                    <li><a href="{{ route('faq.index') }}" class="text-gray-400 transition-colors hover:text-white">FAQ</a></li>
                     <li><a href="{{ route('about') }}" class="text-gray-400 transition-colors hover:text-white">About Us</a></li>
                     <li><a href="{{ route('contact.index') }}" class="text-gray-400 transition-colors hover:text-white">Contact</a></li>
                 </ul>

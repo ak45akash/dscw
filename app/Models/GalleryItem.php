@@ -28,4 +28,14 @@ class GalleryItem extends Model
     {
         return $query->where('is_featured', true);
     }
+
+    public function beforeImageUrl(): ?string
+    {
+        return app(\App\Services\ServiceImageService::class)->url($this->before_image);
+    }
+
+    public function afterImageUrl(): ?string
+    {
+        return app(\App\Services\ServiceImageService::class)->url($this->after_image);
+    }
 }

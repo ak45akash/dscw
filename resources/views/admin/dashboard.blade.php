@@ -45,8 +45,17 @@
                     </ul>
                 </div>
                 <div>
-                    <p class="font-semibold text-graphite-900 dark:text-white">→ Next: Phase 3</p>
-                    <p class="mt-1">Content CMS (blog, pages, FAQ, gallery), coupons, email notifications, and booking calendar UI.</p>
+                    <p class="font-semibold text-graphite-900 dark:text-white">✓ Phase 3 Complete</p>
+                    <ul class="mt-2 space-y-1">
+                        <li>✓ Content CMS (blog, pages, FAQ, gallery, testimonials)</li>
+                        <li>✓ Enquiry inbox + email notifications</li>
+                        <li>✓ Booking calendar UI</li>
+                        <li>✓ Coupons</li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="font-semibold text-graphite-900 dark:text-white">→ Phase 4 Next</p>
+                    <p class="mt-1">Add-ons, media library, SEO tools, reports, users UI, audit UI, cache tools, SMS.</p>
                 </div>
             </div>
         </x-card>

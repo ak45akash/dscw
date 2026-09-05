@@ -20,11 +20,11 @@ class ServiceImageService
     ];
 
     /**
-     * Store an uploaded service image on the public disk.
+     * Store an uploaded image on the public disk.
      *
      * @return string Relative path on the public disk (e.g. services/2026/09/uuid.jpg)
      */
-    public function store(UploadedFile $file): string
+    public function store(UploadedFile $file, string $folder = 'services'): string
     {
         if (! in_array($file->getMimeType(), $this->allowedMimes, true)) {
             throw new InvalidArgumentException('Only JPEG, PNG, GIF, and WebP images are allowed.');
@@ -34,10 +34,11 @@ class ServiceImageService
             throw new InvalidArgumentException('Each image must be 5MB or smaller.');
         }
 
+        $folder = trim($folder, '/');
         $extension = strtolower($file->getClientOriginalExtension() ?: $file->extension() ?: 'jpg');
         $filename = Str::uuid()->toString().'.'.$extension;
 
-        return $file->storeAs('services/'.now()->format('Y/m'), $filename, 'public');
+        return $file->storeAs($folder.'/'.now()->format('Y/m'), $filename, 'public');
     }
 
     public function delete(?string $path): void
@@ -51,6 +52,33 @@ class ServiceImageService
 
     public function isManagedPath(?string $path): bool
     {
-        return is_string($path) && str_starts_with($path, 'services/');
+        if (! is_string($path)) {
+            return false;
+        }
+
+        foreach (['services/', 'gallery/', 'blog/', 'content/'] as $prefix) {
+            if (str_starts_with($path, $prefix)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function url(?string $path, ?string $fallback = null): ?string
+    {
+        if (! $path) {
+            return $fallback;
+        }
+
+        if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
+            return $path;
+        }
+
+        if ($this->isManagedPath($path)) {
+            return Storage::disk('public')->url($path);
+        }
+
+        return asset($path);
     }
 }

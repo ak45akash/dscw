@@ -32,9 +32,10 @@ class Booking extends Model
     public const PAYMENT_REFUNDED = 'refunded';
 
     protected $fillable = [
-        'reference', 'location_id', 'service_id', 'customer_name', 'customer_email',
+        'reference', 'location_id', 'service_id', 'coupon_id', 'customer_name', 'customer_email',
         'customer_phone', 'vehicle_make_model', 'vehicle_plate', 'notes',
         'booking_date', 'start_time', 'end_time', 'duration_minutes', 'price',
+        'discount_amount', 'coupon_code',
         'status', 'payment_method', 'payment_status', 'razorpay_order_id',
         'razorpay_payment_id', 'confirmed_at', 'cancelled_at',
     ];
@@ -44,6 +45,7 @@ class Booking extends Model
         return [
             'booking_date' => 'date',
             'price' => 'decimal:2',
+            'discount_amount' => 'decimal:2',
             'confirmed_at' => 'datetime',
             'cancelled_at' => 'datetime',
         ];
@@ -57,6 +59,11 @@ class Booking extends Model
     public function service(): BelongsTo
     {
         return $this->belongsTo(Service::class);
+    }
+
+    public function coupon(): BelongsTo
+    {
+        return $this->belongsTo(Coupon::class);
     }
 
     public function scopeActive($query)

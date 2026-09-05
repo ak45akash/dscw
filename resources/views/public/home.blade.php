@@ -295,6 +295,27 @@
         </div>
     </section>
 
+    {{-- Latest blog posts --}}
+    @if($latestPosts->isNotEmpty())
+        <section class="bg-white py-24">
+            <div class="container-custom">
+                <div class="mb-12 flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
+                    <div>
+                        <h2 class="mb-4 text-4xl font-bold text-gray-800">From the Blog</h2>
+                        <div class="mb-4 h-1 w-24 bg-blue-600"></div>
+                        <p class="max-w-2xl text-lg text-gray-600">Car care tips, detailing guides, and paint protection advice from our team.</p>
+                    </div>
+                    <a href="{{ route('blog.index') }}" class="font-semibold text-blue-600 hover:text-blue-700">View all articles →</a>
+                </div>
+                <div class="grid gap-6 md:grid-cols-3">
+                    @foreach($latestPosts as $post)
+                        <x-blog-card :post="$post" />
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
+
     {{-- Testimonials --}}
     @if($testimonials->isNotEmpty())
         @php

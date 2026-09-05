@@ -14,13 +14,13 @@ class AdminNavigation
                 'items' => [
                     ['label' => 'Overview', 'route' => 'admin.dashboard', 'permission' => 'dashboard.view'],
                     ['label' => "Today's Bookings", 'route' => 'admin.bookings.today', 'permission' => 'bookings.view'],
-                    ['label' => 'Booking Calendar', 'route' => 'admin.dashboard', 'permission' => 'bookings.view', 'badge' => 'soon'],
+                    ['label' => 'Booking Calendar', 'route' => 'admin.bookings.calendar', 'permission' => 'bookings.view', 'active' => 'admin.bookings.calendar'],
                 ],
             ],
             [
                 'label' => 'Bookings',
                 'items' => [
-                    ['label' => 'All Bookings', 'route' => 'admin.bookings.index', 'permission' => 'bookings.view'],
+                    ['label' => 'All Bookings', 'route' => 'admin.bookings.index', 'permission' => 'bookings.view', 'active' => ['admin.bookings.index', 'admin.bookings.show']],
                     ['label' => 'Blocked Dates', 'route' => 'admin.blocked-dates.index', 'permission' => 'bookings.manage'],
                     ['label' => 'Booking Rules', 'route' => 'admin.settings.booking', 'permission' => 'bookings.manage'],
                 ],
@@ -36,18 +36,20 @@ class AdminNavigation
             [
                 'label' => 'Content',
                 'items' => [
-                    ['label' => 'Pages', 'route' => 'admin.dashboard', 'permission' => 'content.view', 'badge' => 'soon'],
-                    ['label' => 'Blog Posts', 'route' => 'admin.dashboard', 'permission' => 'content.view', 'badge' => 'soon'],
+                    ['label' => 'Pages', 'route' => 'admin.pages.index', 'permission' => 'content.view'],
+                    ['label' => 'Posts', 'route' => 'admin.blog-posts.index', 'permission' => 'content.view', 'active' => ['admin.blog-posts.*']],
+                    ['label' => 'Categories & Tags', 'route' => 'admin.blog-taxonomies.index', 'permission' => 'content.manage'],
                     ['label' => 'Media Library', 'route' => 'admin.dashboard', 'permission' => 'content.manage', 'badge' => 'soon'],
-                    ['label' => 'Testimonials', 'route' => 'admin.dashboard', 'permission' => 'content.view', 'badge' => 'soon'],
-                    ['label' => 'Gallery', 'route' => 'admin.dashboard', 'permission' => 'content.view', 'badge' => 'soon'],
-                    ['label' => 'FAQs', 'route' => 'admin.dashboard', 'permission' => 'content.view', 'badge' => 'soon'],
+                    ['label' => 'Testimonials', 'route' => 'admin.testimonials.index', 'permission' => 'content.view'],
+                    ['label' => 'Gallery', 'route' => 'admin.gallery-items.index', 'permission' => 'content.view'],
+                    ['label' => 'FAQs', 'route' => 'admin.faqs.index', 'permission' => 'content.view'],
+                    ['label' => 'Enquiries', 'route' => 'admin.enquiries.index', 'permission' => 'content.view', 'active' => ['admin.enquiries.index', 'admin.enquiries.show']],
                 ],
             ],
             [
                 'label' => 'Marketing',
                 'items' => [
-                    ['label' => 'Coupons', 'route' => 'admin.dashboard', 'permission' => 'marketing.view', 'badge' => 'soon'],
+                    ['label' => 'Coupons', 'route' => 'admin.coupons.index', 'permission' => 'marketing.view'],
                     ['label' => 'SEO', 'route' => 'admin.dashboard', 'permission' => 'marketing.view', 'badge' => 'soon'],
                 ],
             ],

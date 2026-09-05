@@ -9,14 +9,23 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\Admin\BlockedDateController;
+use App\Http\Controllers\Admin\BlogPostController;
+use App\Http\Controllers\Admin\BlogTaxonomyController;
+use App\Http\Controllers\Admin\BookingCalendarController;
 use App\Http\Controllers\Admin\BookingController as AdminBookingController;
 use App\Http\Controllers\Admin\BookingSettingsController;
 use App\Http\Controllers\Admin\BusinessSettingsController;
+use App\Http\Controllers\Admin\ContactEnquiryController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EditorUploadController;
+use App\Http\Controllers\Admin\FaqController as AdminFaqController;
+use App\Http\Controllers\Admin\GalleryItemController;
 use App\Http\Controllers\Admin\LocationController;
+use App\Http\Controllers\Admin\PageController as AdminPageController;
 use App\Http\Controllers\Admin\ServiceCategoryController;
 use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
+use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Middleware\EnsureAdmin;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +47,7 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.stor
 
 Route::get('/book-now', [BookingController::class, 'index'])->name('booking.index');
 Route::post('/book-now', [BookingController::class, 'store'])->name('booking.store')->middleware('throttle:10,1');
+Route::post('/book-now/coupon', [BookingController::class, 'validateCoupon'])->name('booking.coupon')->middleware('throttle:30,1');
 Route::get('/book-now/confirmation/{reference}', [BookingController::class, 'confirmation'])->name('booking.confirmation');
 Route::post('/book-now/payment/verify', [BookingController::class, 'verifyPayment'])->name('booking.payment.verify')->middleware('throttle:20,1');
 Route::get('/api/booking/slots', [BookingController::class, 'slots'])->name('booking.slots')->middleware('throttle:60,1');
@@ -63,6 +73,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::put('settings/booking', [BookingSettingsController::class, 'update'])->name('settings.booking.update');
 
         Route::get('bookings/today', [AdminBookingController::class, 'today'])->name('bookings.today');
+        Route::get('bookings/calendar', BookingCalendarController::class)->name('bookings.calendar');
         Route::get('bookings', [AdminBookingController::class, 'index'])->name('bookings.index');
         Route::get('bookings/{booking}', [AdminBookingController::class, 'show'])->name('bookings.show');
         Route::patch('bookings/{booking}/status', [AdminBookingController::class, 'updateStatus'])->name('bookings.status');
@@ -73,5 +84,22 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('service-categories', ServiceCategoryController::class)->except(['show']);
         Route::resource('locations', LocationController::class)->except(['show']);
         Route::resource('blocked-dates', BlockedDateController::class)->except(['show']);
+
+        Route::resource('faqs', AdminFaqController::class)->except(['show']);
+        Route::resource('pages', AdminPageController::class)->except(['show']);
+        Route::resource('blog-posts', BlogPostController::class)->except(['show']);
+        Route::get('blog-taxonomies', [BlogTaxonomyController::class, 'index'])->name('blog-taxonomies.index');
+        Route::post('blog-categories', [BlogTaxonomyController::class, 'storeCategory'])->name('blog-categories.store');
+        Route::delete('blog-categories/{blogCategory}', [BlogTaxonomyController::class, 'destroyCategory'])->name('blog-categories.destroy');
+        Route::post('blog-tags', [BlogTaxonomyController::class, 'storeTag'])->name('blog-tags.store');
+        Route::delete('blog-tags/{blogTag}', [BlogTaxonomyController::class, 'destroyTag'])->name('blog-tags.destroy');
+        Route::resource('gallery-items', GalleryItemController::class)->except(['show']);
+        Route::resource('testimonials', TestimonialController::class)->except(['show']);
+
+        Route::get('enquiries', [ContactEnquiryController::class, 'index'])->name('enquiries.index');
+        Route::get('enquiries/{enquiry}', [ContactEnquiryController::class, 'show'])->name('enquiries.show');
+        Route::patch('enquiries/{enquiry}/status', [ContactEnquiryController::class, 'updateStatus'])->name('enquiries.status');
+
+        Route::resource('coupons', CouponController::class)->except(['show']);
     });
 });

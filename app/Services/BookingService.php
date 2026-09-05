@@ -2,14 +2,18 @@
 
 namespace App\Services;
 
+use App\Mail\BookingConfirmationMail;
+use App\Mail\NewBookingAdminMail;
 use App\Models\Booking;
 use App\Models\Location;
 use App\Models\Service;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
 use RuntimeException;
+use Throwable;
 
 class BookingService
 {
@@ -18,6 +22,7 @@ class BookingService
         private AvailabilityService $availability,
         private RazorpayService $razorpay,
         private AuditLogService $auditLog,
+        private CouponService $coupons,
     ) {}
 
     /**
@@ -33,6 +38,7 @@ class BookingService
      *     booking_date: string,
      *     start_time: string,
      *     payment_method: string,
+     *     coupon_code?: ?string,
      * }  $data
      * @return array{booking: Booking, razorpay_order?: array{id: string, amount: int, currency: string, key: string}}
      */
@@ -75,12 +81,26 @@ class BookingService
         }
 
         $endTime = Carbon::parse($data['booking_date'].' '.$match['end']);
+        $basePrice = (float) $service->price;
+        $discount = 0.0;
+        $couponId = null;
+        $couponCode = null;
 
-        $booking = DB::transaction(function () use ($data, $location, $service, $date, $startTime, $endTime, $status, $paymentMethod, $paymentStatus) {
-            return Booking::query()->create([
+        if (! empty($data['coupon_code'])) {
+            $applied = $this->coupons->apply((string) $data['coupon_code'], $basePrice);
+            $discount = $applied['discount'];
+            $couponId = $applied['coupon']->id;
+            $couponCode = $applied['coupon']->code;
+        }
+
+        $finalPrice = max(0, round($basePrice - $discount, 2));
+
+        $booking = DB::transaction(function () use ($data, $location, $service, $date, $startTime, $endTime, $status, $paymentMethod, $paymentStatus, $finalPrice, $discount, $couponId, $couponCode) {
+            $booking = Booking::query()->create([
                 'reference' => $this->generateReference(),
                 'location_id' => $location->id,
                 'service_id' => $service->id,
+                'coupon_id' => $couponId,
                 'customer_name' => $data['customer_name'],
                 'customer_email' => $data['customer_email'],
                 'customer_phone' => $data['customer_phone'],
@@ -91,15 +111,23 @@ class BookingService
                 'start_time' => $startTime->format('H:i:s'),
                 'end_time' => $endTime->format('H:i:s'),
                 'duration_minutes' => $service->duration_minutes,
-                'price' => $service->price,
+                'price' => $finalPrice,
+                'discount_amount' => $discount,
+                'coupon_code' => $couponCode,
                 'status' => $status,
                 'payment_method' => $paymentMethod,
                 'payment_status' => $paymentStatus,
                 'confirmed_at' => $status === Booking::STATUS_CONFIRMED ? now() : null,
             ]);
+
+            if ($couponId) {
+                \App\Models\Coupon::query()->whereKey($couponId)->increment('used_count');
+            }
+
+            return $booking;
         });
 
-        $result = ['booking' => $booking->load(['location', 'service'])];
+        $result = ['booking' => $booking->load(['location', 'service', 'coupon'])];
 
         if ($paymentMethod === Booking::PAYMENT_ONLINE) {
             $order = $this->razorpay->createOrder($booking);
@@ -111,6 +139,8 @@ class BookingService
                 'key' => $this->razorpay->keyId(),
             ];
         }
+
+        $this->sendBookingEmails($result['booking']);
 
         return $result;
     }
@@ -136,7 +166,7 @@ class BookingService
             'confirmed_at' => $status === Booking::STATUS_CONFIRMED ? now() : null,
         ]);
 
-        return $booking->fresh(['location', 'service']);
+        return $booking->fresh(['location', 'service', 'coupon']);
     }
 
     public function updateStatus(Booking $booking, string $status): Booking
@@ -168,7 +198,25 @@ class BookingService
             newValues: ['status' => $status, 'reference' => $booking->reference],
         );
 
-        return $booking->fresh(['location', 'service']);
+        return $booking->fresh(['location', 'service', 'coupon']);
+    }
+
+    private function sendBookingEmails(Booking $booking): void
+    {
+        try {
+            Mail::to($booking->customer_email)->send(new BookingConfirmationMail($booking));
+        } catch (Throwable) {
+            // Mail failures must not block booking creation (shared hosting / misconfigured SMTP).
+        }
+
+        $adminEmail = $this->settings->get('business', 'email');
+        if (filled($adminEmail)) {
+            try {
+                Mail::to($adminEmail)->send(new NewBookingAdminMail($booking));
+            } catch (Throwable) {
+                // Same as above.
+            }
+        }
     }
 
     private function generateReference(): string

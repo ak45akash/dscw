@@ -13,6 +13,8 @@
         <div class="hidden items-center space-x-6 md:flex">
             <a href="{{ route('home') }}" @class([request()->routeIs('home') ? 'nav-link-active' : 'nav-link'])>Home</a>
             <a href="{{ route('services.index') }}" @class([request()->routeIs('services.*') ? 'nav-link-active' : 'nav-link'])>Services</a>
+            <a href="{{ route('blog.index') }}" @class([request()->routeIs('blog.*') ? 'nav-link-active' : 'nav-link'])>Blog</a>
+            <a href="{{ route('gallery.index') }}" @class([request()->routeIs('gallery.*') ? 'nav-link-active' : 'nav-link'])>Gallery</a>
             <a href="{{ route('about') }}" @class([request()->routeIs('about') ? 'nav-link-active' : 'nav-link'])>About</a>
             <a href="{{ route('contact.index') }}" @class([request()->routeIs('contact.*') ? 'nav-link-active' : 'nav-link'])>Contact</a>
         </div>
@@ -45,6 +47,8 @@
         <div class="flex flex-col p-4">
             <a href="{{ route('home') }}" @class(['py-2', request()->routeIs('home') ? 'font-semibold text-blue-600' : 'text-gray-600 hover:text-blue-600'])" @click="close()">Home</a>
             <a href="{{ route('services.index') }}" @class(['py-2', request()->routeIs('services.*') ? 'font-semibold text-blue-600' : 'text-gray-600 hover:text-blue-600'])" @click="close()">Services</a>
+            <a href="{{ route('blog.index') }}" @class(['py-2', request()->routeIs('blog.*') ? 'font-semibold text-blue-600' : 'text-gray-600 hover:text-blue-600'])" @click="close()">Blog</a>
+            <a href="{{ route('gallery.index') }}" @class(['py-2', request()->routeIs('gallery.*') ? 'font-semibold text-blue-600' : 'text-gray-600 hover:text-blue-600'])" @click="close()">Gallery</a>
             <a href="{{ route('about') }}" @class(['py-2', request()->routeIs('about') ? 'font-semibold text-blue-600' : 'text-gray-600 hover:text-blue-600'])" @click="close()">About</a>
             <a href="{{ route('contact.index') }}" @class(['py-2', request()->routeIs('contact.*') ? 'font-semibold text-blue-600' : 'text-gray-600 hover:text-blue-600'])" @click="close()">Contact</a>
             <a href="{{ route('booking.index') }}" class="mt-2 rounded-full bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-3 text-center text-white" @click="close()">Book Now</a>

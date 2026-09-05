@@ -29,6 +29,7 @@
                         'slotsUrl' => route('booking.slots'),
                         'storeUrl' => route('booking.store'),
                         'verifyUrl' => route('booking.payment.verify'),
+                        'couponUrl' => route('booking.coupon'),
                         'csrf' => csrf_token(),
                     ]))"
                 >
@@ -149,7 +150,19 @@
                                 <p><span class="text-gray-500">Service:</span> <span class="font-medium" x-text="selectedService?.name"></span></p>
                                 <p class="mt-2"><span class="text-gray-500">Location:</span> <span class="font-medium" x-text="selectedLocation?.name"></span></p>
                                 <p class="mt-2"><span class="text-gray-500">When:</span> <span class="font-medium" x-text="form.booking_date + ' at ' + form.start_time"></span></p>
-                                <p class="mt-2 text-lg font-bold text-blue-600" x-text="'₹' + Number(selectedService?.price || 0).toLocaleString('en-IN')"></p>
+                                <div class="mt-4 space-y-2">
+                                    <label class="block text-sm font-medium text-gray-700">Coupon code (optional)</label>
+                                    <div class="flex gap-2">
+                                        <input type="text" class="form-input uppercase" x-model="form.coupon_code" placeholder="SAVE10" @keydown.enter.prevent="applyCoupon()">
+                                        <button type="button" class="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50" @click="applyCoupon()" :disabled="applyingCoupon">Apply</button>
+                                    </div>
+                                    <p x-show="couponMessage" class="text-sm" :class="couponValid ? 'text-green-600' : 'text-red-600'" x-text="couponMessage"></p>
+                                </div>
+                                <p class="mt-2 text-sm text-gray-500" x-show="couponValid && discount > 0">
+                                    Subtotal <span x-text="'₹' + Number(selectedService?.price || 0).toLocaleString('en-IN')"></span>
+                                    − discount <span x-text="'₹' + Number(discount).toLocaleString('en-IN')"></span>
+                                </p>
+                                <p class="mt-2 text-lg font-bold text-blue-600" x-text="'₹' + Number(payableTotal).toLocaleString('en-IN')"></p>
                             </div>
 
                             <div class="mt-6 grid gap-3 sm:grid-cols-2">

@@ -251,10 +251,15 @@ document.addEventListener('alpine:init', () => {
         slotsUrl: config.slotsUrl,
         storeUrl: config.storeUrl,
         verifyUrl: config.verifyUrl,
+        couponUrl: config.couponUrl,
         csrf: config.csrf,
         slots: [],
         loadingSlots: false,
         submitting: false,
+        applyingCoupon: false,
+        couponValid: false,
+        couponMessage: null,
+        discount: 0,
         error: null,
         form: {
             location_id: null,
@@ -268,6 +273,7 @@ document.addEventListener('alpine:init', () => {
             vehicle_plate: '',
             notes: '',
             payment_method: 'at_location',
+            coupon_code: '',
         },
         formatLocalDate(date) {
             const year = date.getFullYear();
@@ -296,6 +302,14 @@ document.addEventListener('alpine:init', () => {
         get selectedService() {
             return this.services.find((s) => s.id === this.form.service_id);
         },
+        get payableTotal() {
+            const price = Number(this.selectedService?.price || 0);
+            if (!this.couponValid) {
+                return price;
+            }
+
+            return Math.max(0, price - Number(this.discount || 0));
+        },
         selectLocation(loc) {
             this.form.location_id = loc.id;
             this.form.start_time = '';
@@ -305,6 +319,53 @@ document.addEventListener('alpine:init', () => {
             this.form.service_id = svc.id;
             this.form.start_time = '';
             this.slots = [];
+            this.resetCoupon();
+        },
+        resetCoupon() {
+            this.couponValid = false;
+            this.couponMessage = null;
+            this.discount = 0;
+        },
+        async applyCoupon() {
+            this.couponMessage = null;
+            this.couponValid = false;
+            this.discount = 0;
+            const code = (this.form.coupon_code || '').trim();
+            if (!code) {
+                this.couponMessage = 'Enter a coupon code.';
+                return;
+            }
+            if (!this.form.service_id) {
+                this.couponMessage = 'Select a service first.';
+                return;
+            }
+            this.applyingCoupon = true;
+            try {
+                const res = await fetch(this.couponUrl, {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': this.csrf,
+                    },
+                    body: JSON.stringify({
+                        code,
+                        service_id: this.form.service_id,
+                    }),
+                });
+                const data = await res.json();
+                if (!res.ok) {
+                    throw new Error(data.message || 'Invalid coupon.');
+                }
+                this.form.coupon_code = data.code;
+                this.discount = data.discount;
+                this.couponValid = true;
+                this.couponMessage = `Coupon applied — you save ₹${Number(data.discount).toLocaleString('en-IN')}.`;
+            } catch (e) {
+                this.couponMessage = e.message || 'Could not apply coupon.';
+            } finally {
+                this.applyingCoupon = false;
+            }
         },
         goToSchedule() {
             this.step = 3;
@@ -349,6 +410,10 @@ document.addEventListener('alpine:init', () => {
             this.submitting = true;
             this.error = null;
             try {
+                const payload = { ...this.form };
+                if (!this.couponValid) {
+                    payload.coupon_code = null;
+                }
                 const res = await fetch(this.storeUrl, {
                     method: 'POST',
                     headers: {
@@ -356,7 +421,7 @@ document.addEventListener('alpine:init', () => {
                         'Content-Type': 'application/json',
                         'X-CSRF-TOKEN': this.csrf,
                     },
-                    body: JSON.stringify(this.form),
+                    body: JSON.stringify(payload),
                 });
                 const data = await res.json();
                 if (!res.ok) {
