@@ -2,6 +2,8 @@
 
 namespace App\Support;
 
+use Illuminate\Support\Facades\Route;
+
 class AdminNavigation
 {
     public static function groups(): array
@@ -11,23 +13,23 @@ class AdminNavigation
                 'label' => 'Dashboard',
                 'items' => [
                     ['label' => 'Overview', 'route' => 'admin.dashboard', 'permission' => 'dashboard.view'],
-                    ['label' => "Today's Bookings", 'route' => 'admin.dashboard', 'permission' => 'bookings.view', 'badge' => 'soon'],
+                    ['label' => "Today's Bookings", 'route' => 'admin.bookings.today', 'permission' => 'bookings.view'],
                     ['label' => 'Booking Calendar', 'route' => 'admin.dashboard', 'permission' => 'bookings.view', 'badge' => 'soon'],
                 ],
             ],
             [
                 'label' => 'Bookings',
                 'items' => [
-                    ['label' => 'All Bookings', 'route' => 'admin.dashboard', 'permission' => 'bookings.view', 'badge' => 'soon'],
-                    ['label' => 'Blocked Dates', 'route' => 'admin.dashboard', 'permission' => 'bookings.manage', 'badge' => 'soon'],
-                    ['label' => 'Booking Rules', 'route' => 'admin.dashboard', 'permission' => 'bookings.manage', 'badge' => 'soon'],
+                    ['label' => 'All Bookings', 'route' => 'admin.bookings.index', 'permission' => 'bookings.view'],
+                    ['label' => 'Blocked Dates', 'route' => 'admin.blocked-dates.index', 'permission' => 'bookings.manage'],
+                    ['label' => 'Booking Rules', 'route' => 'admin.settings.booking', 'permission' => 'bookings.manage'],
                 ],
             ],
             [
                 'label' => 'Services',
                 'items' => [
-                    ['label' => 'Services', 'route' => 'admin.dashboard', 'permission' => 'services.view', 'badge' => 'soon'],
-                    ['label' => 'Categories', 'route' => 'admin.dashboard', 'permission' => 'services.view', 'badge' => 'soon'],
+                    ['label' => 'Services', 'route' => 'admin.services.index', 'permission' => 'services.view'],
+                    ['label' => 'Categories', 'route' => 'admin.service-categories.index', 'permission' => 'services.view'],
                     ['label' => 'Add-ons', 'route' => 'admin.dashboard', 'permission' => 'services.manage', 'badge' => 'soon'],
                 ],
             ],
@@ -53,8 +55,7 @@ class AdminNavigation
                 'label' => 'Business',
                 'items' => [
                     ['label' => 'Business Settings', 'route' => 'admin.settings.business', 'permission' => 'business.manage'],
-                    ['label' => 'Locations', 'route' => 'admin.dashboard', 'permission' => 'business.manage', 'badge' => 'soon'],
-                    ['label' => 'Working Hours', 'route' => 'admin.dashboard', 'permission' => 'business.manage', 'badge' => 'soon'],
+                    ['label' => 'Locations', 'route' => 'admin.locations.index', 'permission' => 'business.manage'],
                 ],
             ],
             [
@@ -73,6 +74,43 @@ class AdminNavigation
                 ],
             ],
         ];
+    }
+
+    public static function itemIsActive(array $item, ?string $currentRoute = null): bool
+    {
+        if (! empty($item['badge'])) {
+            return false;
+        }
+
+        $routeName = $item['route'] ?? null;
+        if (! $routeName || ! Route::has($routeName)) {
+            return false;
+        }
+
+        $pattern = $item['active'] ?? $routeName;
+
+        if ($currentRoute === null) {
+            return request()->routeIs($pattern);
+        }
+
+        foreach ((array) $pattern as $candidate) {
+            if ($currentRoute === $candidate || str($currentRoute)->is($candidate)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static function groupContainsActiveItem(array $group, ?string $currentRoute = null): bool
+    {
+        foreach ($group['items'] as $item) {
+            if (self::itemIsActive($item, $currentRoute)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public static function visibleForUser($user): array

@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             FaqSeeder::class,
             TestimonialSeeder::class,
             GallerySeeder::class,
+            LocationSeeder::class,
         ]);
     }
 }

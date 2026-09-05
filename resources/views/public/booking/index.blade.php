@@ -1,111 +1,179 @@
 <x-layouts.public :seo-title="$seoTitle" :seo-description="$seoDescription">
-    <x-page-hero
-        badge="Online Booking"
-        title="Book Your Car Care Service"
-        subtitle="Select your service, choose a convenient time, and let our team handle the rest. Fast, clear, and hassle-free booking."
-    />
-
-    <x-breadcrumbs :items="[['label' => 'Home', 'url' => route('home')], ['label' => 'Book Now']]" />
-
-    {{-- How it works --}}
-    <section class="border-b border-graphite-200 py-16 dark:border-graphite-800 sm:py-20">
-        <div class="container-site">
-            <x-section-heading title="How Booking Works" subtitle="Four simple steps to a cleaner, better-protected vehicle." class="mb-12 text-center" align="center" />
-            <ol class="grid gap-8 md:grid-cols-4">
-                @foreach([
-                    ['step' => '1', 'title' => 'Choose Service', 'text' => 'Browse our service menu and select the treatment your vehicle needs — from a quick wash to full ceramic coating.'],
-                    ['step' => '2', 'title' => 'Pick Date & Time', 'text' => 'Select an available slot that fits your schedule. Same-day bookings may be available for select services.'],
-                    ['step' => '3', 'title' => 'Enter Details', 'text' => 'Provide your contact information, vehicle make/model, and any special instructions for our team.'],
-                    ['step' => '4', 'title' => 'Confirm & Pay', 'text' => 'Review your booking summary, apply any coupon codes, and confirm with secure online payment or pay at location.'],
-                ] as $item)
-                    <li class="text-center">
-                        <span class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-brand-600 text-lg font-bold text-white">{{ $item['step'] }}</span>
-                        <h3 class="mt-4 font-semibold text-graphite-900 dark:text-white">{{ $item['title'] }}</h3>
-                        <p class="mt-2 text-sm text-graphite-600 dark:text-graphite-300">{{ $item['text'] }}</p>
-                    </li>
-                @endforeach
-            </ol>
+    <div class="relative flex h-[40vh] min-h-[280px] items-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="{{ asset('images/hero.jpg') }}" alt="Book car wash" class="h-full w-full object-cover brightness-[0.55]">
         </div>
-    </section>
+        <div class="container-custom relative z-10 text-white">
+            <h1 class="text-4xl font-bold md:text-5xl">Book Your <span class="text-blue-400">Service</span></h1>
+            <p class="mt-3 max-w-2xl text-lg text-white/90">Choose a location, pick a slot, and confirm — pay online or at the centre.</p>
+        </div>
+    </div>
 
-    {{-- Service selection --}}
-    <section class="py-16 sm:py-20">
-        <div class="container-site">
-            <div class="grid gap-12 lg:grid-cols-3">
-                <div class="lg:col-span-2">
-                    <h2 class="text-2xl font-bold text-graphite-900 dark:text-white">Select a Service</h2>
-                    <p class="mt-3 text-graphite-600 dark:text-graphite-300">Choose from our complete range of car care services. The full booking engine with live availability and payment will be connected in the next phase — for now, select a service and contact us to confirm your appointment.</p>
-
-                    <div class="mt-8 space-y-4" x-data="{ selected: null }">
-                        @foreach($services as $service)
-                            <label class="card flex cursor-pointer items-start gap-4 p-5 transition-colors" :class="selected === {{ $service->id }} ? 'ring-2 ring-brand-500' : ''">
-                                <input type="radio" name="service_id" value="{{ $service->id }}" class="mt-1" x-model="selected" @change="selected = {{ $service->id }}">
-                                <div class="flex-1">
-                                    <div class="flex items-start justify-between gap-4">
-                                        <div>
-                                            <p class="font-semibold text-graphite-900 dark:text-white">{{ $service->name }}</p>
-                                            <p class="mt-1 text-sm text-graphite-600 dark:text-graphite-300">{{ $service->short_description }}</p>
-                                        </div>
-                                        <div class="text-right shrink-0">
-                                            <p class="font-bold text-brand-700 dark:text-brand-300">{{ $service->formattedPrice() }}</p>
-                                            <p class="text-xs text-graphite-500">{{ $service->formattedDuration() }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </label>
+    <section class="bg-gradient-to-b from-gray-50 to-white py-16">
+        <div class="container-custom">
+            @if(! $bookingsEnabled)
+                <div class="mx-auto max-w-2xl rounded-2xl border border-amber-200 bg-amber-50 p-8 text-center">
+                    <h2 class="text-2xl font-bold text-gray-800">Online booking is temporarily closed</h2>
+                    <p class="mt-3 text-gray-600">Please <a href="{{ route('contact.index') }}" class="font-medium text-blue-600 hover:underline">contact us</a> to schedule your appointment.</p>
+                </div>
+            @else
+                <div
+                    class="mx-auto max-w-4xl"
+                    x-data="bookingWizard(@js([
+                        'locations' => $locations->map(fn ($l) => ['id' => $l->id, 'name' => $l->name, 'city' => $l->city, 'address' => $l->fullAddress()])->values(),
+                        'services' => $services->map(fn ($s) => ['id' => $s->id, 'name' => $s->name, 'price' => (float) $s->price, 'duration' => $s->formattedDuration(), 'short' => $s->short_description, 'category' => $s->category?->name])->values(),
+                        'preselectedServiceId' => $preselectedServiceId,
+                        'razorpayEnabled' => $razorpayEnabled,
+                        'maxAdvanceDays' => $maxAdvanceDays,
+                        'sameDayBookings' => $sameDayBookings,
+                        'slotsUrl' => route('booking.slots'),
+                        'storeUrl' => route('booking.store'),
+                        'verifyUrl' => route('booking.payment.verify'),
+                        'csrf' => csrf_token(),
+                    ]))"
+                >
+                    {{-- Progress --}}
+                    <div class="mb-10 flex flex-wrap justify-center gap-2 text-sm">
+                        @foreach(['Location', 'Service', 'Schedule', 'Details', 'Payment'] as $i => $label)
+                            <div class="flex items-center gap-2 rounded-full px-3 py-1" :class="step === {{ $i + 1 }} ? 'bg-blue-600 text-white' : (step > {{ $i + 1 }} ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-500')">
+                                <span class="font-semibold">{{ $i + 1 }}</span>
+                                <span class="hidden sm:inline">{{ $label }}</span>
+                            </div>
                         @endforeach
                     </div>
-                </div>
 
-                <aside>
-                    <x-card class="sticky top-24">
-                        <h3 class="text-lg font-semibold">Booking Form</h3>
-                        <p class="mt-2 text-sm text-graphite-500">Complete booking with live calendar and payment is coming soon. Contact us to schedule your appointment today.</p>
-                        <form class="mt-6 space-y-4">
-                            <div>
-                                <x-label for="book_name">Full Name</x-label>
-                                <x-input name="book_name" id="book_name" placeholder="Your name" />
-                            </div>
-                            <div>
-                                <x-label for="book_phone">Phone</x-label>
-                                <x-input name="book_phone" id="book_phone" placeholder="+91" />
-                            </div>
-                            <div>
-                                <x-label for="book_email">Email</x-label>
-                                <x-input type="email" name="book_email" id="book_email" />
-                            </div>
-                            <div>
-                                <x-label for="book_vehicle">Vehicle Make & Model</x-label>
-                                <x-input name="book_vehicle" id="book_vehicle" placeholder="e.g. Honda City 2022" />
-                            </div>
-                            <div>
-                                <x-label for="book_notes">Notes</x-label>
-                                <textarea name="book_notes" id="book_notes" rows="3" class="form-input" placeholder="Any special requirements..."></textarea>
-                            </div>
-                        </form>
-                        <x-button href="{{ route('contact.index') }}" class="mt-6 w-full">Contact to Confirm Booking</x-button>
-                        <p class="mt-3 text-center text-xs text-graphite-400">Full online booking engine launching soon</p>
-                    </x-card>
-                </aside>
-            </div>
-        </div>
-    </section>
+                    <div class="booking-form-surface rounded-2xl border border-gray-100 bg-white p-6 shadow-lg md:p-8">
+                        <template x-if="error">
+                            <div class="mb-6 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700" x-text="error"></div>
+                        </template>
 
-    <section class="bg-graphite-50 py-16 dark:bg-graphite-900/50 sm:py-20">
-        <div class="container-site">
-            <x-section-heading title="Why Book With Us?" class="mb-10" />
-            <div class="grid gap-6 md:grid-cols-3">
-                @foreach([
-                    ['title' => 'Flexible Scheduling', 'text' => 'Morning, afternoon, or evening slots available six days a week. Drop off and collect at your convenience.'],
-                    ['title' => 'Secure Payments', 'text' => 'Pay online via Razorpay or choose pay-at-location. All transactions are encrypted and verified server-side.'],
-                    ['title' => 'Satisfaction Guaranteed', 'text' => 'We inspect every vehicle before handover. If something isn\'t right, we\'ll make it right.'],
-                ] as $item)
-                    <div class="card p-6">
-                        <h3 class="font-semibold">{{ $item['title'] }}</h3>
-                        <p class="mt-2 text-sm text-graphite-600 dark:text-graphite-300">{{ $item['text'] }}</p>
+                        {{-- Step 1: Location --}}
+                        <div x-show="step === 1" x-cloak>
+                            <h2 class="mb-2 text-2xl font-bold text-gray-800">Choose a location</h2>
+                            <p class="mb-6 text-gray-600">We operate multiple centres — pick the one closest to you.</p>
+                            <div class="grid gap-4 md:grid-cols-2">
+                                <template x-for="loc in locations" :key="loc.id">
+                                    <button type="button" @click="selectLocation(loc)" class="rounded-xl border p-5 text-left transition hover:border-blue-400" :class="form.location_id === loc.id ? 'border-blue-600 ring-2 ring-blue-200' : 'border-gray-200'">
+                                        <div class="font-semibold text-gray-900" x-text="loc.name"></div>
+                                        <div class="mt-1 text-sm text-gray-500" x-text="loc.address"></div>
+                                    </button>
+                                </template>
+                            </div>
+                            <div class="mt-8 flex justify-end">
+                                <button type="button" class="rounded-lg bg-blue-600 px-6 py-3 font-medium text-white hover:bg-blue-700 disabled:opacity-40" :disabled="!form.location_id" @click="step = 2">Continue</button>
+                            </div>
+                        </div>
+
+                        {{-- Step 2: Service --}}
+                        <div x-show="step === 2" x-cloak>
+                            <h2 class="mb-2 text-2xl font-bold text-gray-800">Select a service</h2>
+                            <p class="mb-6 text-gray-600">Prices shown are starting rates for standard vehicles.</p>
+                            <div class="max-h-[28rem] space-y-3 overflow-y-auto pr-1">
+                                <template x-for="svc in services" :key="svc.id">
+                                    <button type="button" @click="selectService(svc)" class="flex w-full items-start justify-between gap-4 rounded-xl border p-4 text-left transition hover:border-blue-400" :class="form.service_id === svc.id ? 'border-blue-600 ring-2 ring-blue-200' : 'border-gray-200'">
+                                        <div>
+                                            <div class="font-semibold text-gray-900" x-text="svc.name"></div>
+                                            <div class="mt-1 text-sm text-gray-500" x-text="svc.short"></div>
+                                            <div class="mt-2 text-xs text-gray-400" x-text="svc.duration"></div>
+                                        </div>
+                                        <div class="shrink-0 text-lg font-bold text-blue-600" x-text="'₹' + Number(svc.price).toLocaleString('en-IN')"></div>
+                                    </button>
+                                </template>
+                            </div>
+                            <div class="mt-8 flex justify-between">
+                                <button type="button" class="rounded-lg border border-gray-300 px-6 py-3 font-medium text-gray-700" @click="step = 1">Back</button>
+                                <button type="button" class="rounded-lg bg-blue-600 px-6 py-3 font-medium text-white hover:bg-blue-700 disabled:opacity-40" :disabled="!form.service_id" @click="goToSchedule()">Continue</button>
+                            </div>
+                        </div>
+
+                        {{-- Step 3: Schedule --}}
+                        <div x-show="step === 3" x-cloak>
+                            <h2 class="mb-2 text-2xl font-bold text-gray-800">Pick date & time</h2>
+                            <p class="mb-6 text-gray-600">Available slots update based on location hours and existing bookings.</p>
+                            <div class="mb-6">
+                                <label class="mb-1.5 block text-sm font-medium text-gray-700">Date</label>
+                                <input type="date" class="form-input max-w-xs" x-model="form.booking_date" :min="minDate" :max="maxDate" @change="loadSlots()">
+                            </div>
+                            <div x-show="loadingSlots" class="py-8 text-center text-gray-500">Loading slots…</div>
+                            <div x-show="!loadingSlots && slots.length === 0 && form.booking_date" class="rounded-lg bg-gray-50 p-6 text-center text-gray-600">No slots available for this date. Try another day.</div>
+                            <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
+                                <template x-for="slot in slots" :key="slot.start">
+                                    <button type="button" @click="form.start_time = slot.start" class="rounded-lg border px-3 py-3 text-sm font-medium transition" :class="form.start_time === slot.start ? 'border-blue-600 bg-blue-50 text-blue-700' : 'border-gray-200 hover:border-blue-300'" x-text="slot.label"></button>
+                                </template>
+                            </div>
+                            <div class="mt-8 flex justify-between">
+                                <button type="button" class="rounded-lg border border-gray-300 px-6 py-3 font-medium text-gray-700" @click="step = 2">Back</button>
+                                <button type="button" class="rounded-lg bg-blue-600 px-6 py-3 font-medium text-white hover:bg-blue-700 disabled:opacity-40" :disabled="!form.booking_date || !form.start_time" @click="step = 4">Continue</button>
+                            </div>
+                        </div>
+
+                        {{-- Step 4: Details --}}
+                        <div x-show="step === 4" x-cloak>
+                            <h2 class="mb-2 text-2xl font-bold text-gray-800">Your details</h2>
+                            <div class="mt-6 grid gap-4 sm:grid-cols-2">
+                                <div class="sm:col-span-2">
+                                    <label class="mb-1.5 block text-sm font-medium">Full name</label>
+                                    <input type="text" class="form-input" x-model="form.customer_name" required>
+                                </div>
+                                <div>
+                                    <label class="mb-1.5 block text-sm font-medium">Phone</label>
+                                    <input type="tel" class="form-input" x-model="form.customer_phone" required>
+                                </div>
+                                <div>
+                                    <label class="mb-1.5 block text-sm font-medium">Email</label>
+                                    <input type="email" class="form-input" x-model="form.customer_email" required>
+                                </div>
+                                <div>
+                                    <label class="mb-1.5 block text-sm font-medium">Vehicle make & model</label>
+                                    <input type="text" class="form-input" x-model="form.vehicle_make_model" placeholder="e.g. Honda City 2022" required>
+                                </div>
+                                <div>
+                                    <label class="mb-1.5 block text-sm font-medium">Number plate (optional)</label>
+                                    <input type="text" class="form-input" x-model="form.vehicle_plate">
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <label class="mb-1.5 block text-sm font-medium">Notes (optional)</label>
+                                    <textarea class="form-input" rows="3" x-model="form.notes"></textarea>
+                                </div>
+                            </div>
+                            <div class="mt-8 flex justify-between">
+                                <button type="button" class="rounded-lg border border-gray-300 px-6 py-3 font-medium text-gray-700" @click="step = 3">Back</button>
+                                <button type="button" class="rounded-lg bg-blue-600 px-6 py-3 font-medium text-white hover:bg-blue-700" @click="goToPayment()">Continue</button>
+                            </div>
+                        </div>
+
+                        {{-- Step 5: Payment --}}
+                        <div x-show="step === 5" x-cloak>
+                            <h2 class="mb-2 text-2xl font-bold text-gray-800">Confirm & pay</h2>
+                            <div class="mt-6 rounded-xl bg-gray-50 p-5 text-sm text-gray-700">
+                                <p><span class="text-gray-500">Service:</span> <span class="font-medium" x-text="selectedService?.name"></span></p>
+                                <p class="mt-2"><span class="text-gray-500">Location:</span> <span class="font-medium" x-text="selectedLocation?.name"></span></p>
+                                <p class="mt-2"><span class="text-gray-500">When:</span> <span class="font-medium" x-text="form.booking_date + ' at ' + form.start_time"></span></p>
+                                <p class="mt-2 text-lg font-bold text-blue-600" x-text="'₹' + Number(selectedService?.price || 0).toLocaleString('en-IN')"></p>
+                            </div>
+
+                            <div class="mt-6 grid gap-3 sm:grid-cols-2">
+                                <button type="button" @click="form.payment_method = 'at_location'" class="rounded-xl border p-4 text-left" :class="form.payment_method === 'at_location' ? 'border-blue-600 ring-2 ring-blue-200' : 'border-gray-200'">
+                                    <div class="font-semibold">Pay at location</div>
+                                    <div class="mt-1 text-sm text-gray-500">Confirm now, settle when you arrive.</div>
+                                </button>
+                                <button type="button" @click="form.payment_method = 'online'" class="rounded-xl border p-4 text-left disabled:cursor-not-allowed disabled:opacity-50" :disabled="!razorpayEnabled" :class="form.payment_method === 'online' ? 'border-blue-600 ring-2 ring-blue-200' : 'border-gray-200'">
+                                    <div class="font-semibold">Pay online</div>
+                                    <div class="mt-1 text-sm text-gray-500" x-text="razorpayEnabled ? 'Secure checkout via Razorpay' : 'Online payments not configured yet'"></div>
+                                </button>
+                            </div>
+
+                            <div class="mt-8 flex justify-between">
+                                <button type="button" class="rounded-lg border border-gray-300 px-6 py-3 font-medium text-gray-700" @click="step = 4" :disabled="submitting">Back</button>
+                                <button type="button" class="rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-3 font-medium text-white shadow-lg hover:from-blue-700 hover:to-blue-800 disabled:opacity-40" :disabled="submitting || !form.payment_method" @click="submitBooking()">
+                                    <span x-show="!submitting">Confirm booking</span>
+                                    <span x-show="submitting" x-cloak>Processing…</span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                @endforeach
-            </div>
+                </div>
+            @endif
         </div>
     </section>
 </x-layouts.public>

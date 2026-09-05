@@ -1,8 +1,17 @@
 <header class="sticky top-0 z-30 border-b border-graphite-200 bg-white/90 backdrop-blur dark:border-graphite-800 dark:bg-graphite-900/90">
     <div class="flex h-16 items-center justify-between px-4 sm:px-6">
         <div class="flex items-center gap-3">
-            <button type="button" class="btn-ghost px-2 py-2 lg:hidden" @click="toggle()" aria-label="Toggle sidebar">
-                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            <button
+                type="button"
+                class="btn-ghost px-2 py-2"
+                @click="toggle()"
+                aria-label="Toggle sidebar"
+                data-sidebar-toggle
+                :aria-expanded="(!desktopCollapsed || mobileOpen).toString()"
+            >
+                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
             </button>
             <div>
                 <h1 class="text-lg font-semibold text-graphite-900 dark:text-white">{{ $title ?? 'Dashboard' }}</h1>

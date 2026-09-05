@@ -49,5 +49,10 @@ class SettingsSeeder extends Seeder
             'require_admin_approval' => ['value' => false, 'type' => 'boolean'],
             'auto_confirm_bookings' => ['value' => true, 'type' => 'boolean'],
         ]);
+
+        $settings->setMany('payment', [
+            'razorpay_enabled' => ['value' => false, 'type' => 'boolean'],
+            'razorpay_key_id' => ['value' => '', 'type' => 'string', 'is_public' => true],
+        ], ['razorpay_key_id']);
     }
 }

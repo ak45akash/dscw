@@ -19,7 +19,15 @@
     <section class="py-12 sm:py-16">
         <div class="container-site">
             <div class="grid gap-12 lg:grid-cols-3">
-                <div class="lg:col-span-2">
+                <div class="lg:col-span-2 space-y-8">
+                    <div class="overflow-hidden rounded-xl border border-graphite-200 dark:border-graphite-800">
+                        <img
+                            src="{{ $service->imageUrl() }}"
+                            alt="{{ $service->name }}"
+                            class="aspect-[16/9] w-full object-cover"
+                            loading="lazy"
+                        >
+                    </div>
                     <div class="prose-content">
                         {!! $service->description !!}
                     </div>

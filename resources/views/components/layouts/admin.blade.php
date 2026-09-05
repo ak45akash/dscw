@@ -15,7 +15,10 @@
     <div x-data="adminSidebar()" class="min-h-full lg:flex">
         @include('admin.partials.sidebar')
 
-        <div class="flex min-h-full flex-1 flex-col lg:pl-72">
+        <div
+            class="flex min-h-full flex-1 flex-col transition-[padding] duration-200"
+            :class="desktopCollapsed ? 'lg:pl-0' : 'lg:pl-72'"
+        >
             @include('admin.partials.header', ['title' => $title, 'breadcrumb' => $breadcrumb])
 
             <main class="flex-1 p-4 sm:p-6">
@@ -38,7 +41,7 @@
         </div>
 
         <div
-            x-show="open"
+            x-show="mobileOpen"
             x-transition.opacity
             @click="close()"
             class="fixed inset-0 z-40 bg-graphite-900/50 lg:hidden"

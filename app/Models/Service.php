@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use App\Support\Duration;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Storage;
 
 class Service extends Model
 {
@@ -27,6 +30,11 @@ class Service extends Model
         return $this->belongsTo(ServiceCategory::class, 'service_category_id');
     }
 
+    public function bookings(): HasMany
+    {
+        return $this->hasMany(Booking::class);
+    }
+
     public function scopeActive($query)
     {
         return $query->where('is_active', true);
@@ -44,29 +52,26 @@ class Service extends Model
 
     public function formattedDuration(): string
     {
-        $totalMinutes = $this->duration_minutes;
-        $days = intdiv($totalMinutes, 24 * 60);
-        $hours = intdiv($totalMinutes % (24 * 60), 60);
-        $minutes = $totalMinutes % 60;
+        return Duration::format((int) $this->duration_minutes);
+    }
 
-        $parts = [];
-        if ($days > 0) {
-            $parts[] = $days.' day'.($days > 1 ? 's' : '');
-        }
-        if ($hours > 0) {
-            $parts[] = $hours.' hour'.($hours > 1 ? 's' : '');
-        }
-        if ($minutes > 0) {
-            $parts[] = $minutes.' minute'.($minutes > 1 ? 's' : '');
-        }
-
-        return $parts ? implode(', ', $parts) : '0 minutes';
+    public function hasCustomImage(): bool
+    {
+        return filled($this->image);
     }
 
     public function imageUrl(): string
     {
         if ($this->image) {
-            return str_starts_with($this->image, 'http') ? $this->image : asset($this->image);
+            if (str_starts_with($this->image, 'http://') || str_starts_with($this->image, 'https://')) {
+                return $this->image;
+            }
+
+            if (str_starts_with($this->image, 'services/')) {
+                return Storage::disk('public')->url($this->image);
+            }
+
+            return asset($this->image);
         }
 
         $defaults = [
