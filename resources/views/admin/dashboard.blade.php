@@ -54,8 +54,13 @@
                     </ul>
                 </div>
                 <div>
-                    <p class="font-semibold text-graphite-900 dark:text-white">→ Phase 4 Next</p>
-                    <p class="mt-1">Add-ons, media library, SEO tools, reports, users UI, audit UI, cache tools, SMS.</p>
+                    <p class="font-semibold text-graphite-900 dark:text-white">✓ Phase 4 Complete (ops slice)</p>
+                    <ul class="mt-2 space-y-1">
+                        <li>✓ Audit logs, users &amp; admins, cache/settings</li>
+                        <li>✓ SEO sitemap + robots.txt</li>
+                        <li>✓ Booking &amp; revenue reports</li>
+                    </ul>
+                    <p class="mt-3 text-xs text-graphite-500">Next (4b): add-ons, media/S3, SMS.</p>
                 </div>
             </div>
         </x-card>

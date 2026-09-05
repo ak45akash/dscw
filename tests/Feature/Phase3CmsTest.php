@@ -212,6 +212,6 @@ class Phase3CmsTest extends TestCase
             ->get(route('admin.dashboard'))
             ->assertOk()
             ->assertSee('Phase 3 Complete', false)
-            ->assertSee('Phase 4 Next', false);
+            ->assertSee('Phase 4 Complete', false);
     }
 }

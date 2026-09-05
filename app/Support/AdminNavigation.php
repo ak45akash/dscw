@@ -50,7 +50,7 @@ class AdminNavigation
                 'label' => 'Marketing',
                 'items' => [
                     ['label' => 'Coupons', 'route' => 'admin.coupons.index', 'permission' => 'marketing.view'],
-                    ['label' => 'SEO', 'route' => 'admin.dashboard', 'permission' => 'marketing.view', 'badge' => 'soon'],
+                    ['label' => 'SEO', 'route' => 'admin.seo.index', 'permission' => 'marketing.view'],
                 ],
             ],
             [
@@ -63,16 +63,16 @@ class AdminNavigation
             [
                 'label' => 'Reports',
                 'items' => [
-                    ['label' => 'Booking Reports', 'route' => 'admin.dashboard', 'permission' => 'reports.view', 'badge' => 'soon'],
-                    ['label' => 'Revenue', 'route' => 'admin.dashboard', 'permission' => 'reports.view', 'badge' => 'soon'],
+                    ['label' => 'Booking Reports', 'route' => 'admin.reports.bookings', 'permission' => 'reports.view'],
+                    ['label' => 'Revenue', 'route' => 'admin.reports.revenue', 'permission' => 'reports.view'],
                 ],
             ],
             [
                 'label' => 'System',
                 'items' => [
-                    ['label' => 'Users & Admins', 'route' => 'admin.dashboard', 'permission' => 'system.manage', 'badge' => 'soon'],
-                    ['label' => 'Audit Logs', 'route' => 'admin.dashboard', 'permission' => 'system.view', 'badge' => 'soon'],
-                    ['label' => 'Cache & Settings', 'route' => 'admin.dashboard', 'permission' => 'system.manage', 'badge' => 'soon'],
+                    ['label' => 'Users & Admins', 'route' => 'admin.users.index', 'permission' => 'system.manage', 'active' => ['admin.users.*']],
+                    ['label' => 'Audit Logs', 'route' => 'admin.audit-logs.index', 'permission' => 'system.view', 'active' => ['admin.audit-logs.*']],
+                    ['label' => 'Cache & Settings', 'route' => 'admin.system.settings', 'permission' => 'system.manage'],
                 ],
             ],
         ];

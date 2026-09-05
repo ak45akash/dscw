@@ -8,6 +8,7 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\Admin\AuditLogController;
 use App\Http\Controllers\Admin\BlockedDateController;
 use App\Http\Controllers\Admin\BlogPostController;
 use App\Http\Controllers\Admin\BlogTaxonomyController;
@@ -23,10 +24,15 @@ use App\Http\Controllers\Admin\FaqController as AdminFaqController;
 use App\Http\Controllers\Admin\GalleryItemController;
 use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Admin\PageController as AdminPageController;
+use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\SeoController;
 use App\Http\Controllers\Admin\ServiceCategoryController;
 use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
+use App\Http\Controllers\Admin\SystemSettingsController;
 use App\Http\Controllers\Admin\TestimonialController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\SitemapController;
 use App\Http\Middleware\EnsureAdmin;
 use Illuminate\Support\Facades\Route;
 
@@ -55,6 +61,9 @@ Route::get('/api/booking/slots', [BookingController::class, 'slots'])->name('boo
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index');
 
 Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
+
+Route::get('/sitemap.xml', [SitemapController::class, 'sitemap'])->name('sitemap');
+Route::get('/robots.txt', [SitemapController::class, 'robots'])->name('robots');
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('guest')->group(function () {
@@ -101,5 +110,24 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::patch('enquiries/{enquiry}/status', [ContactEnquiryController::class, 'updateStatus'])->name('enquiries.status');
 
         Route::resource('coupons', CouponController::class)->except(['show']);
+
+        Route::get('seo', SeoController::class)->name('seo.index');
+
+        Route::get('reports/bookings', [ReportController::class, 'bookings'])->name('reports.bookings');
+        Route::get('reports/revenue', [ReportController::class, 'revenue'])->name('reports.revenue');
+
+        Route::get('users', [UserController::class, 'index'])->name('users.index');
+        Route::get('users/create', [UserController::class, 'create'])->name('users.create');
+        Route::post('users', [UserController::class, 'store'])->name('users.store');
+        Route::get('users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+        Route::put('users/{user}', [UserController::class, 'update'])->name('users.update');
+        Route::delete('users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+
+        Route::get('audit-logs', [AuditLogController::class, 'index'])->name('audit-logs.index');
+        Route::get('audit-logs/{auditLog}', [AuditLogController::class, 'show'])->name('audit-logs.show');
+
+        Route::get('system/settings', [SystemSettingsController::class, 'edit'])->name('system.settings');
+        Route::put('system/settings', [SystemSettingsController::class, 'update'])->name('system.settings.update');
+        Route::post('system/cache', [SystemSettingsController::class, 'clearCache'])->name('system.cache.clear');
     });
 });

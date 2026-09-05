@@ -27,15 +27,18 @@ Status inventory for Diamond Steam Car Wash (`dscw`).
 - [x] Booking calendar UI (admin month view)
 - [x] Coupons (admin + booking apply)
 
-## Phase 4 — Next (deferred)
+## Phase 4 — Complete (ops slice)
+
+- [x] Audit log UI
+- [x] Users & admins UI
+- [x] Cache & settings system page (SEO / email / analytics)
+- [x] Sitemap + robots.txt (+ `sitemap:generate` scheduled daily)
+- [x] Booking reports + revenue reports (CSV export)
+
+### Phase 4b — Next (deferred)
 
 - Service add-ons
-- Full media library / cloud storage (S3)
-- SEO tools / sitemap scheduler
-- Booking reports and revenue reports
-- Users and admins UI
-- Audit log UI
-- Cache and settings system page
-- SMS reminders
+- Full media library / S3 cutover
+- SMS reminders (provider integration)
 
 See also [DEPLOYMENT.md](DEPLOYMENT.md) for production/shared-hosting steps.

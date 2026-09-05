@@ -54,5 +54,15 @@ class SettingsSeeder extends Seeder
             'razorpay_enabled' => ['value' => false, 'type' => 'boolean'],
             'razorpay_key_id' => ['value' => '', 'type' => 'string', 'is_public' => true],
         ], ['razorpay_key_id']);
+
+        $settings->setMany('email', [
+            'mail_from_name' => config('dscw.business.name'),
+            'mail_from_address' => 'hello@diamondsteamcarwash.com',
+        ]);
+
+        $settings->setMany('analytics', [
+            'ga_measurement_id' => '',
+            'gtm_container_id' => '',
+        ]);
     }
 }
