@@ -90,7 +90,10 @@ class Phase3CmsTest extends TestCase
     {
         $admin = $this->admin();
 
-        $this->actingAs($admin)->get(route('admin.bookings.calendar'))->assertOk();
+        $this->actingAs($admin)->get(route('admin.bookings.calendar'))
+            ->assertOk()
+            ->assertSee('booking-cal__grid', false)
+            ->assertSee('booking-cal__weekday', false);
         $this->actingAs($admin)->get(route('admin.blog-posts.index'))->assertOk();
         $this->actingAs($admin)->get(route('admin.blog-taxonomies.index'))->assertOk();
         $this->actingAs($admin)->get(route('admin.gallery-items.index'))->assertOk();

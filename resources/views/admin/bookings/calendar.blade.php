@@ -1,47 +1,120 @@
 <x-layouts.admin title="Booking Calendar" breadcrumb="Dashboard / Calendar">
-    <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
-        <div class="flex items-center gap-2">
-            <a href="{{ route('admin.bookings.calendar', ['month' => $prevMonth, 'location_id' => $locationId]) }}" class="btn-secondary">Previous</a>
-            <h2 class="text-lg font-semibold">{{ $month->format('F Y') }}</h2>
-            <a href="{{ route('admin.bookings.calendar', ['month' => $nextMonth, 'location_id' => $locationId]) }}" class="btn-secondary">Next</a>
-        </div>
-        <form method="GET" class="flex items-center gap-2">
-            <input type="hidden" name="month" value="{{ $month->format('Y-m') }}">
-            <select name="location_id" class="form-input w-auto" onchange="this.form.submit()">
-                <option value="">All locations</option>
-                @foreach($locations as $location)
-                    <option value="{{ $location->id }}" @selected($locationId == $location->id)>{{ $location->name }}</option>
-                @endforeach
-            </select>
-        </form>
-    </div>
+    @php
+        $statusColors = [
+            'pending' => 'booking-cal-event--pending',
+            'confirmed' => 'booking-cal-event--confirmed',
+            'completed' => 'booking-cal-event--completed',
+            'no_show' => 'booking-cal-event--noshow',
+        ];
+    @endphp
 
-    <div class="grid grid-cols-7 gap-px overflow-hidden rounded-xl border border-graphite-200 bg-graphite-200 dark:border-graphite-800 dark:bg-graphite-800">
-        @foreach(['Mon','Tue','Wed','Thu','Fri','Sat','Sun'] as $label)
-            <div class="bg-graphite-50 px-2 py-2 text-center text-xs font-semibold uppercase tracking-wide text-graphite-500 dark:bg-graphite-900">{{ $label }}</div>
-        @endforeach
-        @foreach($days as $day)
-            <div @class([
-                'min-h-28 bg-white p-2 dark:bg-graphite-950',
-                'opacity-50' => ! $day['inMonth'],
-            ])>
-                <div class="mb-1 flex items-center justify-between text-xs">
-                    <span class="font-semibold">{{ $day['date']->day }}</span>
-                    @if($day['blocked']->isNotEmpty())
-                        <span class="rounded bg-red-100 px-1 text-[10px] font-medium text-red-700 dark:bg-red-900/40 dark:text-red-200">Blocked</span>
-                    @endif
-                </div>
-                <div class="space-y-1">
-                    @foreach($day['bookings']->take(4) as $booking)
-                        <a href="{{ route('admin.bookings.show', $booking) }}" class="block truncate rounded bg-blue-50 px-1.5 py-0.5 text-[11px] text-blue-800 hover:bg-blue-100 dark:bg-blue-900/30 dark:text-blue-100">
-                            {{ substr((string) $booking->start_time, 0, 5) }} · {{ $booking->service?->name }}
-                        </a>
-                    @endforeach
-                    @if($day['bookings']->count() > 4)
-                        <p class="text-[10px] text-graphite-500">+{{ $day['bookings']->count() - 4 }} more</p>
-                    @endif
-                </div>
+    <div class="booking-cal">
+        <div class="booking-cal__toolbar">
+            <div class="booking-cal__nav">
+                <a
+                    href="{{ route('admin.bookings.calendar', ['month' => $prevMonth, 'location_id' => $locationId]) }}"
+                    class="booking-cal__nav-btn"
+                    aria-label="Previous month"
+                >
+                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                </a>
+                <h2 class="booking-cal__title">{{ $month->format('F Y') }}</h2>
+                <a
+                    href="{{ route('admin.bookings.calendar', ['month' => $nextMonth, 'location_id' => $locationId]) }}"
+                    class="booking-cal__nav-btn"
+                    aria-label="Next month"
+                >
+                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </a>
+                <a
+                    href="{{ route('admin.bookings.calendar', ['month' => $todayMonth, 'location_id' => $locationId]) }}"
+                    class="booking-cal__today"
+                >Today</a>
             </div>
-        @endforeach
+
+            <div class="booking-cal__meta">
+                <span class="booking-cal__stat">{{ $monthBookingCount }} {{ \Illuminate\Support\Str::plural('booking', $monthBookingCount) }}</span>
+                @if($monthBlockedCount > 0)
+                    <span class="booking-cal__stat booking-cal__stat--blocked">{{ $monthBlockedCount }} blocked {{ \Illuminate\Support\Str::plural('day', $monthBlockedCount) }}</span>
+                @endif
+                <form method="GET" class="booking-cal__filter">
+                    <input type="hidden" name="month" value="{{ $month->format('Y-m') }}">
+                    <label for="location_id" class="sr-only">Location</label>
+                    <select name="location_id" id="location_id" class="form-input booking-cal__select" onchange="this.form.submit()">
+                        <option value="">All locations</option>
+                        @foreach($locations as $location)
+                            <option value="{{ $location->id }}" @selected($locationId == $location->id)>{{ $location->name }}</option>
+                        @endforeach
+                    </select>
+                </form>
+            </div>
+        </div>
+
+        <div class="booking-cal__legend">
+            <span><i class="booking-cal-dot booking-cal-dot--confirmed"></i> Confirmed</span>
+            <span><i class="booking-cal-dot booking-cal-dot--pending"></i> Pending</span>
+            <span><i class="booking-cal-dot booking-cal-dot--completed"></i> Completed</span>
+            <span><i class="booking-cal-dot booking-cal-dot--noshow"></i> No-show</span>
+            <span><i class="booking-cal-dot booking-cal-dot--blocked"></i> Blocked</span>
+        </div>
+
+        <div class="booking-cal__frame">
+            <div class="booking-cal__weekdays" aria-hidden="true">
+                @foreach(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] as $label)
+                    <div class="booking-cal__weekday">{{ $label }}</div>
+                @endforeach
+            </div>
+
+            <div class="booking-cal__grid" role="grid" aria-label="{{ $month->format('F Y') }} bookings">
+                @foreach($days as $day)
+                    @php
+                        $count = $day['bookings']->count();
+                        $visible = $day['bookings']->take(3);
+                        $extra = max(0, $count - 3);
+                    @endphp
+                    <div
+                        role="gridcell"
+                        @class([
+                            'booking-cal__day',
+                            'booking-cal__day--muted' => ! $day['inMonth'],
+                            'booking-cal__day--today' => $day['isToday'],
+                            'booking-cal__day--blocked' => $day['blocked']->isNotEmpty(),
+                            'booking-cal__day--busy' => $count > 0,
+                        ])
+                    >
+                        <div class="booking-cal__day-head">
+                            <span @class(['booking-cal__date', 'booking-cal__date--today' => $day['isToday']])>
+                                {{ $day['date']->day }}
+                            </span>
+                            @if($day['blocked']->isNotEmpty())
+                                <span class="booking-cal__blocked-tag" title="{{ $day['blocked']->pluck('reason')->filter()->implode(', ') ?: 'Blocked' }}">Blocked</span>
+                            @elseif($count > 0)
+                                <span class="booking-cal__count">{{ $count }}</span>
+                            @endif
+                        </div>
+
+                        <div class="booking-cal__events">
+                            @foreach($visible as $booking)
+                                <a
+                                    href="{{ route('admin.bookings.show', $booking) }}"
+                                    class="booking-cal-event {{ $statusColors[$booking->status] ?? 'booking-cal-event--confirmed' }}"
+                                    title="{{ \Carbon\Carbon::parse($booking->start_time)->format('g:i A') }} · {{ $booking->customer_name }} · {{ $booking->service?->name }} ({{ $booking->statusLabel() }})"
+                                >
+                                    <span class="booking-cal-event__time">{{ \Carbon\Carbon::parse($booking->start_time)->format('g:i A') }}</span>
+                                    <span class="booking-cal-event__label">{{ $booking->service?->name ?? 'Booking' }}</span>
+                                </a>
+                            @endforeach
+
+                            @if($extra > 0)
+                                <a
+                                    href="{{ route('admin.bookings.index', ['date' => $day['key'], 'location_id' => $locationId]) }}"
+                                    class="booking-cal__more"
+                                >+{{ $extra }} more</a>
+                            @endif
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
     </div>
 </x-layouts.admin>

@@ -20,15 +20,16 @@ class BookingCalendarController extends Controller
         $start = $month->copy()->startOfWeek(Carbon::MONDAY);
         $end = $month->copy()->endOfMonth()->endOfWeek(Carbon::SUNDAY);
 
-        $bookings = Booking::query()
+        $bookingRows = Booking::query()
             ->with(['service', 'location'])
             ->whereBetween('booking_date', [$start->toDateString(), $end->toDateString()])
             ->when($locationId, fn ($q) => $q->where('location_id', $locationId))
             ->whereNotIn('status', [Booking::STATUS_CANCELLED])
             ->orderBy('booking_date')
             ->orderBy('start_time')
-            ->get()
-            ->groupBy(fn (Booking $b) => $b->booking_date->toDateString());
+            ->get();
+
+        $bookings = $bookingRows->groupBy(fn (Booking $b) => $b->booking_date->toDateString());
 
         $blocked = BlockedDate::query()
             ->whereBetween('date', [$start->toDateString(), $end->toDateString()])
@@ -43,7 +44,9 @@ class BookingCalendarController extends Controller
             $key = $day->toDateString();
             $days->push([
                 'date' => $day->copy(),
+                'key' => $key,
                 'inMonth' => $day->month === $month->month,
+                'isToday' => $day->isToday(),
                 'bookings' => $bookings->get($key, collect()),
                 'blocked' => $blocked->get($key, collect()),
             ]);
@@ -56,6 +59,13 @@ class BookingCalendarController extends Controller
             'locationId' => $locationId,
             'prevMonth' => $month->copy()->subMonth()->format('Y-m'),
             'nextMonth' => $month->copy()->addMonth()->format('Y-m'),
+            'todayMonth' => now()->format('Y-m'),
+            'monthBookingCount' => $bookingRows
+                ->filter(fn (Booking $booking) => $booking->booking_date->isSameMonth($month))
+                ->count(),
+            'monthBlockedCount' => $days
+                ->filter(fn (array $day) => $day['inMonth'] && $day['blocked']->isNotEmpty())
+                ->count(),
         ]);
     }
 }

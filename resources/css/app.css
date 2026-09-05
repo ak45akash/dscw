@@ -194,6 +194,178 @@
         @apply font-semibold text-graphite-800 dark:text-graphite-100;
     }
 
+    /* Admin booking month calendar */
+    .booking-cal {
+        @apply space-y-4;
+    }
+
+    .booking-cal__toolbar {
+        @apply flex flex-col gap-4 rounded-xl border border-graphite-200 bg-white p-4 dark:border-graphite-800 dark:bg-graphite-900 sm:flex-row sm:items-center sm:justify-between;
+    }
+
+    .booking-cal__nav {
+        @apply flex flex-wrap items-center gap-2;
+    }
+
+    .booking-cal__nav-btn {
+        @apply inline-flex h-9 w-9 items-center justify-center rounded-lg border border-graphite-200 bg-white text-graphite-700 transition hover:bg-graphite-50 dark:border-graphite-700 dark:bg-graphite-950 dark:text-graphite-200 dark:hover:bg-graphite-800;
+    }
+
+    .booking-cal__title {
+        @apply min-w-[10rem] text-center text-xl font-semibold tracking-tight text-graphite-900 dark:text-white;
+    }
+
+    .booking-cal__today {
+        @apply ml-1 inline-flex items-center rounded-lg border border-graphite-200 px-3 py-1.5 text-sm font-medium text-graphite-700 transition hover:bg-graphite-50 dark:border-graphite-700 dark:text-graphite-200 dark:hover:bg-graphite-800;
+    }
+
+    .booking-cal__meta {
+        @apply flex flex-wrap items-center gap-3;
+    }
+
+    .booking-cal__stat {
+        @apply rounded-full bg-brand-50 px-2.5 py-1 text-xs font-medium text-brand-700 dark:bg-brand-950 dark:text-brand-200;
+    }
+
+    .booking-cal__stat--blocked {
+        @apply bg-red-50 text-red-700 dark:bg-red-950 dark:text-red-200;
+    }
+
+    .booking-cal__select {
+        @apply min-w-[14rem];
+    }
+
+    .booking-cal__legend {
+        @apply flex flex-wrap gap-x-4 gap-y-2 text-xs text-graphite-500 dark:text-graphite-400;
+    }
+
+    .booking-cal__legend span {
+        @apply inline-flex items-center gap-1.5;
+    }
+
+    .booking-cal-dot {
+        @apply inline-block h-2.5 w-2.5 rounded-full;
+    }
+
+    .booking-cal-dot--confirmed { @apply bg-blue-500; }
+    .booking-cal-dot--pending { @apply bg-amber-500; }
+    .booking-cal-dot--completed { @apply bg-emerald-500; }
+    .booking-cal-dot--noshow { @apply bg-graphite-400; }
+    .booking-cal-dot--blocked { @apply bg-red-500; }
+
+    .booking-cal__frame {
+        @apply overflow-hidden rounded-xl border border-graphite-200 bg-white shadow-sm dark:border-graphite-800 dark:bg-graphite-900;
+    }
+
+    .booking-cal__weekdays {
+        display: grid;
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+        @apply border-b border-graphite-200 bg-graphite-50 dark:border-graphite-800 dark:bg-graphite-950;
+    }
+
+    .booking-cal__weekday {
+        @apply px-2 py-2.5 text-center text-[11px] font-semibold uppercase tracking-wider text-graphite-500;
+    }
+
+    .booking-cal__grid {
+        display: grid;
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+    }
+
+    .booking-cal__day {
+        min-height: 7.5rem;
+        @apply flex flex-col gap-1.5 border-b border-r border-graphite-100 bg-white p-2 dark:border-graphite-800 dark:bg-graphite-900;
+    }
+
+    .booking-cal__day:nth-child(7n) {
+        @apply border-r-0;
+    }
+
+    .booking-cal__day--muted {
+        @apply bg-graphite-50/80 text-graphite-400 dark:bg-graphite-950/60 dark:text-graphite-600;
+    }
+
+    .booking-cal__day--today {
+        @apply bg-blue-50/40 dark:bg-blue-950/20;
+    }
+
+    .booking-cal__day--blocked {
+        background-image: repeating-linear-gradient(
+            -45deg,
+            transparent,
+            transparent 6px,
+            rgba(239, 68, 68, 0.06) 6px,
+            rgba(239, 68, 68, 0.06) 12px
+        );
+    }
+
+    .booking-cal__day-head {
+        @apply flex items-center justify-between gap-1;
+    }
+
+    .booking-cal__date {
+        @apply inline-flex h-7 w-7 items-center justify-center rounded-full text-sm font-semibold text-graphite-800 dark:text-graphite-100;
+    }
+
+    .booking-cal__date--today {
+        @apply bg-blue-600 text-white;
+    }
+
+    .booking-cal__blocked-tag {
+        @apply rounded bg-red-100 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-red-700 dark:bg-red-900/50 dark:text-red-200;
+    }
+
+    .booking-cal__count {
+        @apply text-[10px] font-medium text-graphite-400;
+    }
+
+    .booking-cal__events {
+        @apply flex min-h-0 flex-1 flex-col gap-1 overflow-hidden;
+    }
+
+    .booking-cal-event {
+        @apply block truncate rounded-md px-1.5 py-1 text-[11px] font-medium leading-tight transition hover:brightness-95;
+    }
+
+    .booking-cal-event__time {
+        @apply mr-1 font-semibold;
+    }
+
+    .booking-cal-event--confirmed {
+        @apply bg-blue-100 text-blue-900 dark:bg-blue-900/40 dark:text-blue-100;
+    }
+
+    .booking-cal-event--pending {
+        @apply bg-amber-100 text-amber-900 dark:bg-amber-900/40 dark:text-amber-100;
+    }
+
+    .booking-cal-event--completed {
+        @apply bg-emerald-100 text-emerald-900 dark:bg-emerald-900/40 dark:text-emerald-100;
+    }
+
+    .booking-cal-event--noshow {
+        @apply bg-graphite-100 text-graphite-700 dark:bg-graphite-800 dark:text-graphite-200;
+    }
+
+    .booking-cal__more {
+        @apply px-1 text-[10px] font-medium text-brand-700 hover:underline dark:text-brand-300;
+    }
+
+    @media (max-width: 900px) {
+        .booking-cal__frame {
+            @apply overflow-x-auto;
+        }
+
+        .booking-cal__weekdays,
+        .booking-cal__grid {
+            min-width: 56rem;
+        }
+
+        .booking-cal__day {
+            min-height: 6.5rem;
+        }
+    }
+
     .container-custom {
         @apply container mx-auto px-4;
     }
