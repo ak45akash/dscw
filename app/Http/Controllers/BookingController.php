@@ -32,13 +32,14 @@ class BookingController extends Controller
     {
         $services = Service::query()->active()->with(['category', 'addons' => fn ($q) => $q->active()])->orderBy('display_order')->get();
         $locations = Location::query()->active()->with('workingHours')->get();
-        $preselectedSlug = $request->string('service')->toString();
-        $preselected = $services->firstWhere('slug', $preselectedSlug);
+        $preselectedService = $services->firstWhere('slug', $request->string('service')->toString());
+        $preselectedLocation = $locations->firstWhere('slug', $request->string('location')->toString());
 
         return view('public.booking.index', [
             'services' => $services,
             'locations' => $locations,
-            'preselectedServiceId' => $preselected?->id,
+            'preselectedServiceId' => $preselectedService?->id,
+            'preselectedLocationId' => $preselectedLocation?->id,
             'bookingsEnabled' => (bool) $this->settings->get('booking', 'online_bookings_enabled', true),
             'razorpayEnabled' => $this->razorpay->isEnabled(),
             'maxAdvanceDays' => (int) $this->settings->get('booking', 'max_advance_days', 30),

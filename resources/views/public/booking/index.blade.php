@@ -37,6 +37,7 @@
                             ])->values(),
                         ])->values(),
                         'preselectedServiceId' => $preselectedServiceId,
+                        'preselectedLocationId' => $preselectedLocationId ?? null,
                         'razorpayEnabled' => $razorpayEnabled,
                         'maxAdvanceDays' => $maxAdvanceDays,
                         'sameDayBookings' => $sameDayBookings,

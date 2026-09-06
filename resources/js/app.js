@@ -447,7 +447,7 @@ document.addEventListener('alpine:init', () => {
         discount: 0,
         error: null,
         form: {
-            location_id: null,
+            location_id: config.preselectedLocationId || null,
             service_id: config.preselectedServiceId || null,
             addon_ids: [],
             booking_date: '',
@@ -722,7 +722,7 @@ document.addEventListener('alpine:init', () => {
             });
         },
         init() {
-            if (this.form.service_id && this.locations.length === 1) {
+            if (!this.form.location_id && this.form.service_id && this.locations.length === 1) {
                 this.form.location_id = this.locations[0].id;
             }
         },
