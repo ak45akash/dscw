@@ -16,12 +16,12 @@
     </section>
 
     @if($featured->isNotEmpty())
-    <section class="bg-graphite-50 py-16 dark:bg-graphite-900/50 sm:py-20">
+    <section class="bg-graphite-50 py-16 dark:bg-graphite-900 sm:py-20">
         <div class="container-site">
             <x-section-heading title="Featured Transformations" class="mb-10" />
-            <div class="grid gap-8 md:grid-cols-2">
+            <div class="grid items-stretch gap-6 sm:gap-8 md:grid-cols-2">
                 @foreach($featured as $item)
-                    <article class="card overflow-hidden">
+                    <article class="card flex h-full flex-col overflow-hidden">
                         <div class="grid grid-cols-2 gap-1">
                             <div class="aspect-[4/3] bg-gradient-to-br from-graphite-300 to-graphite-400 dark:from-graphite-700 dark:to-graphite-600">
                                 <span class="flex h-full items-center justify-center text-xs font-medium text-white/80">Before</span>
@@ -30,13 +30,13 @@
                                 <span class="flex h-full items-center justify-center text-xs font-medium text-white/80">After</span>
                             </div>
                         </div>
-                        <div class="p-6">
-                            <div class="flex items-center gap-2">
+                        <div class="flex flex-1 flex-col p-5 sm:p-6">
+                            <div class="flex flex-wrap items-center gap-2">
                                 <x-badge color="blue">{{ $item->category }}</x-badge>
                                 <span class="text-xs text-graphite-500">{{ $item->service }}</span>
                             </div>
                             <h3 class="mt-3 text-lg font-semibold">{{ $item->title }}</h3>
-                            <p class="mt-2 text-sm text-graphite-600 dark:text-graphite-300">{{ $item->description }}</p>
+                            <p class="mt-2 flex-1 text-sm text-graphite-600 dark:text-graphite-300">{{ $item->description }}</p>
                         </div>
                     </article>
                 @endforeach
@@ -48,15 +48,15 @@
     <section class="py-16 sm:py-20">
         <div class="container-site">
             <x-section-heading title="All Gallery Items" subtitle="Browse our complete collection of service results." class="mb-10" />
-            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div class="grid items-stretch gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
                 @foreach($items as $item)
-                    <article class="card overflow-hidden">
+                    <article class="card flex h-full flex-col overflow-hidden">
                         <div class="aspect-[16/10] bg-gradient-to-br from-graphite-200 to-brand-100 dark:from-graphite-800 dark:to-brand-900"></div>
-                        <div class="p-5">
+                        <div class="flex flex-1 flex-col p-5">
                             <h3 class="font-semibold">{{ $item->title }}</h3>
                             <p class="mt-1 text-xs text-graphite-500">{{ $item->service }}</p>
                             @if($item->description)
-                                <p class="mt-2 text-sm text-graphite-600 dark:text-graphite-300">{{ Str::limit($item->description, 120) }}</p>
+                                <p class="mt-2 flex-1 text-sm text-graphite-600 dark:text-graphite-300">{{ Str::limit($item->description, 120) }}</p>
                             @endif
                         </div>
                     </article>

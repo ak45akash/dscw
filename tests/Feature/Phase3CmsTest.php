@@ -126,7 +126,7 @@ class Phase3CmsTest extends TestCase
     {
         Mail::fake();
 
-        $location = Location::query()->where('slug', 'andheri')->firstOrFail();
+        $location = Location::query()->where('slug', 'sector-66')->firstOrFail();
         $service = Service::query()->active()->orderBy('price')->firstOrFail();
         $date = now()->next('Wednesday')->startOfDay();
         $slots = app(AvailabilityService::class)->slotsFor($location, $service, $date);
@@ -159,7 +159,7 @@ class Phase3CmsTest extends TestCase
             'is_active' => true,
         ]);
 
-        $location = Location::query()->where('slug', 'andheri')->firstOrFail();
+        $location = Location::query()->where('slug', 'sector-66')->firstOrFail();
         $service = Service::query()->active()->orderByDesc('price')->firstOrFail();
         $date = now()->next('Thursday')->startOfDay();
         $slots = app(AvailabilityService::class)->slotsFor($location, $service, $date);

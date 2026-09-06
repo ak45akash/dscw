@@ -26,7 +26,7 @@ class LocationController extends Controller
     public function create(): View
     {
         return view('admin.locations.form', [
-            'location' => new Location(['is_active' => true, 'city' => 'Mumbai', 'state' => 'Maharashtra']),
+            'location' => new Location(['is_active' => true, 'city' => 'Sahibzada Ajit Singh Nagar', 'state' => 'Punjab']),
             'hours' => $this->defaultHours(),
         ]);
     }

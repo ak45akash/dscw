@@ -43,8 +43,8 @@ class BookingController extends Controller
             'razorpayEnabled' => $this->razorpay->isEnabled(),
             'maxAdvanceDays' => (int) $this->settings->get('booking', 'max_advance_days', 30),
             'sameDayBookings' => (bool) $this->settings->get('booking', 'same_day_bookings', true),
-            'seoTitle' => 'Book Now | Diamond Steam Car Wash',
-            'seoDescription' => 'Book your car wash, steam cleaning, detailing, or coating service online. Choose your location, service, and preferred time slot.',
+            'seoTitle' => 'Book Steam Car Wash Online | Sector 66 & Matour',
+            'seoDescription' => 'Book steam wash, detailing, ceramic coating, or PPF online at Diamond Steam Car Wash. Choose Sector 66 or Matour, pick a slot, and confirm in minutes.',
         ]);
     }
 

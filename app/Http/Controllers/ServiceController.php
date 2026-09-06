@@ -21,8 +21,8 @@ class ServiceController extends Controller
         return view('public.services.index', [
             'categories' => $categories,
             'featured' => $featured,
-            'seoTitle' => 'Car Wash & Detailing Services | Diamond Steam Car Wash',
-            'seoDescription' => 'Explore our full range of car wash, steam cleaning, detailing, ceramic coating, and PPF services in Mumbai. Transparent pricing and expert care.',
+            'seoTitle' => 'Car Wash Services Punjab | Steam, Detailing & Coating',
+            'seoDescription' => 'Explore steam wash, interior detailing, ceramic coating, and PPF services at Diamond Steam Car Wash in Sector 66, SAS Nagar and Matour, Punjab.',
         ]);
     }
 

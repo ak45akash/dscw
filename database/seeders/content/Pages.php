@@ -5,34 +5,34 @@ return [
         'slug' => 'about-us',
         'title' => 'About Us',
         'template' => 'default',
-        'meta_title' => 'About Diamond Steam Car Wash | Premium Car Care in Mumbai',
-        'meta_description' => 'Learn about Diamond Steam Car Wash — Mumbai\'s trusted premium steam car wash. Our story, mission, values, and commitment to paint-safe, eco-conscious vehicle care.',
+        'meta_title' => 'About Diamond Steam Car Wash | Premium Car Care in Punjab',
+        'meta_description' => 'Learn about Diamond Steam Car Wash — Punjab\'s trusted premium steam car wash. Our story, mission, values, and commitment to paint-safe, eco-conscious vehicle care.',
         'content' => <<<'HTML'
 <h2>Welcome to Diamond Steam Car Wash</h2>
-<p>Diamond Steam Car Wash was founded with a clear purpose: to bring world-class, paint-safe vehicle care to Mumbai drivers who refuse to compromise between cleanliness, convenience, and environmental responsibility. What began as a single bay operation serving neighbourhood sedan owners has grown into a trusted premium car wash destination for families, corporate fleets, ride-share operators, and luxury vehicle enthusiasts across the city.</p>
-<p>Mumbai presents unique challenges for car owners. Construction dust settles on paint within hours of washing. Monsoon humidity traps contaminants in door seals and upholstery. Hard municipal water leaves mineral spots on glass and body panels. Roadside brush tunnels and improvised bucket washes may appear affordable, but they often introduce swirl marks, strip protective coatings, and waste hundreds of litres of water per vehicle. We built Diamond Steam Car Wash to offer a better standard—one grounded in professional technique, commercial-grade equipment, and honest service recommendations.</p>
+<p>Diamond Steam Car Wash was founded with a clear purpose: to bring world-class, paint-safe vehicle care to Punjab drivers who refuse to compromise between cleanliness, convenience, and environmental responsibility. What began as a single bay operation serving neighbourhood sedan owners has grown into a trusted premium car wash destination for families, corporate fleets, ride-share operators, and luxury vehicle enthusiasts across the city.</p>
+<p>Punjab presents unique challenges for car owners. Construction dust settles on paint within hours of washing. Monsoon humidity traps contaminants in door seals and upholstery. Hard municipal water leaves mineral spots on glass and body panels. Roadside brush tunnels and improvised bucket washes may appear affordable, but they often introduce swirl marks, strip protective coatings, and waste hundreds of litres of water per vehicle. We built Diamond Steam Car Wash to offer a better standard—one grounded in professional technique, commercial-grade equipment, and honest service recommendations.</p>
 
 <h2>Our Story</h2>
-<p>The idea for Diamond Steam Car Wash emerged when our founders—long-time Mumbai commuters and automotive enthusiasts—grew frustrated with the gap between what premium vehicles deserved and what most local wash facilities actually delivered. After researching dry vapour technology used in European detailing studios and fleet maintenance programmes, they invested in professional steam generators, microfibre systems, and technician training programmes designed around paint preservation rather than speed alone.</p>
+<p>The idea for Diamond Steam Car Wash emerged when our founders—long-time Punjab commuters and automotive enthusiasts—grew frustrated with the gap between what premium vehicles deserved and what most local wash facilities actually delivered. After researching dry vapour technology used in European detailing studios and fleet maintenance programmes, they invested in professional steam generators, microfibre systems, and technician training programmes designed around paint preservation rather than speed alone.</p>
 <p>Our first location opened with a simple promise: every vehicle, regardless of make or model, receives the same meticulous care we would give our own cars. Word spread quickly. Clients who had previously accepted swirl marks as inevitable began noticing how their paint retained gloss longer between details. Fleet managers reported lower correction costs. Families appreciated interior sanitisation that did not soak seats in a city where mould and musty odours are common monsoon complaints. Today, Diamond Steam Car Wash continues to refine that promise with expanded service menus, appointment booking convenience, and a team united by genuine respect for the vehicles entrusted to us.</p>
 
 <h2>Mission, Vision, and Values</h2>
 <h3>Our Mission</h3>
 <p>To deliver exceptional steam-based car wash and detailing services that protect vehicle finishes, conserve water, and exceed customer expectations—every visit, every vehicle, every time.</p>
 <h3>Our Vision</h3>
-<p>To become Mumbai's most trusted name in premium car care, recognised for technical excellence, transparent pricing, and sustainable practices that set a new benchmark for the local automotive service industry.</p>
+<p>To become Punjab's most trusted name in premium car care, recognised for technical excellence, transparent pricing, and sustainable practices that set a new benchmark for the local automotive service industry.</p>
 <h3>Our Core Values</h3>
 <ul>
 <li><strong>Integrity:</strong> We recommend only the services your vehicle genuinely needs. No pressure tactics, no unnecessary upsells, and no shortcuts behind closed bay doors.</li>
 <li><strong>Precision:</strong> From pre-inspection to final walk-around, every step follows documented procedures designed to protect paint, trim, glass, and interior materials.</li>
 <li><strong>Sustainability:</strong> Steam technology allows us to clean thoroughly while using a fraction of the water consumed by conventional washing—an important consideration in a water-conscious city.</li>
 <li><strong>Respect:</strong> Your vehicle is a significant investment and often a source of pride. We handle it accordingly, with clean equipment, trained hands, and attention to detail at every contact point.</li>
-<li><strong>Continuous Improvement:</strong> We invest in equipment upgrades, product research, and staff development so our standards rise as Mumbai's automotive landscape evolves.</li>
+<li><strong>Continuous Improvement:</strong> We invest in equipment upgrades, product research, and staff development so our standards rise as Punjab's automotive landscape evolves.</li>
 </ul>
 
 <h2>Why Steam Wash?</h2>
 <p>Steam car wash is the cornerstone of everything we do at Diamond Steam Car Wash. Unlike high-pressure jet washing that can force water into electronic modules and door cavities, dry vapour steam is applied with controlled heat and minimal moisture. Superheated steam expands pores in grease, brake dust, and urban grime, loosening their bond with paint and plastics so they wipe away cleanly with microfibre towels rather than aggressive scrubbing.</p>
-<p>For Mumbai's climate, steam offers additional advantages. Interior steam sanitisation kills bacteria on dashboards, steering wheels, and switchgear without overwetting fabric—a critical factor when humidity slows drying and encourages mould growth. Exterior steam cleaning removes contaminants before they embed and etch clear coat, extending the life of wax, sealant, and ceramic coating layers. Fleet operators and environmentally conscious families appreciate that a professional steam wash typically uses five to fifteen litres of water compared to the 150–300 litres common in traditional full-service washes.</p>
+<p>For Punjab's climate, steam offers additional advantages. Interior steam sanitisation kills bacteria on dashboards, steering wheels, and switchgear without overwetting fabric—a critical factor when humidity slows drying and encourages mould growth. Exterior steam cleaning removes contaminants before they embed and etch clear coat, extending the life of wax, sealant, and ceramic coating layers. Fleet operators and environmentally conscious families appreciate that a professional steam wash typically uses five to fifteen litres of water compared to the 150–300 litres common in traditional full-service washes.</p>
 <p>We pair steam with pH-neutral pre-soaks, dedicated wheel products, and paint-safe drying techniques where appropriate. Steam is not a marketing buzzword here; it is the engineering foundation of a process refined through thousands of vehicles serviced across the city.</p>
 
 <h2>Our Team and Process</h2>
@@ -52,23 +52,23 @@ return [
 <p>If you are ever dissatisfied with any aspect of your service, we want to hear from you promptly. We will inspect the concern, address it fairly, and use the feedback to strengthen our procedures. Many of our longest-standing clients began as sceptics who had experienced paint damage elsewhere; earning and retaining their trust remains our highest measure of success.</p>
 <p>We also maintain transparent pricing on our website and at our facility. Quotes for add-on work are provided before additional labour begins. You will never discover unexpected charges when you collect your keys.</p>
 
-<h2>Service Area — Mumbai and Beyond</h2>
-<p>Diamond Steam Car Wash proudly serves vehicle owners across Mumbai and the wider metropolitan region. Our clients regularly visit us from South Mumbai, Bandra, Andheri, Juhu, Powai, Goregaon, Malad, Borivali, Thane, and Navi Mumbai. Whether you commute through BKC daily, park outdoors near coastal humidity in Worli, or manage a corporate fleet operating across multiple business districts, we provide consistent, premium care tailored to how Mumbai actually treats your car.</p>
+<h2>Service Area — Punjab</h2>
+<p>Diamond Steam Car Wash proudly serves vehicle owners across Sahibzada Ajit Singh Nagar and Matour, Punjab. Visit us at Plot Number 589, Sector 66 near Bestech Mall And Business Towers, or our Matour centre. Whether you commute through Sector 66, work near business towers, or manage vehicles across the tricity, we provide consistent, premium care tailored to how Punjab roads actually treat your car.</p>
 <p>We understand that time is valuable. Our efficient processes are designed to return most routine wash clients within 45 to 90 minutes, with longer appointments reserved transparently for detailing and protection services. Ample parking and clear communication at drop-off and collection make every visit straightforward.</p>
 
 <h2>Looking Ahead</h2>
-<p>As Mumbai's roads grow busier and vehicle technology becomes more sophisticated—soft-touch paints, advanced driver assistance sensors, hybrid battery compartments, and delicate interior screens—the demand for knowledgeable, careful car care will only increase. Diamond Steam Car Wash is committed to meeting that demand with integrity, innovation, and an unwavering focus on the finish you drive home. We invite you to experience the difference that professional steam washing and genuine craftsmanship make. Your car deserves nothing less than diamond-standard care.</p>
+<p>As Punjab's roads grow busier and vehicle technology becomes more sophisticated—soft-touch paints, advanced driver assistance sensors, hybrid battery compartments, and delicate interior screens—the demand for knowledgeable, careful car care will only increase. Diamond Steam Car Wash is committed to meeting that demand with integrity, innovation, and an unwavering focus on the finish you drive home. We invite you to experience the difference that professional steam washing and genuine craftsmanship make. Your car deserves nothing less than diamond-standard care.</p>
 HTML,
     ],
     [
         'slug' => 'privacy-policy',
         'title' => 'Privacy Policy',
         'template' => 'default',
-        'meta_title' => 'Privacy Policy | Diamond Steam Car Wash Mumbai',
+        'meta_title' => 'Privacy Policy | Diamond Steam Car Wash Punjab',
         'meta_description' => 'Read the privacy policy for Diamond Steam Car Wash. Learn how we collect, use, store, and protect your personal information in compliance with Indian data protection laws.',
         'content' => <<<'HTML'
 <h2>Introduction</h2>
-<p>Diamond Steam Car Wash ("we," "us," or "our") operates the website and booking services associated with our premium car wash facility in Mumbai, Maharashtra, India. This Privacy Policy explains how we collect, use, disclose, store, and protect your personal information when you visit our website, book services, contact us, or interact with our business in any manner.</p>
+<p>Diamond Steam Car Wash ("we," "us," or "our") operates the website and booking services associated with our premium car wash facilities in Sahibzada Ajit Singh Nagar and Matour, Punjab, India. This Privacy Policy explains how we collect, use, disclose, store, and protect your personal information when you visit our website, book services, contact us, or interact with our business in any manner.</p>
 <p>We are committed to handling your data responsibly and in accordance with applicable Indian laws, including the Information Technology Act, 2000, the Information Technology (Reasonable Security Practices and Procedures and Sensitive Personal Data or Information) Rules, 2011, and the Digital Personal Data Protection Act, 2023 ("DPDP Act"), as and when fully enforceable. By using our website or services, you acknowledge that you have read and understood this Privacy Policy.</p>
 
 <h2>Information We Collect</h2>
@@ -153,7 +153,7 @@ HTML,
 <p>If you have questions, concerns, or requests regarding this Privacy Policy or our data handling practices, please contact us:</p>
 <ul>
 <li><strong>Business name:</strong> Diamond Steam Car Wash</li>
-<li><strong>Location:</strong> Mumbai, Maharashtra, India</li>
+<li><strong>Location:</strong> Sahibzada Ajit Singh Nagar & Matour, Punjab, India</li>
 <li><strong>Email:</strong> privacy@diamondsteamcarwash.in</li>
 <li><strong>Phone:</strong> Available on our website contact page</li>
 </ul>
@@ -164,11 +164,11 @@ HTML,
         'slug' => 'terms-and-conditions',
         'title' => 'Terms and Conditions',
         'template' => 'default',
-        'meta_title' => 'Terms and Conditions | Diamond Steam Car Wash Mumbai',
-        'meta_description' => 'Terms and conditions for booking and using Diamond Steam Car Wash services in Mumbai. Covers appointments, payments, liability, cancellations, and customer responsibilities.',
+        'meta_title' => 'Terms and Conditions | Diamond Steam Car Wash Punjab',
+        'meta_description' => 'Terms and conditions for booking and using Diamond Steam Car Wash services in Punjab. Covers appointments, payments, liability, cancellations, and customer responsibilities.',
         'content' => <<<'HTML'
 <h2>Agreement to Terms</h2>
-<p>These Terms and Conditions ("Terms") govern your access to and use of the website, online booking system, and car wash and detailing services ("Services") provided by Diamond Steam Car Wash, a business operating in Mumbai, Maharashtra, India ("we," "us," or "our"). By booking an appointment, visiting our facility, or using our website, you ("you," "your," or "Customer") agree to be bound by these Terms. If you do not agree, please do not use our Services.</p>
+<p>These Terms and Conditions ("Terms") govern your access to and use of the website, online booking system, and car wash and detailing services ("Services") provided by Diamond Steam Car Wash, a business operating in Punjab, India ("we," "us," or "our"). By booking an appointment, visiting our facility, or using our website, you ("you," "your," or "Customer") agree to be bound by these Terms. If you do not agree, please do not use our Services.</p>
 <p>We reserve the right to modify these Terms at any time. Updated Terms will be posted on our website with a revised effective date. Continued use of our Services after changes are published constitutes acceptance of the modified Terms.</p>
 
 <h2>Services Offered</h2>
@@ -225,7 +225,7 @@ HTML,
 <p>We shall not be liable for failure or delay in performing our obligations due to circumstances beyond our reasonable control, including but not limited to natural disasters, floods, power outages, government restrictions, pandemics, supply chain disruptions, or civil unrest. In such events, we will make reasonable efforts to notify affected customers and reschedule services.</p>
 
 <h2>Governing Law and Dispute Resolution</h2>
-<p>These Terms are governed by the laws of India. Any dispute arising out of or relating to these Terms or our Services shall be subject to the exclusive jurisdiction of the courts in Mumbai, Maharashtra. Before initiating formal legal proceedings, both parties agree to attempt good-faith resolution through direct communication with our management team.</p>
+<p>These Terms are governed by the laws of India. Any dispute arising out of or relating to these Terms or our Services shall be subject to the exclusive jurisdiction of the courts in Punjab. Before initiating formal legal proceedings, both parties agree to attempt good-faith resolution through direct communication with our management team.</p>
 
 <h2>Contact Information</h2>
 <p>For questions regarding these Terms and Conditions, booking policies, or service-related enquiries, please contact Diamond Steam Car Wash through the contact details published on our website. We are committed to fair, transparent dealings with every customer who trusts us with their vehicle.</p>

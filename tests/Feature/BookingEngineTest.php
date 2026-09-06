@@ -23,7 +23,7 @@ class BookingEngineTest extends TestCase
 
     public function test_availability_returns_slots_for_open_day(): void
     {
-        $location = Location::query()->where('slug', 'andheri')->firstOrFail();
+        $location = Location::query()->where('slug', 'sector-66')->firstOrFail();
         $service = Service::query()->active()->firstOrFail();
 
         // Next Monday
@@ -41,7 +41,7 @@ class BookingEngineTest extends TestCase
 
     public function test_slots_endpoint_returns_json(): void
     {
-        $location = Location::query()->where('slug', 'andheri')->firstOrFail();
+        $location = Location::query()->where('slug', 'sector-66')->firstOrFail();
         $service = Service::query()->active()->firstOrFail();
         $date = now()->next('Monday')->toDateString();
 
@@ -56,7 +56,7 @@ class BookingEngineTest extends TestCase
 
     public function test_guest_can_create_pay_at_location_booking(): void
     {
-        $location = Location::query()->where('slug', 'andheri')->firstOrFail();
+        $location = Location::query()->where('slug', 'sector-66')->firstOrFail();
         $service = Service::query()->active()->orderBy('price')->firstOrFail();
         $date = now()->next('Tuesday')->startOfDay();
 

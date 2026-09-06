@@ -6,6 +6,7 @@ use App\Http\Requests\ContactRequest;
 use App\Mail\ContactEnquiryMail;
 use App\Models\ContactEnquiry;
 use App\Models\Faq;
+use App\Models\Location;
 use App\Services\SettingsService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Mail;
@@ -22,9 +23,10 @@ class ContactController extends Controller
 
         return view('public.contact.index', [
             'business' => $business,
+            'locations' => Location::query()->active()->orderBy('display_order')->get(),
             'faqs' => Faq::query()->active()->where('category', 'Booking')->take(3)->get(),
-            'seoTitle' => 'Contact Us | Diamond Steam Car Wash Mumbai',
-            'seoDescription' => 'Get in touch with Diamond Steam Car Wash. Call, email, or send us a message for bookings, quotes, and car care enquiries in Mumbai.',
+            'seoTitle' => 'Contact Diamond Steam | Sector 66 & Matour Punjab',
+            'seoDescription' => 'Visit Diamond Steam Car Wash at Plot 589, Sector 66 near Bestech Mall, SAS Nagar, or Matour, Punjab. Call, WhatsApp, or message us for bookings and quotes.',
         ]);
     }
 

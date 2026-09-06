@@ -13,8 +13,8 @@ class FaqController extends Controller
 
         return view('public.faq.index', [
             'faqGroups' => $faqs,
-            'seoTitle' => 'Frequently Asked Questions | Diamond Steam Car Wash',
-            'seoDescription' => 'Find answers about our car wash services, booking process, pricing, ceramic coating, PPF, and more at Diamond Steam Car Wash Mumbai.',
+            'seoTitle' => 'FAQ | Steam Car Wash Booking & Services Punjab',
+            'seoDescription' => 'Answers about steam car wash booking, pricing, ceramic coating, PPF, and care at Diamond Steam Car Wash locations in Sector 66 and Matour, Punjab.',
         ]);
     }
 }

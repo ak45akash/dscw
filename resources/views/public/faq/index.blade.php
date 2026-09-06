@@ -34,7 +34,7 @@
         </div>
     </section>
 
-    <section class="bg-graphite-50 py-16 dark:bg-graphite-900/50 sm:py-20">
+    <section class="bg-graphite-50 py-16 dark:bg-graphite-900 sm:py-20">
         <div class="container-site text-center">
             <h2 class="text-2xl font-bold text-graphite-900 dark:text-white">Still have questions?</h2>
             <p class="mx-auto mt-3 max-w-xl text-graphite-600 dark:text-graphite-300">Our friendly team is ready to assist you with service recommendations, pricing, and booking enquiries.</p>

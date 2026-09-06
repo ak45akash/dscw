@@ -1,4 +1,4 @@
-<x-layouts.public :seo-title="$seoTitle" :seo-description="$seoDescription">
+<x-layouts.public :seo-title="$seoTitle" :seo-description="$seoDescription" :seo-image="$seoImage ?? null">
     <x-page-hero
         badge="Car Care Blog"
         title="Expert Car Care Guides & Tips"

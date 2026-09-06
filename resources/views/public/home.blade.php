@@ -1,315 +1,219 @@
-<x-layouts.public :seo-title="$businessName . ' | Premium Car Care in ' . $city">
+<x-layouts.public
+    :seo-title="$businessName . ' | Premium Steam Car Wash in ' . $city"
+    :seo-description="'Book paint-safe steam wash, detailing, ceramic coating, and PPF at Diamond Steam Car Wash in ' . $city . ' and Matour, Punjab. Fast online booking.'"
+    seo-image="images/exterior-detailing.jpg"
+>
     {{-- Hero --}}
-    <div class="relative flex h-[90vh] items-center overflow-hidden">
-        <div class="absolute inset-0 z-0">
-            @foreach([5, 15, 25, 35, 45, 55, 65, 75, 85, 10, 30, 50, 70, 90, 20] as $i => $left)
-                <div
-                    class="absolute h-4 w-4 animate-float rounded-full bg-white/10"
-                    style="left: {{ $left }}%; top: {{ ($i * 17) % 90 + 5 }}%; animation-delay: {{ ($i * 0.4) }}s; animation-duration: {{ 3 + ($i % 4) }}s;"
-                ></div>
-            @endforeach
-        </div>
+    <div class="relative flex min-h-[62vh] items-center overflow-hidden sm:min-h-[72vh] lg:min-h-[80vh]">
+        <x-parallax-bg src="images/exterior-detailing.jpg" alt="Professional steam car wash in Punjab" :speed="0.8" brightness="0.52" position="center 25%" height="180%" />
+        <div class="absolute inset-0 z-0 bg-gradient-to-r from-graphite-950/75 via-brand-950/45 to-transparent"></div>
 
-        <div class="absolute inset-0 z-0">
-            <img
-                src="{{ asset('images/exterior-detailing.jpg') }}"
-                alt="Car washing"
-                class="h-full w-full scale-110 object-cover brightness-[0.6] transition-transform duration-[10000ms] hover:scale-105"
-                style="object-position: center 25%;"
-            >
-        </div>
-
-        <div class="animate-fadeInUp absolute inset-0 z-0 bg-gradient-to-r from-blue-900/40 to-black/30"></div>
-
-        <div class="container-custom relative z-10 text-white">
-            <div class="max-w-2xl animate-fadeInUp" style="animation-delay: 0.3s;">
-                <h1 class="mb-6 text-5xl leading-tight font-bold">
-                    <span class="animate-pulse text-blue-400">Diamond</span> Steam Car Wash in <span class="gradient-text">{{ $city }}</span>
+        <div class="container-custom relative z-10 py-16 text-white sm:py-20 lg:py-24">
+            <div class="max-w-2xl animate-on-scroll" x-data="scrollReveal">
+                <p class="mb-3 text-sm font-semibold tracking-wide text-accent-400 uppercase">{{ $city }} &amp; Matour</p>
+                <h1 class="mb-5 text-3xl leading-tight font-bold sm:text-4xl md:text-5xl lg:text-6xl">
+                    Diamond Steam Car Wash
                 </h1>
-                <p class="mb-8 text-xl leading-relaxed font-light">
-                    {{ $tagline }}. Experience the ultimate car care with our professional washing and detailing services using eco-friendly methods.
+                <p class="mb-8 max-w-xl text-base leading-relaxed text-white/90 sm:text-lg md:text-xl">
+                    {{ $tagline }}. Professional steam washing and detailing with paint-safe methods.
                 </p>
-                <div class="flex animate-slideInFromBottom flex-wrap gap-4" style="animation-delay: 0.6s;">
-                    <a href="{{ route('booking.index') }}" class="inline-flex items-center rounded-lg bg-blue-600 px-8 py-4 font-medium text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-blue-700">
-                        Book Now
-                        <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                    </a>
-                    <a href="{{ route('services.index') }}" class="inline-flex items-center rounded-lg border-2 border-white bg-transparent px-8 py-4 font-medium text-white transition-all duration-300 hover:scale-105 hover:bg-white hover:text-blue-600">
-                        Our Services
-                        <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="absolute right-0 bottom-12 left-0 z-10">
-            <div class="container-custom">
-                <div class="flex animate-slideInFromBottom flex-wrap justify-center gap-4 md:gap-8" style="animation-delay: 1s;">
-                    @foreach([
-                        ['icon' => 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z', 'label' => 'Premium Quality'],
-                        ['icon' => 'M13 10V3L4 14h7v7l9-11h-7z', 'label' => 'Fast Service'],
-                        ['icon' => 'M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h.5A2.5 2.5 0 0020 5.5v-1.65', 'label' => 'Eco-Friendly'],
-                    ] as $badge)
-                        <div class="flex items-center rounded-full border border-white/20 bg-white/10 px-6 py-3 text-white shadow-lg backdrop-blur-md">
-                            <svg class="mr-2 h-5 w-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ $badge['icon'] }}"></path></svg>
-                            <span class="font-medium">{{ $badge['label'] }}</span>
-                        </div>
-                    @endforeach
+                <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
+                    <a href="{{ route('booking.index') }}" class="btn-cta">Book Now</a>
+                    <a href="{{ route('services.index') }}" class="btn-cta-outline">Our Services</a>
                 </div>
             </div>
         </div>
     </div>
 
     {{-- Services --}}
-    <section class="bg-gradient-to-b from-gray-50 to-white py-24">
+    <section class="bg-graphite-50 py-14 dark:bg-graphite-900 sm:py-20 lg:py-24">
         <div class="container-custom">
-            <div class="mb-16 text-center">
-                <h2 class="mb-4 text-4xl font-bold text-gray-800">Our Services</h2>
-                <div class="mx-auto mb-6 h-1 w-24 bg-blue-600"></div>
-                <p class="mx-auto max-w-2xl text-lg text-gray-600">
-                    Choose from our range of professional car washing and detailing services. We use eco-friendly products and the latest techniques to give your car the care it deserves.
+            <div class="mb-10 text-center sm:mb-14">
+                <h2 class="mb-3 text-2xl font-bold text-graphite-900 dark:text-white sm:text-3xl md:text-4xl">Our Services</h2>
+                <div class="mx-auto mb-4 h-1 w-16 bg-brand-600 sm:mb-6 sm:w-20"></div>
+                <p class="mx-auto max-w-2xl text-sm text-graphite-600 dark:text-graphite-300 sm:text-base md:text-lg">
+                    Professional washes and detailing packages tailored for everyday drivers and premium vehicles.
                 </p>
             </div>
 
             @if($featuredServices->isNotEmpty())
-                <div class="grid grid-cols-1 items-stretch gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <div class="grid grid-cols-1 items-stretch gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-8">
                     @foreach($featuredServices as $service)
                         <x-service-card :service="$service" />
                     @endforeach
                 </div>
             @else
-                <div class="py-16 text-center">
-                    <p class="text-gray-600">No services available at the moment.</p>
-                </div>
+                <p class="py-12 text-center text-graphite-600">No services available at the moment.</p>
             @endif
 
-            <div class="mt-16 text-center">
-                <a href="{{ route('services.index') }}" class="inline-flex items-center rounded-lg bg-blue-600 px-8 py-3 font-medium text-white shadow-md transition-all duration-300 hover:scale-105 hover:bg-blue-700">
-                    View All Services
-                    <svg class="ml-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
-                </a>
+            <div class="mt-10 text-center sm:mt-14">
+                <a href="{{ route('services.index') }}" class="btn-cta">View All Services</a>
             </div>
         </div>
     </section>
 
     {{-- Process --}}
-    <section class="relative overflow-hidden bg-gradient-to-br from-gray-50 to-blue-50 py-20" x-data="scrollSection">
-        <div class="absolute inset-0">
-            <div class="absolute top-20 left-10 h-32 w-32 animate-float rounded-full bg-blue-200/20"></div>
-            <div class="absolute right-10 bottom-20 h-24 w-24 animate-float rounded-full bg-purple-200/20" style="animation-delay: 1s;"></div>
-            <div class="absolute top-1/2 left-1/4 h-16 w-16 animate-float rounded-full bg-green-200/20" style="animation-delay: 2s;"></div>
-        </div>
+    <section class="relative flex min-h-[32rem] items-center overflow-hidden py-24 sm:min-h-[36rem] sm:py-28 lg:min-h-[40rem] lg:py-32">
+        <x-parallax-bg
+            src="images/steam-wash.jpg"
+            alt=""
+            :speed="0.75"
+            brightness="0.55"
+            position="center 40%"
+            height="180%"
+        >
+            <div class="absolute inset-0 bg-white/88 dark:bg-graphite-950/90"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-brand-600/5 via-transparent to-brand-700/10 dark:from-brand-500/10 dark:to-brand-900/20"></div>
+        </x-parallax-bg>
 
-        <div class="relative z-10 container mx-auto px-4">
-            <div class="mb-16 text-center transition-all duration-1000" :class="visible ? 'animate-fadeInUp opacity-100' : 'translate-y-10 opacity-0'">
-                <h2 class="mb-4 text-4xl font-bold text-gray-800 md:text-5xl">
-                    Our <span class="gradient-text">Premium Process</span>
-                </h2>
-                <p class="mx-auto max-w-3xl text-xl text-gray-600">
-                    Experience the Diamond Steam difference with our meticulous 4-step process
+        <div class="container-custom relative z-10 w-full">
+            <div class="mb-12 text-center sm:mb-16">
+                <h2 class="mb-3 text-2xl font-bold text-graphite-900 dark:text-white sm:text-3xl md:text-4xl">How It Works</h2>
+                <div class="mx-auto mb-4 h-1 w-16 bg-brand-600 sm:w-20"></div>
+                <p class="mx-auto max-w-2xl text-sm text-graphite-600 dark:text-graphite-300 sm:text-base md:text-lg">
+                    A clear four-step process from booking to handover.
                 </p>
             </div>
 
-            <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+            <div class="grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 sm:gap-7 lg:grid-cols-4 lg:gap-8">
                 @foreach([
-                    ['id' => 1, 'title' => 'Book Online', 'description' => 'Choose your service and book instantly through our easy-to-use platform', 'icon' => '📱', 'color' => 'from-blue-500 to-blue-600'],
-                    ['id' => 2, 'title' => 'Pre-Wash Inspection', 'description' => 'Our team inspects your vehicle and prepares the perfect treatment plan', 'icon' => '🔍', 'color' => 'from-green-500 to-green-600'],
-                    ['id' => 3, 'title' => 'Premium Wash', 'description' => 'Professional cleaning using eco-friendly products and advanced techniques', 'icon' => '🚿', 'color' => 'from-purple-500 to-purple-600'],
-                    ['id' => 4, 'title' => 'Quality Check', 'description' => 'Final inspection to ensure your vehicle meets our premium standards', 'icon' => '✨', 'color' => 'from-orange-500 to-orange-600'],
-                ] as $index => $step)
-                    <div class="group relative transition-all duration-700" :class="visible ? 'animate-fadeInUp opacity-100' : 'translate-y-10 opacity-0'" style="animation-delay: {{ $index * 200 }}ms;">
-                        @if($index < 3)
-                            <div class="absolute top-1/2 -right-4 z-10 hidden h-0.5 w-8 -translate-y-1/2 bg-gradient-to-r from-blue-300 to-transparent lg:block">
-                                <div class="absolute top-1/2 right-0 h-2 w-2 -translate-y-1/2 animate-pulse rounded-full bg-blue-400"></div>
-                            </div>
-                        @endif
-
-                        <div class="relative overflow-hidden rounded-2xl border border-gray-100 bg-white p-8 shadow-lg transition-all duration-300 hover-lift group-hover:shadow-2xl">
-                            <div class="absolute inset-0 bg-gradient-to-br {{ $step['color'] }} opacity-0 transition-opacity duration-300 group-hover:opacity-5"></div>
-                            <div class="absolute -top-4 -right-4 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br {{ $step['color'] }} text-lg font-bold text-white shadow-lg">
-                                {{ $step['id'] }}
-                            </div>
-                            <div class="mb-6 animate-wave text-6xl transition-transform duration-300 group-hover:scale-110">{{ $step['icon'] }}</div>
-                            <h3 class="mb-4 text-2xl font-bold text-gray-800 transition-colors duration-300 group-hover:text-blue-600">{{ $step['title'] }}</h3>
-                            <p class="leading-relaxed text-gray-600">{{ $step['description'] }}</p>
+                    ['id' => '01', 'title' => 'Book Online', 'description' => 'Pick a service, location, and time slot that fits your schedule.', 'path' => 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z'],
+                    ['id' => '02', 'title' => 'Vehicle Check', 'description' => 'We review your car and confirm the right treatment for its condition.', 'path' => 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'],
+                    ['id' => '03', 'title' => 'Professional Care', 'description' => 'From washes to detailing and protection, we follow a paint-safe process.', 'path' => 'M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z'],
+                    ['id' => '04', 'title' => 'Handover', 'description' => 'Final quality check, then we return your vehicle ready to drive.', 'path' => 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'],
+                ] as $step)
+                    <article class="hover-lift flex h-full min-h-[14rem] flex-col rounded-xl border border-graphite-200/90 bg-white/95 p-7 shadow-sm backdrop-blur-sm dark:border-graphite-700 dark:bg-graphite-900/95 sm:min-h-[15.5rem] sm:p-8">
+                        <div class="mb-5 flex items-center gap-3">
+                            <span class="text-sm font-semibold tracking-wide text-brand-600 dark:text-accent-400">{{ $step['id'] }}</span>
+                            <span class="flex h-11 w-11 items-center justify-center rounded-lg bg-brand-600 text-white">
+                                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="{{ $step['path'] }}"></path></svg>
+                            </span>
                         </div>
-                    </div>
+                        <h3 class="mb-3 text-lg font-semibold text-graphite-900 dark:text-white">{{ $step['title'] }}</h3>
+                        <p class="flex-1 text-sm leading-relaxed text-graphite-600 dark:text-graphite-300">{{ $step['description'] }}</p>
+                    </article>
                 @endforeach
             </div>
+        </div>
+    </section>
 
-            <div class="mt-16 text-center transition-all duration-1000" :class="visible ? 'animate-slideInFromBottom opacity-100' : 'translate-y-10 opacity-0'" style="animation-delay: 800ms;">
-                <div class="mx-auto max-w-2xl rounded-2xl border border-gray-100 bg-white p-8 shadow-lg">
-                    <h3 class="mb-4 text-2xl font-bold text-gray-800">Ready to Experience Premium Care?</h3>
-                    <p class="mb-6 text-gray-600">Join thousands of satisfied customers who trust Diamond Steam with their vehicles</p>
-                    <a href="{{ route('booking.index') }}" class="inline-block rounded-full bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-4 font-semibold text-white shadow-lg transition-all duration-300 hover:from-blue-700 hover:to-purple-700 hover:shadow-xl transform hover:scale-105">
-                        Book Your Service Now
-                    </a>
+    {{-- Trusted Local Care — image + stats + CTA --}}
+    <section class="relative flex min-h-[34rem] items-center overflow-hidden py-24 text-white sm:min-h-[40rem] sm:py-28 lg:min-h-[44rem] lg:py-36" x-data="statsSection">
+        <x-parallax-bg src="images/facility-1.jpg" alt="Diamond Steam Car Wash facility" :speed="0.95" brightness="1" position="center center" height="190%">
+            <div class="absolute inset-0 bg-gradient-to-r from-graphite-950/90 via-brand-950/80 to-brand-900/70"></div>
+        </x-parallax-bg>
+
+        <div class="container-custom relative z-10 w-full">
+            <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+                <div>
+                    <p class="mb-3 text-sm font-semibold uppercase tracking-wide text-accent-400">Trusted Local Care</p>
+                    <h2 class="mb-4 text-2xl font-bold sm:text-3xl md:text-4xl">Clean finishes. Consistent standards.</h2>
+                    <p class="mb-8 max-w-xl text-sm leading-relaxed text-white/80 sm:text-base">
+                        From Sector 66 to Matour, we keep every bay process paint-safe, transparent, and easy to book — so your car looks after every visit.
+                    </p>
+                    <div class="flex flex-col gap-3 sm:flex-row sm:gap-4">
+                        <a href="{{ route('booking.index') }}" class="btn-cta">Book a Slot</a>
+                        <a href="{{ route('gallery.index') }}" class="btn-cta-outline">See Our Work</a>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 sm:gap-5">
+                    @foreach([
+                        ['value' => '5,000+', 'label' => 'Happy customers', 'index' => 0],
+                        ['value' => '15,000+', 'label' => 'Cars washed', 'index' => 1],
+                        ['value' => '98%', 'label' => 'Satisfaction', 'index' => 2],
+                        ['value' => '2', 'label' => 'Punjab locations', 'index' => 3],
+                    ] as $stat)
+                        <div class="flex min-h-[8.5rem] h-full flex-col justify-center rounded-xl border border-white/15 bg-white/10 px-4 py-8 text-center backdrop-blur-sm sm:min-h-[10rem] sm:px-6 sm:py-10">
+                            <div class="text-2xl font-bold text-white sm:text-3xl md:text-4xl">{{ $stat['value'] }}</div>
+                            <div class="mt-2 text-xs text-white/75 sm:text-sm">{{ $stat['label'] }}</div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
     </section>
 
-    {{-- Stats --}}
-    <section class="relative overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 py-20" x-data="statsSection">
-        <div class="absolute inset-0">
-            <div class="absolute inset-0 bg-black/20"></div>
-            @foreach(range(0, 19) as $i)
-                <div
-                    class="absolute h-2 w-2 animate-float rounded-full bg-white/20"
-                    style="left: {{ ($i * 13 + 7) % 100 }}%; top: {{ ($i * 19 + 11) % 100 }}%; animation-delay: {{ ($i * 0.3) }}s; animation-duration: {{ 3 + ($i % 4) }}s;"
-                ></div>
-            @endforeach
-        </div>
-
-        <div class="relative z-10 container mx-auto px-4">
-            <div class="mb-16 text-center transition-all duration-1000" :class="visible ? 'animate-fadeInUp opacity-100' : 'translate-y-10 opacity-0'">
-                <h2 class="mb-4 text-4xl font-bold text-white md:text-5xl">
-                    Our <span class="text-yellow-300">Achievements</span>
-                </h2>
-                <p class="mx-auto max-w-3xl text-xl text-blue-100">
-                    Numbers that speak for our commitment to excellence
+    {{-- Why choose us --}}
+    <section class="bg-white py-14 dark:bg-graphite-950 sm:py-20 lg:py-24">
+        <div class="container-custom">
+            <div class="mb-10 text-center sm:mb-14">
+                <h2 class="mb-3 text-2xl font-bold text-graphite-900 dark:text-white sm:text-3xl md:text-4xl">Why Choose Diamond Steam</h2>
+                <div class="mx-auto mb-4 h-1 w-16 bg-brand-600 sm:w-20"></div>
+                <p class="mx-auto max-w-2xl text-sm text-graphite-600 dark:text-graphite-300 sm:text-base md:text-lg">
+                    Practical advantages that matter every time you book.
                 </p>
             </div>
 
-            <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+            <div class="grid grid-cols-1 items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
                 @foreach([
-                    ['number' => 5000, 'suffix' => '+', 'label' => 'Happy Customers', 'icon' => '😊', 'color' => 'from-blue-500 to-blue-600'],
-                    ['number' => 15000, 'suffix' => '+', 'label' => 'Cars Washed', 'icon' => '🚗', 'color' => 'from-green-500 to-green-600'],
-                    ['number' => 98, 'suffix' => '%', 'label' => 'Satisfaction Rate', 'icon' => '⭐', 'color' => 'from-yellow-500 to-orange-500'],
-                    ['number' => 3, 'suffix' => '', 'label' => 'Years Experience', 'icon' => '🏆', 'color' => 'from-purple-500 to-purple-600'],
-                ] as $index => $stat)
-                    <div class="text-center transition-all duration-700" :class="visible ? 'animate-fadeInUp opacity-100' : 'translate-y-10 opacity-0'" style="animation-delay: {{ $index * 200 }}ms;">
-                        <div class="rounded-2xl border border-white/20 bg-white/10 p-8 backdrop-blur-lg transition-all duration-300 hover-lift group hover:bg-white/20">
-                            <div class="mb-4 animate-wave text-6xl transition-transform duration-300 group-hover:scale-110">{{ $stat['icon'] }}</div>
-                            <div class="mb-4">
-                                <span class="text-5xl font-bold text-white md:text-6xl" x-text="counts[{{ $index }}].toLocaleString()"></span>
-                                <span class="text-3xl font-bold text-yellow-300 md:text-4xl">{{ $stat['suffix'] }}</span>
-                            </div>
-                            <p class="text-xl font-semibold text-blue-100">{{ $stat['label'] }}</p>
-                            <div class="mx-auto mt-4 h-1 w-16 rounded-full bg-gradient-to-r {{ $stat['color'] }} transition-all duration-300 group-hover:w-24"></div>
+                    ['title' => 'Eco-conscious methods', 'description' => 'Lower water use and paint-safe products for everyday maintenance.', 'path' => 'M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h.5A2.5 2.5 0 0020 5.5v-1.65'],
+                    ['title' => 'Trained technicians', 'description' => 'Consistent process control for interiors, exteriors, and protection work.', 'path' => 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'],
+                    ['title' => 'Reliable turnaround', 'description' => 'Clear slot booking with predictable service windows.', 'path' => 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z'],
+                    ['title' => 'Paint-first approach', 'description' => 'Techniques designed to reduce swirl risk and preserve finish.', 'path' => 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'],
+                    ['title' => 'Transparent pricing', 'description' => 'Published packages with optional add-ons you can choose at booking.', 'path' => 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z'],
+                    ['title' => 'Two Punjab locations', 'description' => 'Sector 66, SAS Nagar and Matour — book the centre that suits you.', 'path' => 'M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z'],
+                ] as $feature)
+                    <article class="hover-lift flex h-full flex-col rounded-xl border border-graphite-200 bg-graphite-50 p-6 dark:border-graphite-700 dark:bg-graphite-900">
+                        <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-brand-600 text-white">
+                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="{{ $feature['path'] }}"></path></svg>
                         </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
-
-    {{-- Why Choose Us --}}
-    <section class="relative overflow-hidden bg-white py-20" x-data="scrollSection">
-        <div class="absolute inset-0">
-            <div class="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500"></div>
-            <div class="absolute top-20 right-10 h-64 w-64 animate-float rounded-full bg-gradient-to-br from-blue-100 to-purple-100 opacity-30"></div>
-            <div class="absolute bottom-20 left-10 h-48 w-48 animate-float rounded-full bg-gradient-to-br from-green-100 to-blue-100 opacity-30" style="animation-delay: 2s;"></div>
-        </div>
-
-        <div class="relative z-10 container mx-auto px-4">
-            <div class="mb-16 text-center transition-all duration-1000" :class="visible ? 'animate-fadeInUp opacity-100' : 'translate-y-10 opacity-0'">
-                <h2 class="mb-4 text-4xl font-bold text-gray-800 md:text-5xl">
-                    Why Choose <span class="gradient-text">Diamond Steam</span>?
-                </h2>
-                <p class="mx-auto max-w-3xl text-xl text-gray-600">
-                    Discover what makes us the preferred choice for premium car care services
-                </p>
-            </div>
-
-            <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-                @foreach([
-                    ['title' => 'Eco-Friendly Products', 'description' => 'We use only biodegradable, environmentally safe cleaning products that protect your car and the planet.', 'icon' => '🌱', 'color' => 'from-green-500 to-emerald-600', 'bg' => 'bg-green-50'],
-                    ['title' => 'Professional Team', 'description' => 'Our trained professionals have years of experience and treat every vehicle with meticulous care.', 'icon' => '👨‍🔧', 'color' => 'from-blue-500 to-blue-600', 'bg' => 'bg-blue-50'],
-                    ['title' => 'Advanced Equipment', 'description' => 'State-of-the-art washing equipment and techniques ensure the best results for your vehicle.', 'icon' => '⚡', 'color' => 'from-purple-500 to-purple-600', 'bg' => 'bg-purple-50'],
-                    ['title' => 'Time Efficient', 'description' => 'Quick service without compromising quality. Most services completed within 30-60 minutes.', 'icon' => '⏱️', 'color' => 'from-orange-500 to-red-500', 'bg' => 'bg-orange-50'],
-                    ['title' => 'Satisfaction Guarantee', 'description' => "100% satisfaction guaranteed or we'll redo the service at no extra cost. Your happiness is our priority.", 'icon' => '✅', 'color' => 'from-teal-500 to-cyan-600', 'bg' => 'bg-teal-50'],
-                    ['title' => 'Affordable Pricing', 'description' => 'Premium quality services at competitive prices. Great value for money with transparent pricing.', 'icon' => '💰', 'color' => 'from-yellow-500 to-yellow-600', 'bg' => 'bg-yellow-50'],
-                ] as $index => $feature)
-                    <div class="group transition-all duration-700" :class="visible ? 'animate-fadeInUp opacity-100' : 'translate-y-10 opacity-0'" style="animation-delay: {{ $index * 150 }}ms;">
-                        <div class="{{ $feature['bg'] }} relative h-full overflow-hidden rounded-2xl border-2 border-transparent p-8 transition-all duration-300 hover-lift hover:border-gray-200">
-                            <div class="absolute inset-0 bg-gradient-to-br {{ $feature['color'] }} opacity-0 transition-opacity duration-500 group-hover:opacity-5"></div>
-                            <div class="relative mb-6">
-                                <div class="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br {{ $feature['color'] }} shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-xl">
-                                    <span class="animate-wave text-3xl group-hover:animate-bounce">{{ $feature['icon'] }}</span>
-                                </div>
-                            </div>
-                            <h3 class="mb-4 text-2xl font-bold text-gray-800 transition-colors duration-300 group-hover:text-blue-600">{{ $feature['title'] }}</h3>
-                            <p class="leading-relaxed text-gray-600">{{ $feature['description'] }}</p>
-                            <div class="absolute bottom-0 left-0 h-1 w-0 rounded-b-2xl bg-gradient-to-r {{ $feature['color'] }} transition-all duration-500 group-hover:w-full"></div>
-                        </div>
-                    </div>
+                        <h3 class="mb-2 text-lg font-semibold text-graphite-900 dark:text-white">{{ $feature['title'] }}</h3>
+                        <p class="flex-1 text-sm leading-relaxed text-graphite-600 dark:text-graphite-300">{{ $feature['description'] }}</p>
+                    </article>
                 @endforeach
             </div>
 
-            <div class="mt-16 text-center transition-all duration-1000" :class="visible ? 'animate-slideInFromBottom opacity-100' : 'translate-y-10 opacity-0'" style="animation-delay: 900ms;">
-                <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-600 to-purple-600 p-12 text-white">
-                    <div class="absolute inset-0 animate-shimmer bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600"></div>
-                    <div class="relative z-10">
-                        <h3 class="mb-4 text-3xl font-bold md:text-4xl">Experience the Diamond Steam Difference</h3>
-                        <p class="mx-auto mb-8 max-w-2xl text-xl text-blue-100">
-                            Join thousands of satisfied customers who trust us with their vehicles. Book your premium car wash service today!
-                        </p>
-                        <div class="flex flex-col justify-center gap-4 sm:flex-row">
-                            <a href="{{ route('booking.index') }}" class="rounded-full bg-white px-8 py-4 font-semibold text-blue-600 shadow-lg transition-all duration-300 hover:scale-105 hover:bg-gray-100 hover:shadow-xl">Book Now</a>
-                            <a href="{{ route('services.index') }}" class="rounded-full border-2 border-white px-8 py-4 font-semibold text-white transition-all duration-300 hover:scale-105 hover:bg-white hover:text-blue-600">View Services</a>
-                        </div>
-                    </div>
+            <div class="mt-10 rounded-xl bg-brand-700 px-6 py-8 text-center text-white sm:mt-14 sm:px-10 sm:py-10">
+                <h3 class="mb-3 text-xl font-bold sm:text-2xl md:text-3xl">Ready to book?</h3>
+                <p class="mx-auto mb-6 max-w-xl text-sm text-brand-100 sm:text-base">Pick a service and location online — same-day slots when available.</p>
+                <div class="flex flex-col justify-center gap-3 sm:flex-row sm:gap-4">
+                    <a href="{{ route('booking.index') }}" class="inline-flex justify-center rounded-lg bg-white px-6 py-3.5 font-semibold text-brand-800 transition hover:bg-brand-50">Book Now</a>
+                    <a href="{{ route('contact.index') }}" class="btn-cta-outline">Contact Us</a>
                 </div>
             </div>
         </div>
     </section>
 
-    {{-- Benefits --}}
-    <section class="relative overflow-hidden py-24">
-        <div class="absolute inset-0 z-0 opacity-5">
-            <div class="h-full w-full bg-cover bg-center" style="background-image: url('{{ asset('images/detailing.jpg') }}')"></div>
-        </div>
-
-        <div class="container-custom relative z-10">
-            <div class="animate-on-scroll mb-16 text-center" x-data="scrollReveal">
-                <h2 class="mb-4 text-4xl font-bold text-gray-800">Why Choose Diamond Steam Car Wash</h2>
-                <div class="mx-auto mb-6 h-1 w-24 bg-blue-600"></div>
-                <p class="mx-auto max-w-2xl text-lg text-gray-600">
-                    We are committed to providing the best car wash experience with quality service, eco-friendly products, and professional staff.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-                @foreach([
-                    ['title' => 'Time-Saving', 'description' => 'Quick turnaround times with our efficient processes. Get your car back faster.', 'path' => 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z'],
-                    ['title' => 'Eco-Friendly', 'description' => 'We use eco-friendly products and water-saving techniques to protect the environment.', 'path' => 'M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h.5A2.5 2.5 0 0020 5.5v-1.65'],
-                    ['title' => 'Professional Staff', 'description' => 'Our trained professionals handle your vehicle with care and expertise.', 'path' => 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'],
-                    ['title' => 'Satisfaction Guaranteed', 'description' => "We ensure 100% satisfaction with our services or we'll rewash your vehicle.", 'path' => 'M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5'],
-                    ['title' => 'Vehicle Protection', 'description' => "Our methods and products are safe for your car's paint and finish.", 'path' => 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'],
-                    ['title' => 'All Vehicle Types', 'description' => 'We service all types of vehicles from compact cars to SUVs and luxury vehicles.', 'path' => 'M13 10V3L4 14h7v7l9-11h-7z'],
-                ] as $index => $benefit)
-                    <div class="group animate-on-scroll overflow-hidden rounded-xl shadow-lg" x-data="scrollReveal" style="transition-delay: {{ $index * 100 }}ms;">
-                        <div class="flex h-24 items-center justify-center bg-gradient-to-r from-blue-600 to-blue-700 p-6">
-                            <div class="transition-transform duration-300 group-hover:scale-110">
-                                <svg class="h-10 w-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ $benefit['path'] }}"></path></svg>
-                            </div>
-                        </div>
-                        <div class="bg-white p-6">
-                            <h3 class="mb-3 text-xl font-bold text-gray-800">{{ $benefit['title'] }}</h3>
-                            <p class="text-gray-600">{{ $benefit['description'] }}</p>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
-
-    {{-- Latest blog posts --}}
-    @if($latestPosts->isNotEmpty())
-        <section class="bg-white py-24">
+    {{-- Locations --}}
+    @if($locations->isNotEmpty())
+        <section class="bg-graphite-50 py-14 dark:bg-graphite-900 sm:py-20">
             <div class="container-custom">
-                <div class="mb-12 flex flex-col items-start justify-between gap-4 md:flex-row md:items-end">
-                    <div>
-                        <h2 class="mb-4 text-4xl font-bold text-gray-800">From the Blog</h2>
-                        <div class="mb-4 h-1 w-24 bg-blue-600"></div>
-                        <p class="max-w-2xl text-lg text-gray-600">Car care tips, detailing guides, and paint protection advice from our team.</p>
-                    </div>
-                    <a href="{{ route('blog.index') }}" class="font-semibold text-blue-600 hover:text-blue-700">View all articles →</a>
+                <div class="mb-10 text-center sm:mb-12">
+                    <h2 class="mb-3 text-2xl font-bold text-graphite-900 dark:text-white sm:text-3xl md:text-4xl">Our Locations</h2>
+                    <div class="mx-auto mb-4 h-1 w-16 bg-brand-600 sm:w-20"></div>
                 </div>
-                <div class="grid gap-6 md:grid-cols-3">
+                <div class="mx-auto grid max-w-4xl grid-cols-1 items-stretch gap-5 sm:grid-cols-2 sm:gap-6">
+                    @foreach($locations as $location)
+                        <article class="hover-lift flex h-full flex-col rounded-xl border border-graphite-200 bg-white p-6 shadow-sm dark:border-graphite-700 dark:bg-graphite-900">
+                            <h3 class="text-lg font-semibold text-graphite-900 dark:text-white">{{ $location->name }}</h3>
+                            <p class="mt-3 flex-1 text-sm leading-relaxed text-graphite-600 dark:text-graphite-300">{{ $location->fullAddress() }}</p>
+                            @if($location->phone)
+                                <a href="tel:{{ $location->phone }}" class="mt-4 text-sm font-medium text-brand-700 hover:underline dark:text-accent-400">{{ $location->phone }}</a>
+                            @endif
+                        </article>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
+
+    {{-- Blog --}}
+    @if($latestPosts->isNotEmpty())
+        <section class="relative overflow-hidden bg-brand-950 py-14 text-white sm:py-20 lg:py-24">
+            <div class="absolute inset-0 opacity-30" style="background-image: radial-gradient(circle at 15% 20%, #14b8a6 0, transparent 35%), radial-gradient(circle at 85% 10%, #06b6d4 0, transparent 30%);"></div>
+            <div class="container-custom relative">
+                <div class="mb-8 flex flex-col gap-4 sm:mb-12 md:flex-row md:items-end md:justify-between">
+                    <div>
+                        <h2 class="mb-3 text-2xl font-bold sm:text-3xl md:text-4xl">From the Blog</h2>
+                        <div class="mb-3 h-1 w-16 bg-accent-400 sm:w-20"></div>
+                        <p class="max-w-2xl text-sm text-brand-100 sm:text-base">Car care tips and protection guidance from our team.</p>
+                    </div>
+                    <a href="{{ route('blog.index') }}" class="text-sm font-semibold text-accent-300 hover:text-accent-200">View all articles →</a>
+                </div>
+                <div class="grid grid-cols-1 items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
                     @foreach($latestPosts as $post)
-                        <x-blog-card :post="$post" />
+                        <x-blog-card :post="$post" variant="dark" />
                     @endforeach
                 </div>
             </div>
@@ -325,88 +229,108 @@
                     'id' => $t->id,
                     'name' => $t->name,
                     'location' => $city,
-                    'rating' => $t->rating,
-                    'comment' => $t->review,
+                    'service' => $t->service,
+                    'rating' => (int) $t->rating,
+                    'comment' => \Illuminate\Support\Str::limit(trim($t->review), 160),
                     'image' => asset($testimonialImages[$i % count($testimonialImages)]),
                 ];
             })->values();
         @endphp
 
-        <section class="relative overflow-hidden bg-gradient-to-b from-blue-50 to-white py-24">
-            <div class="pointer-events-none absolute inset-0 opacity-20">
-                <div class="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-blue-500 blur-3xl"></div>
-                <div class="absolute -bottom-24 -left-24 h-96 w-96 rounded-full bg-blue-400 blur-3xl"></div>
-            </div>
-
-            <div class="container-custom relative z-10">
-                <div class="animate-on-scroll mb-16 text-center" x-data="scrollReveal">
-                    <h2 class="mb-4 text-4xl font-bold text-gray-800">What Our Customers Say</h2>
-                    <div class="mx-auto mb-6 h-1 w-24 bg-blue-600"></div>
-                    <p class="mx-auto max-w-2xl text-lg text-gray-600">
-                        We take pride in providing excellent service to our customers. Here's what some of them have to say about their experience with Diamond Steam.
-                    </p>
+        <section class="bg-graphite-50 py-14 dark:bg-graphite-900 sm:py-20 lg:py-24">
+            <div class="container-custom">
+                <div class="mb-10 text-center sm:mb-12">
+                    <h2 class="mb-3 text-2xl font-bold text-graphite-900 dark:text-white sm:text-3xl md:text-4xl">Customer Feedback</h2>
+                    <div class="mx-auto mb-4 h-1 w-16 bg-brand-600 sm:w-20"></div>
+                    <p class="mx-auto max-w-2xl text-sm text-graphite-600 dark:text-graphite-300 sm:text-base">Recent reviews from drivers who book with us regularly.</p>
                 </div>
 
-                <div class="mx-auto max-w-5xl px-4" x-data="testimonialCarousel(@js($carouselItems))">
-                    <div
-                        class="relative overflow-hidden rounded-xl bg-white p-6 shadow-xl md:p-10"
-                        @mouseenter="autoplay = false"
-                        @mouseleave="autoplay = true"
-                    >
-                        <div class="absolute top-0 left-0 h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-600 opacity-10"></div>
-                        <div class="absolute top-10 right-10">
-                            <svg class="h-16 w-16 text-blue-100" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"></path></svg>
-                        </div>
-
-                        <div class="flex flex-col items-center gap-10 lg:flex-row">
-                            <div class="w-full lg:w-1/3">
-                                <div class="relative mb-6 h-80 overflow-hidden rounded-xl shadow-lg lg:mb-0 lg:h-96">
-                                    <template x-for="(item, index) in items" :key="item.id">
+                <div
+                    class="relative"
+                    x-data="testimonialCarousel(@js($carouselItems))"
+                    @mouseenter="autoplay = false"
+                    @mouseleave="autoplay = true"
+                    @focusin="autoplay = false"
+                    @focusout="autoplay = true"
+                >
+                    <div class="overflow-hidden" x-ref="viewport">
+                        <div
+                            class="testimonial-track flex items-stretch will-change-transform"
+                            x-ref="track"
+                            :style="trackStyle"
+                        >
+                            <template x-for="item in items" :key="item.id">
+                                <article
+                                    class="testimonial-card flex h-full min-h-[22rem] flex-col rounded-xl border border-graphite-200 bg-white p-5 shadow-sm dark:border-graphite-700 dark:bg-graphite-950 sm:min-h-[24rem] sm:p-6"
+                                    :style="slideStyle"
+                                >
+                                    <div class="mb-4 h-36 w-full shrink-0 overflow-hidden rounded-lg sm:h-40">
                                         <img
-                                            x-show="current === index"
-                                            x-transition:enter="transition ease-out duration-500"
-                                            x-transition:enter-start="opacity-0"
-                                            x-transition:enter-end="opacity-100"
                                             :src="item.image"
                                             :alt="item.name"
-                                            class="absolute inset-0 h-full w-full object-cover"
-                                            style="object-position: center 25%;"
+                                            class="h-full w-full object-cover"
+                                            style="object-position: center 30%;"
+                                            loading="lazy"
+                                            decoding="async"
                                         >
-                                    </template>
-                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                                </div>
-                            </div>
-
-                            <div class="w-full lg:w-2/3">
-                                <template x-for="(item, index) in items" :key="'content-' + item.id">
-                                    <div x-show="current === index" x-transition>
-                                        <div class="mb-6 flex">
-                                            <template x-for="i in 5" :key="i">
-                                                <svg class="h-6 w-6" :class="i <= item.rating ? 'text-yellow-500' : 'text-gray-300'" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8-2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                                                </svg>
-                                            </template>
-                                        </div>
-                                        <p class="mb-8 text-xl leading-relaxed text-gray-700 italic" x-text="'&quot;' + item.comment + '&quot;'"></p>
-                                        <div>
-                                            <h4 class="text-xl font-bold text-gray-800" x-text="item.name"></h4>
-                                            <p class="text-blue-600" x-text="item.location"></p>
-                                        </div>
                                     </div>
-                                </template>
 
-                                <div class="mt-8 flex gap-3">
-                                    <button type="button" @click="prev()" class="flex h-10 w-10 items-center justify-center rounded-full bg-gray-200 transition-colors hover:bg-gray-300" aria-label="Previous testimonial">
-                                        <svg class="h-5 w-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                                    </button>
-                                    <button type="button" @click="next()" class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-white transition-colors hover:bg-blue-700" aria-label="Next testimonial">
-                                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                                    </button>
-                                </div>
-                            </div>
+                                    <div class="mb-3 flex gap-1">
+                                        <template x-for="star in 5" :key="star">
+                                            <svg
+                                                class="h-5 w-5"
+                                                :class="star <= item.rating ? 'text-amber-400' : 'text-graphite-300 dark:text-graphite-600'"
+                                                fill="currentColor"
+                                                viewBox="0 0 20 20"
+                                                aria-hidden="true"
+                                            >
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8-2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                            </svg>
+                                        </template>
+                                    </div>
+
+                                    <p class="mb-4 line-clamp-5 flex-1 text-sm leading-relaxed text-graphite-700 dark:text-graphite-200" x-text="'“' + item.comment + '”'"></p>
+
+                                    <div class="mt-auto border-t border-graphite-100 pt-4 dark:border-graphite-800">
+                                        <h3 class="truncate text-base font-semibold text-graphite-900 dark:text-white" x-text="item.name"></h3>
+                                        <p class="mt-0.5 truncate text-sm text-brand-700 dark:text-accent-400" x-text="item.service || item.location"></p>
+                                    </div>
+                                </article>
+                            </template>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 flex items-center justify-center gap-4">
+                        <button
+                            type="button"
+                            @click="prev()"
+                            class="flex h-11 w-11 items-center justify-center rounded-full border border-graphite-300 text-graphite-700 transition hover:bg-white dark:border-graphite-600 dark:text-graphite-200 dark:hover:bg-graphite-800"
+                            aria-label="Previous testimonials"
+                        >
+                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                        </button>
+
+                        <div class="flex items-center gap-2" role="tablist" aria-label="Testimonial slides">
+                            <template x-for="page in pageCount" :key="'dot-' + page">
+                                <button
+                                    type="button"
+                                    class="h-2.5 rounded-full transition-all duration-300"
+                                    :class="(page - 1) === index ? 'w-7 bg-brand-600' : 'w-2.5 bg-graphite-300 hover:bg-graphite-400 dark:bg-graphite-600 dark:hover:bg-graphite-500'"
+                                    :aria-label="'Go to slide ' + page"
+                                    :aria-current="(page - 1) === index ? 'true' : null"
+                                    @click="goTo(page - 1)"
+                                ></button>
+                            </template>
                         </div>
 
-                        <div class="absolute right-10 bottom-10 rounded-full bg-gray-100 px-3 py-1 text-sm font-medium" x-text="(current + 1) + ' / ' + items.length"></div>
+                        <button
+                            type="button"
+                            @click="next()"
+                            class="flex h-11 w-11 items-center justify-center rounded-full bg-brand-600 text-white transition hover:bg-brand-700"
+                            aria-label="Next testimonials"
+                        >
+                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
                     </div>
                 </div>
             </div>

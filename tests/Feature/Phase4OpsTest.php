@@ -125,7 +125,7 @@ class Phase4OpsTest extends TestCase
         $this->actingAs($admin)
             ->put(route('admin.system.settings.update'), [
                 'meta_title' => 'DSCW SEO',
-                'meta_description' => 'Steam car wash Mumbai',
+                'meta_description' => 'Steam car wash Punjab',
                 'mail_from_name' => 'DSCW',
                 'mail_from_address' => 'hello@example.com',
                 'ga_measurement_id' => 'G-TEST123',
@@ -231,7 +231,8 @@ class Phase4OpsTest extends TestCase
         $this->actingAs($admin)
             ->get(route('admin.seo.index'))
             ->assertOk()
-            ->assertSee('/sitemap.xml');
+            ->assertSee('/sitemap.xml')
+            ->assertSee('Page scores');
     }
 
     public function test_dashboard_shows_phase_4_ops_complete(): void

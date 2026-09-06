@@ -11,28 +11,48 @@ document.addEventListener('alpine:init', () => {
         preference: localStorage.getItem('dscw-theme') || 'system',
 
         init(adminMode = 'system') {
-            this.mode = adminMode;
+            this.mode = adminMode || 'system';
+            const stored = localStorage.getItem('dscw-theme');
+            this.preference = ['light', 'dark', 'system'].includes(stored) ? stored : 'system';
             this.apply();
+
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+                if (this.preference === 'system') {
+                    this.apply();
+                }
+            });
         },
 
         isDark() {
+            // Admin can force-disable dark mode sitewide.
             if (this.mode === 'disabled') {
                 return false;
             }
 
-            if (this.mode === 'enabled') {
-                if (this.preference === 'dark') return true;
-                if (this.preference === 'light') return false;
+            // User preference always wins for light/dark.
+            if (this.preference === 'dark') {
+                return true;
             }
 
+            if (this.preference === 'light') {
+                return false;
+            }
+
+            // preference === 'system'
             return window.matchMedia('(prefers-color-scheme: dark)').matches;
         },
 
         apply() {
-            document.documentElement.classList.toggle('dark', this.isDark());
+            const dark = this.isDark();
+            document.documentElement.classList.toggle('dark', dark);
+            document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
         },
 
         setPreference(value) {
+            if (!['light', 'dark', 'system'].includes(value)) {
+                return;
+            }
+
             this.preference = value;
             localStorage.setItem('dscw-theme', value);
             this.apply();
@@ -42,6 +62,59 @@ document.addEventListener('alpine:init', () => {
             this.setPreference(this.isDark() ? 'light' : 'dark');
         },
     });
+
+    Alpine.data('parallaxBg', (speed = 0.7) => ({
+        offset: 0,
+        _raf: null,
+        _onScroll: null,
+        init() {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                return;
+            }
+
+            this._onScroll = () => {
+                if (this._raf) {
+                    return;
+                }
+
+                this._raf = requestAnimationFrame(() => {
+                    this._raf = null;
+                    const rect = this.$el.getBoundingClientRect();
+                    const vh = window.innerHeight || 1;
+                    // Viewport-relative travel so movement stays obvious on tall screens.
+                    const progress = (vh * 0.5 - (rect.top + rect.height * 0.5)) / vh;
+                    const travel = Math.min(vh, 1000) * 0.55;
+                    const raw = progress * speed * travel;
+                    // Keep shift within image overflow so edges never show.
+                    const maxShift = Math.max(120, rect.height * 0.42);
+                    this.offset = Math.round(Math.max(-maxShift, Math.min(maxShift, raw)));
+                    this.applyTransform();
+                });
+            };
+
+            this.$nextTick(() => {
+                this._onScroll();
+            });
+
+            window.addEventListener('scroll', this._onScroll, { passive: true });
+            window.addEventListener('resize', this._onScroll, { passive: true });
+        },
+        applyTransform() {
+            const img = this.$refs.bg || this.$el.querySelector('[data-parallax-img]');
+            if (img) {
+                img.style.transform = `translate3d(0, ${this.offset}px, 0)`;
+            }
+        },
+        destroy() {
+            if (this._onScroll) {
+                window.removeEventListener('scroll', this._onScroll);
+                window.removeEventListener('resize', this._onScroll);
+            }
+            if (this._raf) {
+                cancelAnimationFrame(this._raf);
+            }
+        },
+    }));
 
     Alpine.data('adminNavGroup', (key, forceOpen = false) => ({
         open: !!forceOpen,
@@ -218,28 +291,140 @@ document.addEventListener('alpine:init', () => {
     }));
 
     Alpine.data('testimonialCarousel', (items) => ({
-        items,
-        current: 0,
+        items: Array.isArray(items) ? items : [],
+        index: 0,
+        perView: 1,
+        gap: 20,
+        containerWidth: 0,
         autoplay: true,
-        interval: null,
+        _interval: null,
+        _onResize: null,
+        _ro: null,
         init() {
-            this.startAutoplay();
+            this.updatePerView();
+            this._onResize = () => this.updatePerView();
+            window.addEventListener('resize', this._onResize, { passive: true });
+
+            this.$nextTick(() => {
+                if (!this.$refs.viewport) {
+                    return;
+                }
+
+                this.containerWidth = this.$refs.viewport.clientWidth;
+                this._ro = new ResizeObserver((entries) => {
+                    const entry = entries[0];
+                    if (entry) {
+                        this.containerWidth = entry.contentRect.width;
+                    }
+                });
+                this._ro.observe(this.$refs.viewport);
+            });
+
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                this.startAutoplay();
+            }
+        },
+        updatePerView() {
+            const width = window.innerWidth;
+            let next = 1;
+            if (width >= 1024) {
+                next = 3;
+            } else if (width >= 640) {
+                next = 2;
+            }
+
+            if (next !== this.perView) {
+                this.perView = next;
+                this.index = Math.min(this.index, this.maxIndex);
+            }
+        },
+        get maxIndex() {
+            return Math.max(0, this.items.length - this.perView);
+        },
+        get pageCount() {
+            return this.maxIndex + 1;
+        },
+        get slideWidth() {
+            if (!this.containerWidth) {
+                return 0;
+            }
+
+            return (this.containerWidth - this.gap * (this.perView - 1)) / this.perView;
+        },
+        get trackStyle() {
+            const offset = this.index * (this.slideWidth + this.gap);
+
+            return {
+                transform: `translate3d(-${offset}px, 0, 0)`,
+                gap: `${this.gap}px`,
+            };
+        },
+        get slideStyle() {
+            const width = this.slideWidth || undefined;
+
+            return width
+                ? { flex: `0 0 ${width}px`, width: `${width}px`, maxWidth: `${width}px` }
+                : { flex: `0 0 calc((100% - ${(this.perView - 1) * this.gap}px) / ${this.perView})` };
+        },
+        jumpTo(i) {
+            const track = this.$refs.track;
+            if (track) {
+                track.style.transition = 'none';
+            }
+            this.index = Math.max(0, Math.min(this.maxIndex, i));
+            this.$nextTick(() => {
+                requestAnimationFrame(() => {
+                    if (track) {
+                        track.style.transition = '';
+                    }
+                });
+            });
+        },
+        goTo(i) {
+            this.index = Math.max(0, Math.min(this.maxIndex, i));
+        },
+        next() {
+            if (this.items.length <= this.perView) {
+                return;
+            }
+            if (this.index >= this.maxIndex) {
+                this.jumpTo(0);
+                return;
+            }
+            this.index += 1;
+        },
+        prev() {
+            if (this.items.length <= this.perView) {
+                return;
+            }
+            if (this.index <= 0) {
+                this.jumpTo(this.maxIndex);
+                return;
+            }
+            this.index -= 1;
         },
         startAutoplay() {
-            this.interval = setInterval(() => {
+            this.stopAutoplay();
+            this._interval = setInterval(() => {
                 if (this.autoplay) {
                     this.next();
                 }
-            }, 5000);
+            }, 4500);
         },
-        prev() {
-            this.current = this.current === 0 ? this.items.length - 1 : this.current - 1;
-        },
-        next() {
-            this.current = this.current === this.items.length - 1 ? 0 : this.current + 1;
+        stopAutoplay() {
+            if (this._interval) {
+                clearInterval(this._interval);
+                this._interval = null;
+            }
         },
         destroy() {
-            clearInterval(this.interval);
+            this.stopAutoplay();
+            if (this._onResize) {
+                window.removeEventListener('resize', this._onResize);
+            }
+            if (this._ro) {
+                this._ro.disconnect();
+            }
         },
     }));
 

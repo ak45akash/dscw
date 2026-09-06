@@ -45,6 +45,8 @@ class BlogPostSeeder extends Seeder
                     'title' => $post['title'],
                     'excerpt' => $post['excerpt'],
                     'content' => $post['content'],
+                    'featured_image' => $post['featured_image'] ?? $this->imageForSlug($post['slug']),
+                    'featured_image_alt' => $post['featured_image_alt'] ?? $post['title'],
                     'status' => 'published',
                     'published_at' => $post['published_at'],
                     'meta_title' => $post['meta_title'],
@@ -62,5 +64,42 @@ class BlogPostSeeder extends Seeder
 
             $blogPost->tags()->sync($tagIds);
         }
+    }
+
+    private function imageForSlug(string $slug): string
+    {
+        $pool = [
+            'images/steam-wash.jpg',
+            'images/ceramic-coating.jpg',
+            'images/ppf.jpg',
+            'images/exterior-detailing.jpg',
+            'images/interior-detail.jpg',
+            'images/interior-detailing.jpg',
+            'images/full-detailing.jpg',
+            'images/premium-wash.jpg',
+            'images/dry-clean.jpg',
+            'images/detailing.jpg',
+            'images/car-wash.jpg',
+            'images/facility-2.jpg',
+            'images/facility-3.jpg',
+        ];
+
+        $map = [
+            'why-steam-car-wash-safer-mumbai' => 'images/steam-wash.jpg',
+            'ceramic-coating-guide-indian-climate' => 'images/ceramic-coating.jpg',
+            'ppf-vs-ceramic-coating-comparison' => 'images/ppf.jpg',
+            'monsoon-car-care-tips-mumbai' => 'images/exterior-detailing.jpg',
+            'interior-steam-cleaning-benefits-process' => 'images/interior-detail.jpg',
+            'ppf-maintenance-keeping-film-looking-new' => 'images/ppf.jpg',
+            'paint-correction-before-ceramic-coating' => 'images/ceramic-coating.jpg',
+            'engine-bay-steam-cleaning-safety-benefits' => 'images/steam-wash.jpg',
+            'full-car-detailing-package-whats-included' => 'images/full-detailing.jpg',
+        ];
+
+        if (isset($map[$slug])) {
+            return $map[$slug];
+        }
+
+        return $pool[crc32($slug) % count($pool)];
     }
 }

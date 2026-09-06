@@ -15,8 +15,8 @@ class GalleryController extends Controller
         return view('public.gallery.index', [
             'items' => $items,
             'featured' => $featured,
-            'seoTitle' => 'Before & After Gallery | Diamond Steam Car Wash',
-            'seoDescription' => 'See real transformation results from our car wash, detailing, paint correction, ceramic coating, and PPF services in Mumbai.',
+            'seoTitle' => 'Car Wash Gallery Punjab | Before & After Results',
+            'seoDescription' => 'See real before-and-after results from steam wash, detailing, paint correction, ceramic coating, and PPF at Diamond Steam Car Wash in Punjab.',
         ]);
     }
 }

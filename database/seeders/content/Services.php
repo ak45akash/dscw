@@ -5,10 +5,10 @@ return [
         'name' => 'Basic Wash',
         'slug' => 'basic-wash',
         'category' => 'exterior',
-        'short_description' => 'Quick exterior rinse and hand wash for everyday Mumbai dust. Paint-safe shampoo, microfibre dry, and tyre dressing included.',
+        'short_description' => 'Quick exterior rinse and hand wash for everyday Punjab dust. Paint-safe shampoo, microfibre dry, and tyre dressing included.',
         'description' => <<<'HTML'
-<h2>Everyday Exterior Cleaning for Mumbai Roads</h2>
-<p>Your car collects brake dust, construction grit, and monsoon splash within days of leaving the showroom. Our Basic Wash is designed for owners who need a reliable, affordable exterior refresh without committing to a full detailing session. At Diamond Steam Car Wash in Mumbai, we treat even entry-level washes with the same paint-safe discipline we apply to luxury vehicles.</p>
+<h2>Everyday Exterior Cleaning for Punjab Roads</h2>
+<p>Your car collects brake dust, construction grit, and monsoon splash within days of leaving the showroom. Our Basic Wash is designed for owners who need a reliable, affordable exterior refresh without committing to a full detailing session. At Diamond Steam Car Wash in Punjab, we treat even entry-level washes with the same paint-safe discipline we apply to luxury vehicles.</p>
 <p>This service is ideal for hatchbacks, sedans, and compact SUVs that need a presentable finish before a weekend drive, client meeting, or family outing. We do not use harsh roadside brushes or recycled dirty water. Every vehicle receives a dedicated wash bucket, clean microfibre mitts, and pH-neutral shampoo formulated for Indian climate conditions.</p>
 
 <h2>What Is Included</h2>
@@ -23,34 +23,34 @@ return [
 </ul>
 
 <h3>Paint-Safe Technique</h3>
-<p>Mumbai's hard water leaves mineral deposits if vehicles air-dry in open parking. Our technicians hand-dry every panel immediately after rinsing. We work top-down, rinsing mitts frequently, and never drag a mitt across dry panels where grit could scratch clear coat. This method prevents the swirl marks that accumulate from automatic brush tunnels and single-bucket home washing.</p>
+<p>Punjab's hard water leaves mineral deposits if vehicles air-dry in open parking. Our technicians hand-dry every panel immediately after rinsing. We work top-down, rinsing mitts frequently, and never drag a mitt across dry panels where grit could scratch clear coat. This method prevents the swirl marks that accumulate from automatic brush tunnels and single-bucket home washing.</p>
 
 <h2>Who Should Book This Service</h2>
-<p>Choose Basic Wash if your car is generally well maintained and you need routine cleaning every one to two weeks. It suits daily commuters travelling through BKC, Andheri, or Navi Mumbai who want consistent care without premium pricing. If your vehicle has heavy tree sap, rail dust, or months of neglected contamination, we recommend upgrading to Premium Steam Wash or Full Detailing for deeper decontamination.</p>
+<p>Choose Basic Wash if your car is generally well maintained and you need routine cleaning every one to two weeks. It suits daily commuters travelling through Sector 66, SAS Nagar, or Matour who want consistent care without premium pricing. If your vehicle has heavy tree sap, rail dust, or months of neglected contamination, we recommend upgrading to Premium Steam Wash or Full Detailing for deeper decontamination.</p>
 
 <h2>Our Process at Diamond Steam Car Wash</h2>
 <p>Upon arrival, we inspect your vehicle for obvious issues such as fresh bird droppings or tar spots that need pre-treatment. The wash bay is prepared with fresh solution and clean towels assigned exclusively to your car. The entire process typically completes within 45 minutes, making it practical for lunch-break drop-offs or quick Saturday morning visits.</p>
 <p>We finish with a walk-around quality check. Mirrors, number plates, and rear glass receive final attention because these areas are often missed in rushed roadside washes. You drive away with a clean, dry exterior that reflects Diamond Steam Car Wash standards—not a hurried hose-down that leaves streaks and trapped moisture in door seals.</p>
 
 <h2>Benefits of Regular Basic Washing</h2>
-<p>Consistent exterior cleaning preserves resale value by preventing contaminants from bonding permanently to paint. Brake dust on wheels becomes corrosive when left for weeks. City film on glass reduces night visibility during Mumbai monsoon downpours. A fortnightly Basic Wash interrupts this cycle affordably, extending the life of any existing wax, sealant, or ceramic coating on your vehicle.</p>
+<p>Consistent exterior cleaning preserves resale value by preventing contaminants from bonding permanently to paint. Brake dust on wheels becomes corrosive when left for weeks. City film on glass reduces night visibility during Punjab monsoon downpours. A fortnightly Basic Wash interrupts this cycle affordably, extending the life of any existing wax, sealant, or ceramic coating on your vehicle.</p>
 <p>Pair this service with quarterly interior care or annual protection review for a complete maintenance rhythm. Our team will honestly advise when your paint needs more than a basic wash—never upselling services your car does not require.</p>
 HTML,
         'price' => 599,
         'duration_minutes' => 45,
         'is_featured' => false,
         'featured_order' => null,
-        'meta_title' => 'Basic Car Wash Mumbai | Diamond Steam Car Wash',
-        'meta_description' => 'Affordable paint-safe basic car wash in Mumbai. Hand wash, microfibre dry, wheel clean & tyre dressing. Book at Diamond Steam Car Wash.',
+        'meta_title' => 'Basic Car Wash Punjab | Diamond Steam Car Wash',
+        'meta_description' => 'Affordable paint-safe basic car wash in Punjab. Hand wash, microfibre dry, wheel clean & tyre dressing. Book at Diamond Steam Car Wash.',
     ],
     [
         'name' => 'Premium Steam Wash',
         'slug' => 'premium-steam-wash',
         'category' => 'exterior',
-        'short_description' => 'Dry steam exterior and interior sanitisation using minimal water. Lifts grime safely, kills bacteria, and protects paint in Mumbai humidity.',
+        'short_description' => 'Dry steam exterior and interior sanitisation using minimal water. Lifts grime safely, kills bacteria, and protects paint in Punjab humidity.',
         'description' => <<<'HTML'
-<h2>Advanced Steam Cleaning for Mumbai Vehicles</h2>
-<p>Premium Steam Wash is the signature service at Diamond Steam Car Wash. Using commercial dry vapour technology, we clean your vehicle's exterior and key interior surfaces with superheated low-moisture steam that dissolves grease, sanitises contact points, and uses a fraction of the water consumed by conventional washing. For Mumbai—a city facing periodic water restrictions and relentless urban contamination—this approach is both responsible and remarkably effective.</p>
+<h2>Advanced Steam Cleaning for Punjab Vehicles</h2>
+<p>Premium Steam Wash is the signature service at Diamond Steam Car Wash. Using commercial dry vapour technology, we clean your vehicle's exterior and key interior surfaces with superheated low-moisture steam that dissolves grease, sanitises contact points, and uses a fraction of the water consumed by conventional washing. For Punjab—a region facing periodic water restrictions and relentless urban contamination—this approach is both responsible and remarkably effective.</p>
 <p>Unlike high-pressure jet washing that can force water into door cavities and damage delicate trim, steam is applied with controlled precision. Heat expands pores in dirt and oils, breaking their bond with paint and plastics so they wipe away cleanly. The result is a depth of cleanliness that hand washing alone rarely achieves, without introducing new swirl marks or chemical residue.</p>
 
 <h2>What Is Included</h2>
@@ -66,7 +66,7 @@ HTML,
 </ul>
 
 <h3>Why Steam Outperforms Traditional Washing</h3>
-<p>Traditional bucket washing moves dirt across paint if equipment is not meticulously maintained. Steam lifts contamination before mechanical contact, reducing scratch risk. It also sanitises—critical for families, ride-share operators, and anyone concerned about bacteria on frequently touched surfaces. In Mumbai's humid climate, interior steam cleaning removes musty residue without soaking upholstery, which can lead to mould if dried improperly.</p>
+<p>Traditional bucket washing moves dirt across paint if equipment is not meticulously maintained. Steam lifts contamination before mechanical contact, reducing scratch risk. It also sanitises—critical for families, ride-share operators, and anyone concerned about bacteria on frequently touched surfaces. In Punjab's humid climate, interior steam cleaning removes musty residue without soaking upholstery, which can lead to mould if dried improperly.</p>
 
 <h2>Ideal For</h2>
 <p>This service suits premium vehicle owners, corporate fleet managers, and health-conscious families who want showroom presentation between full details. It is excellent pre-monsoon preparation and weekly maintenance for cars garaged outdoors near construction zones or coastal areas where salt mist accelerates corrosion.</p>
@@ -74,7 +74,7 @@ HTML,
 
 <h2>Our Professional Process</h2>
 <p>Every Premium Steam Wash begins with a visual inspection. Tar, tree sap, and industrial fallout receive targeted pre-treatment before steam application. Technicians work in sections, applying steam and immediately wiping with fresh microfibre to prevent redepositing grime. Interior work follows a systematic sequence: upper dashboard, centre console, doors, and finally floor contact points.</p>
-<p>We use professional-grade dry steam generators operating at temperatures that sanitise without flooding electrical components. Door seals are dried thoroughly because trapped moisture in Mumbai humidity is a leading cause of premature seal degradation and interior odours.</p>
+<p>We use professional-grade dry steam generators operating at temperatures that sanitise without flooding electrical components. Door seals are dried thoroughly because trapped moisture in Punjab humidity is a leading cause of premature seal degradation and interior odours.</p>
 
 <h2>Long-Term Benefits</h2>
 <p>Regular Premium Steam Wash extends the life of ceramic coatings and wax layers by removing contaminants before they etch or embed. Fleet operators report reduced downtime and lower water bills compared to conventional fleet washing contracts. Individual owners notice improved cabin hygiene, clearer glass in monsoon rains, and paint that retains gloss longer between polishing sessions.</p>
@@ -84,8 +84,8 @@ HTML,
         'duration_minutes' => 75,
         'is_featured' => true,
         'featured_order' => 1,
-        'meta_title' => 'Premium Steam Car Wash Mumbai | Diamond Steam',
-        'meta_description' => 'Professional dry steam car wash in Mumbai. Paint-safe exterior clean, interior sanitisation & minimal water use. Book Diamond Steam Car Wash.',
+        'meta_title' => 'Premium Steam Car Wash Punjab | Diamond Steam',
+        'meta_description' => 'Professional dry steam car wash in Punjab. Paint-safe exterior clean, interior sanitisation & minimal water use. Book Diamond Steam Car Wash.',
     ],
     [
         'name' => 'Interior Deep Clean',
@@ -93,8 +93,8 @@ HTML,
         'category' => 'interior',
         'short_description' => 'Thorough cabin restoration with steam extraction, fabric shampoo, odour treatment, and every crevice detailed for a factory-fresh feel.',
         'description' => <<<'HTML'
-<h2>Complete Cabin Restoration for Mumbai Drivers</h2>
-<p>Mumbai's heat, humidity, and stop-start traffic create a perfect environment for odours, bacteria, and embedded grime inside your vehicle. Spilled chai, monsoon wet footwear, pet hair, and air-conditioning condensation leave carpets and upholstery harbouring contaminants that surface fresheners only mask temporarily. Our Interior Deep Clean addresses the root cause with professional extraction, steam sanitisation, and meticulous attention to every cabin surface.</p>
+<h2>Complete Cabin Restoration for Punjab Drivers</h2>
+<p>Punjab's heat, humidity, and stop-start traffic create a perfect environment for odours, bacteria, and embedded grime inside your vehicle. Spilled chai, monsoon wet footwear, pet hair, and air-conditioning condensation leave carpets and upholstery harbouring contaminants that surface fresheners only mask temporarily. Our Interior Deep Clean addresses the root cause with professional extraction, steam sanitisation, and meticulous attention to every cabin surface.</p>
 <p>At Diamond Steam Car Wash, interior detailing is not a quick vacuum and wipe. We dismantle accessible trim where safe, agitate fibres to release embedded dirt, and extract moisture rather than leaving seats damp in humid conditions. The outcome is a genuinely fresh cabin you can smell and feel—not a superficial clean that fades within days.</p>
 
 <h2>What Is Included</h2>
@@ -111,7 +111,7 @@ HTML,
 </ul>
 
 <h3>Steam Extraction Advantage</h3>
-<p>Soaking fabric seats in Mumbai's climate risks incomplete drying and subsequent mould growth. Our low-moisture steam combined with extraction equipment removes bacteria and allergens while pulling residual moisture from fibres. This technique is particularly effective after monsoon season when vehicles develop persistent musty odours from damp carpets and clogged AC evaporators.</p>
+<p>Soaking fabric seats in Punjab's climate risks incomplete drying and subsequent mould growth. Our low-moisture steam combined with extraction equipment removes bacteria and allergens while pulling residual moisture from fibres. This technique is particularly effective after monsoon season when vehicles develop persistent musty odours from damp carpets and clogged AC evaporators.</p>
 
 <h2>Who Needs Interior Deep Cleaning</h2>
 <p>Families with children, pet owners, ride-share drivers, and anyone selling their vehicle benefit most from this service. Corporate fleet managers use it to maintain client-facing presentation standards. If you notice lingering smells when AC runs, visible staining on seats, or greasy buildup on steering wheels and gear knobs, your cabin is overdue for professional attention.</p>
@@ -122,15 +122,15 @@ HTML,
 <p>Odour treatment targets source areas rather than masking scents. AC vents are cleaned externally and sanitised to reduce recirculated bacteria. Final inspection includes glass, mirrors, seatbelt webbing, and often-neglected areas like seat adjustment levers and door pull handles.</p>
 
 <h2>Results You Can Expect</h2>
-<p>Clients consistently report improved air quality, eliminated or dramatically reduced odours, and upholstery that looks visibly lighter and feels softer. Regular deep cleaning every three to six months prevents permanent staining and maintains higher resale values. In Mumbai's competitive used car market, a documented interior restoration signals care that buyers notice immediately during test drives.</p>
+<p>Clients consistently report improved air quality, eliminated or dramatically reduced odours, and upholstery that looks visibly lighter and feels softer. Regular deep cleaning every three to six months prevents permanent staining and maintains higher resale values. In Punjab's competitive used car market, a documented interior restoration signals care that buyers notice immediately during test drives.</p>
 <p>Combine Interior Deep Clean with Premium Steam Wash for a complete vehicle refresh, or schedule it as part of our Full Detailing package for showroom-level presentation inside and out.</p>
 HTML,
         'price' => 2499,
         'duration_minutes' => 150,
         'is_featured' => true,
         'featured_order' => 4,
-        'meta_title' => 'Interior Deep Car Cleaning Mumbai | Diamond Steam',
-        'meta_description' => 'Professional interior deep cleaning in Mumbai. Steam sanitisation, fabric extraction, odour removal & full cabin detail. Book today.',
+        'meta_title' => 'Interior Deep Car Cleaning Punjab | Diamond Steam',
+        'meta_description' => 'Professional interior deep cleaning in Punjab. Steam sanitisation, fabric extraction, odour removal & full cabin detail. Book today.',
     ],
     [
         'name' => 'Full Detailing',
@@ -140,7 +140,7 @@ HTML,
         'description' => <<<'HTML'
 <h2>Showroom Presentation Inside and Out</h2>
 <p>Full Detailing at Diamond Steam Car Wash is our most comprehensive single-visit transformation. Designed for owners who demand excellence before weddings, corporate events, vehicle handovers, or simply because their car deserves better than routine washing, this package combines exterior decontamination, paint enhancement, complete interior restoration, and application of durable protection layers.</p>
-<p>Mumbai vehicles endure conditions that accelerate wear: UV exposure on open rooftops, brake dust from congested traffic, tree sap in residential lanes, and monsoon mud that penetrates every panel gap. Full Detailing reverses accumulated neglect and establishes a protected baseline that regular maintenance can preserve for months.</p>
+<p>Punjab vehicles endure conditions that accelerate wear: UV exposure on open rooftops, brake dust from congested traffic, tree sap in residential lanes, and monsoon mud that penetrates every panel gap. Full Detailing reverses accumulated neglect and establishes a protected baseline that regular maintenance can preserve for months.</p>
 
 <h2>Exterior Detailing Included</h2>
 <ul>
@@ -179,8 +179,8 @@ HTML,
         'duration_minutes' => 360,
         'is_featured' => true,
         'featured_order' => 2,
-        'meta_title' => 'Full Car Detailing Mumbai | Diamond Steam Car Wash',
-        'meta_description' => 'Complete car detailing in Mumbai—exterior decon, machine polish, interior deep clean & paint protection. Showroom results guaranteed.',
+        'meta_title' => 'Full Car Detailing Punjab | Diamond Steam Car Wash',
+        'meta_description' => 'Complete car detailing in Punjab—exterior decon, machine polish, interior deep clean & paint protection. Showroom results guaranteed.',
     ],
     [
         'name' => 'Engine Bay Steam Clean',
@@ -189,7 +189,7 @@ HTML,
         'short_description' => 'Safe low-moisture steam cleaning for your engine bay. Removes grease and grime, aids resale inspection, and helps spot leaks early.',
         'description' => <<<'HTML'
 <h2>Professional Engine Bay Cleaning Without Risk</h2>
-<p>A clean engine bay is not merely cosmetic. It helps mechanics identify oil leaks, coolant seepage, and worn hoses during service. It improves resale appeal when buyers inspect under the bonnet. It also removes grease and debris that trap heat and accelerate rubber component deterioration. At Diamond Steam Car Wash in Mumbai, our Engine Bay Steam Clean uses controlled dry steam to achieve these benefits without the flood risk of conventional pressure washing.</p>
+<p>A clean engine bay is not merely cosmetic. It helps mechanics identify oil leaks, coolant seepage, and worn hoses during service. It improves resale appeal when buyers inspect under the bonnet. It also removes grease and debris that trap heat and accelerate rubber component deterioration. At Diamond Steam Car Wash in Punjab, our Engine Bay Steam Clean uses controlled dry steam to achieve these benefits without the flood risk of conventional pressure washing.</p>
 <p>Many owners avoid cleaning their engine bay because they fear damaging electronics. This caution is warranted—hosing a modern engine indiscriminately can cause serious problems. Our technicians are trained to protect sensitive components, use low-moisture steam at safe distances, and dry the bay thoroughly before return. The process is safe for daily drivers, luxury vehicles, and well-maintained classics when performed by qualified staff.</p>
 
 <h2>What Is Included</h2>
@@ -205,9 +205,9 @@ HTML,
 </ul>
 
 <h3>Why Steam Instead of Pressure Washing</h3>
-<p>High-pressure water forces moisture into connector boots, coil packs, and sensor housings. Mumbai's humidity then prolongs drying time, increasing corrosion risk. Steam delivers heat that emulsifies grease while using minimal liquid volume. Contaminants are lifted and wiped away rather than blasted into crevices where they cause long-term problems.</p>
+<p>High-pressure water forces moisture into connector boots, coil packs, and sensor housings. Punjab's humidity then prolongs drying time, increasing corrosion risk. Steam delivers heat that emulsifies grease while using minimal liquid volume. Contaminants are lifted and wiped away rather than blasted into crevices where they cause long-term problems.</p>
 
-<h2>Benefits for Mumbai Vehicle Owners</h2>
+<h2>Benefits for Punjab Vehicle Owners</h2>
 <p>Stop-start traffic and monsoon water ingress accelerate under-bonnet grime accumulation. Oil mist from minor seepage combines with dust to form a stubborn film that traps heat. A clean bay runs marginally cooler and allows faster diagnosis during scheduled service at your authorised workshop. When selling your vehicle, a presentable engine compartment signals attentive ownership to discerning buyers.</p>
 <p>Fleet operators benefit from easier pre-trip inspections and improved technician efficiency during maintenance windows. A clean engine also reduces fire risk from oil-soaked debris contacting hot exhaust components—a concern often overlooked until an incident occurs.</p>
 
@@ -215,25 +215,25 @@ HTML,
 <p>Schedule Engine Bay Steam Clean annually, before RTO inspections, prior to selling your vehicle, or after monsoon season when mud and water ingress peak. Avoid booking if your vehicle has active electrical faults, cracked wiring, or known major oil leaks that require mechanical repair first—we will advise honestly during inspection.</p>
 
 <h2>Our Safety-First Process</h2>
-<p>The engine is allowed to cool to a safe working temperature. Battery terminals may be covered, and air intakes masked to prevent moisture ingestion. Degreaser dwell time is controlled, followed by sectional steam treatment and immediate wipe-down. Dressing is applied sparingly to avoid attracting fresh dust while protecting rubber hoses from Mumbai's heat and UV when the bonnet is opened.</p>
+<p>The engine is allowed to cool to a safe working temperature. Battery terminals may be covered, and air intakes masked to prevent moisture ingestion. Degreaser dwell time is controlled, followed by sectional steam treatment and immediate wipe-down. Dressing is applied sparingly to avoid attracting fresh dust while protecting rubber hoses from Punjab's heat and UV when the bonnet is opened.</p>
 <p>Most sessions complete within 60 minutes. You receive a cleaner, more inspectable engine bay and practical guidance on maintaining it between professional cleanings. Pair with Basic Wash or Premium Steam Wash for a completely refreshed vehicle presentation.</p>
 HTML,
         'price' => 1499,
         'duration_minutes' => 60,
         'is_featured' => false,
         'featured_order' => null,
-        'meta_title' => 'Engine Bay Steam Cleaning Mumbai | Diamond Steam',
-        'meta_description' => 'Safe engine bay steam cleaning in Mumbai. Remove grease & grime without electrical risk. Professional low-moisture detailing.',
+        'meta_title' => 'Engine Bay Steam Cleaning Punjab | Diamond Steam',
+        'meta_description' => 'Safe engine bay steam cleaning in Punjab. Remove grease & grime without electrical risk. Professional low-moisture detailing.',
     ],
     [
         'name' => 'Ceramic Coating',
         'slug' => 'ceramic-coating',
         'category' => 'protection',
-        'short_description' => 'Professional 9H ceramic coating for long-lasting paint protection, hydrophobic beading, and UV defence against Mumbai sun and monsoon.',
+        'short_description' => 'Professional 9H ceramic coating for long-lasting paint protection, hydrophobic beading, and UV defence against Punjab sun and monsoon.',
         'description' => <<<'HTML'
-<h2>Long-Term Paint Protection for Mumbai Conditions</h2>
-<p>Ceramic coating transforms your vehicle's exterior with a semi-permanent silica-based layer that bonds at a molecular level to factory clear coat. Unlike wax that degrades within weeks in Mumbai's heat and pollution, professional ceramic coatings deliver years of hydrophobic performance, UV resistance, and chemical protection against bird droppings, tree sap, and industrial fallout. Diamond Steam Car Wash applies premium coating systems only after proper paint preparation—because protection is only as durable as the surface beneath it.</p>
-<p>Our Mumbai clients choose ceramic coating to reduce washing effort, maintain deeper gloss, and protect resale value on vehicles that face daily exposure on Western Express Highway, coastal roads, and open office parking where UV intensity is relentless from March through June.</p>
+<h2>Long-Term Paint Protection for Punjab Conditions</h2>
+<p>Ceramic coating transforms your vehicle's exterior with a semi-permanent silica-based layer that bonds at a molecular level to factory clear coat. Unlike wax that degrades within weeks in Punjab's heat and pollution, professional ceramic coatings deliver years of hydrophobic performance, UV resistance, and chemical protection against bird droppings, tree sap, and industrial fallout. Diamond Steam Car Wash applies premium coating systems only after proper paint preparation—because protection is only as durable as the surface beneath it.</p>
+<p>Our Punjab clients choose ceramic coating to reduce washing effort, maintain deeper gloss, and protect resale value on vehicles that face daily exposure on Western Express Highway, coastal roads, and open office parking where UV intensity is relentless from March through June.</p>
 
 <h2>What Is Included</h2>
 <ul>
@@ -252,7 +252,7 @@ HTML,
 <p>Coating over contaminated or swirled paint locks in defects permanently. Our preparation process removes iron particles, tar, and environmental fallout before polishing creates the smooth, defect-minimised surface coatings require. Vehicles with severe paint damage may need Paint Correction before coating application—we assess honestly and quote transparently during consultation.</p>
 
 <h2>Benefits of Ceramic Coating</h2>
-<p>Hydrophobic properties cause water to bead and sheet off, carrying dust and reducing water spot formation during monsoon. UV inhibitors slow clear coat oxidation and colour fade on daily-parked vehicles. Chemical resistance provides a sacrificial layer against acidic bird droppings and tree sap that etch unprotected paint within hours in Mumbai heat.</p>
+<p>Hydrophobic properties cause water to bead and sheet off, carrying dust and reducing water spot formation during monsoon. UV inhibitors slow clear coat oxidation and colour fade on daily-parked vehicles. Chemical resistance provides a sacrificial layer against acidic bird droppings and tree sap that etch unprotected paint within hours in Punjab heat.</p>
 <p>Maintenance washing becomes faster and safer because dirt releases more easily, reducing mechanical abrasion during cleaning. Many owners find fortnightly Premium Steam Wash sufficient to maintain coating performance for two to five years depending on product tier and driving conditions.</p>
 
 <h2>Ideal For</h2>
@@ -260,24 +260,24 @@ HTML,
 <p>Coating is not suitable for vehicles with failing clear coat, unresolved rust, or panels requiring bodywork. We decline applications that would not deliver lasting results rather than taking payment for a compromised finish.</p>
 
 <h2>Application Process and Timeline</h2>
-<p>Ceramic coating requires six to seven hours in controlled conditions. The vehicle must remain indoors during initial curing; we advise against immediate exposure to heavy rain for 24 to 48 hours post-application. Our studio environment in Mumbai is equipped for temperature-controlled application year-round, avoiding the humidity-related curing failures common with mobile coating services.</p>
+<p>Ceramic coating requires six to seven hours in controlled conditions. The vehicle must remain indoors during initial curing; we advise against immediate exposure to heavy rain for 24 to 48 hours post-application. Our studio environment in Punjab is equipped for temperature-controlled application year-round, avoiding the humidity-related curing failures common with mobile coating services.</p>
 <p>After delivery, we provide written aftercare: pH-neutral wash products, avoidance of automated brush tunnels, and complimentary inspection at six months to verify coating integrity. Annual maintenance top-ups are available to extend hydrophobic performance on high-mileage vehicles.</p>
 HTML,
         'price' => 24999,
         'duration_minutes' => 420,
         'is_featured' => true,
         'featured_order' => 3,
-        'meta_title' => 'Ceramic Coating Mumbai | Diamond Steam Car Wash',
-        'meta_description' => 'Professional 9H ceramic coating in Mumbai. UV protection, hydrophobic finish & multi-year paint defence. Expert prep included.',
+        'meta_title' => 'Ceramic Coating Punjab | Diamond Steam Car Wash',
+        'meta_description' => 'Professional 9H ceramic coating in Punjab. UV protection, hydrophobic finish & multi-year paint defence. Expert prep included.',
     ],
     [
         'name' => 'Paint Protection Film (PPF)',
         'slug' => 'paint-protection-film',
         'category' => 'protection',
-        'short_description' => 'Self-healing PPF installation to shield paint from stone chips, scratches, and Mumbai road debris. Clear, invisible armour for high-impact zones.',
+        'short_description' => 'Self-healing PPF installation to shield paint from stone chips, scratches, and Punjab road debris. Clear, invisible armour for high-impact zones.',
         'description' => <<<'HTML'
-<h2>Physical Paint Protection for Mumbai Roads</h2>
-<p>Paint Protection Film—commonly known as PPF—is a transparent polyurethane layer applied directly to painted surfaces. It absorbs stone chip impacts, resists scratching from car park brushes and road debris, and self-heals minor swirl marks with heat exposure. For Mumbai drivers navigating construction zones, expressway expansion projects, and gravel-strewn monsoon roads, PPF provides protection that ceramic coating alone cannot offer against physical impact.</p>
+<h2>Physical Paint Protection for Punjab Roads</h2>
+<p>Paint Protection Film—commonly known as PPF—is a transparent polyurethane layer applied directly to painted surfaces. It absorbs stone chip impacts, resists scratching from car park brushes and road debris, and self-heals minor swirl marks with heat exposure. For Punjab drivers navigating construction zones, expressway expansion projects, and gravel-strewn monsoon roads, PPF provides protection that ceramic coating alone cannot offer against physical impact.</p>
 <p>Diamond Steam Car Wash installs premium self-healing films using precision-cut patterns and expert squeegee technique to deliver invisible protection without yellowing, peeling, or visible edge lines. Our installations focus on high-impact areas or full front-end coverage depending on your vehicle usage and budget.</p>
 
 <h2>Coverage Options</h2>
@@ -291,23 +291,23 @@ HTML,
 <h3>Installation Process</h3>
 <p>Surface preparation mirrors ceramic coating standards: wash, decontaminate, clay, and polish before film application. Panels are cleaned with installation gel or slip solution, film positioned using computer-cut patterns matched to your vehicle make and model, then squeegeed to remove air and activate adhesive bond. Edges are wrapped where possible and heat-formed around complex curves for seamless appearance.</p>
 
-<h2>Why PPF Matters in Mumbai</h2>
+<h2>Why PPF Matters in Punjab</h2>
 <p>Construction trucks shedding gravel, sudden lane changes on the Eastern Freeway, and tight parking in dense commercial areas create constant chip and scratch risk. Factory paint repairs are expensive and rarely match original finish perfectly. PPF sacrifices itself—absorbing damage that would otherwise reach your paint. Quality films self-heal light scratches from washing or contact, maintaining optical clarity for years.</p>
-<p>Combined with ceramic coating over the film, you achieve both impact protection and hydrophobic ease of maintenance. Many luxury SUV and sports car owners in Mumbai choose this combination for daily-driven vehicles where appearance directly affects enjoyment and resale value.</p>
+<p>Combined with ceramic coating over the film, you achieve both impact protection and hydrophobic ease of maintenance. Many luxury SUV and sports car owners in Punjab choose this combination for daily-driven vehicles where appearance directly affects enjoyment and resale value.</p>
 
 <h2>Who Should Consider PPF</h2>
 <p>New car buyers protecting delivery-fresh paint, owners of vehicles with expensive metallic or matte finishes, highway commuters covering significant daily kilometres, and anyone who has previously paid for bonnet resprays due to chip damage. PPF is also popular on headlamps to prevent UV yellowing and stone crack damage that compromises night visibility and MOT compliance.</p>
 
 <h2>Aftercare and Warranty</h2>
 <p>Installed PPF requires gentle washing with pH-neutral products—no pressure washer direct blasts on film edges during the first week. We provide manufacturer warranty documentation and inspect edges at annual service visits. Film can be removed without paint damage when professionally detached, making it a reversible investment unlike permanent resprays.</p>
-<p>Consultation includes vehicle inspection, coverage recommendation based on your driving patterns, and transparent pricing. Full front installations typically require a full day in our climate-controlled bay to ensure dust-free application—critical for invisible results on dark and metallic paints popular in Mumbai's premium segment.</p>
+<p>Consultation includes vehicle inspection, coverage recommendation based on your driving patterns, and transparent pricing. Full front installations typically require a full day in our climate-controlled bay to ensure dust-free application—critical for invisible results on dark and metallic paints popular in Punjab's premium segment.</p>
 HTML,
         'price' => 39999,
         'duration_minutes' => 480,
         'is_featured' => false,
         'featured_order' => null,
-        'meta_title' => 'PPF Paint Protection Film Mumbai | Diamond Steam',
-        'meta_description' => 'Professional PPF installation in Mumbai. Self-healing paint protection film against stone chips & scratches. Expert precision fitting.',
+        'meta_title' => 'PPF Paint Protection Film Punjab | Diamond Steam',
+        'meta_description' => 'Professional PPF installation in Punjab. Self-healing paint protection film against stone chips & scratches. Expert precision fitting.',
     ],
     [
         'name' => 'Paint Correction',
@@ -316,7 +316,7 @@ HTML,
         'short_description' => 'Multi-stage machine polishing to remove swirls, scratches, and oxidation. Restores clarity and depth before coating or sale.',
         'description' => <<<'HTML'
 <h2>Restore Your Paint's True Depth and Clarity</h2>
-<p>Paint correction is the process of permanently removing defects from your vehicle's clear coat using machine polishing compounds and pads. Swirl marks from improper washing, light scratches from car park contact, oxidation from UV exposure, and water spot etching from Mumbai's hard water all diminish the reflective quality of your paint. Correction levels the surface optically, revealing the colour depth and gloss your vehicle had when new—or better, if factory delivery imperfections are addressed.</p>
+<p>Paint correction is the process of permanently removing defects from your vehicle's clear coat using machine polishing compounds and pads. Swirl marks from improper washing, light scratches from car park contact, oxidation from UV exposure, and water spot etching from Punjab's hard water all diminish the reflective quality of your paint. Correction levels the surface optically, revealing the colour depth and gloss your vehicle had when new—or better, if factory delivery imperfections are addressed.</p>
 <p>At Diamond Steam Car Wash, paint correction is performed by trained detailers using LED inspection lighting, paint thickness gauges, and dual-action and rotary polishers selected for each panel's requirements. We correct only what is necessary, preserving maximum clear coat thickness for long-term paint health.</p>
 
 <h2>Defects We Address</h2>
@@ -342,14 +342,14 @@ HTML,
 
 <h2>Results and Maintenance</h2>
 <p>Properly corrected paint exhibits mirror-like reflection, accurate colour rendering, and smooth tactile finish. Maintenance thereafter requires safe washing techniques—our Premium Steam Wash and proper hand washing guidance prevent reintroducing swirls. Ceramic coating after correction locks in results and reduces future defect accumulation from washing.</p>
-<p>Document your correction with before-and-after photos for resale portfolios. Mumbai's harsh environment makes correction a worthwhile investment for any vehicle you plan to keep beyond two years or sell at a premium price point.</p>
+<p>Document your correction with before-and-after photos for resale portfolios. Punjab's harsh environment makes correction a worthwhile investment for any vehicle you plan to keep beyond two years or sell at a premium price point.</p>
 HTML,
         'price' => 8999,
         'duration_minutes' => 300,
         'is_featured' => false,
         'featured_order' => null,
-        'meta_title' => 'Paint Correction Mumbai | Diamond Steam Car Wash',
-        'meta_description' => 'Expert paint correction in Mumbai. Remove swirls, scratches & oxidation with professional machine polishing. Prep for ceramic coating.',
+        'meta_title' => 'Paint Correction Punjab | Diamond Steam Car Wash',
+        'meta_description' => 'Expert paint correction in Punjab. Remove swirls, scratches & oxidation with professional machine polishing. Prep for ceramic coating.',
     ],
     [
         'name' => 'Headlight Restoration',
@@ -357,8 +357,8 @@ HTML,
         'category' => 'exterior',
         'short_description' => 'Restore yellowed, hazy headlights to optical clarity. Improves night visibility and passes inspection with UV-sealed long-lasting results.',
         'description' => <<<'HTML'
-<h2>Clear Headlights for Safer Mumbai Night Driving</h2>
-<p>UV exposure, road grit, and Mumbai's intense sun gradually oxidise polycarbonate headlight lenses. What begins as slight yellowing progresses to cloudy, pitted surfaces that scatter light rather than projecting it down the road. Reduced night visibility increases accident risk during monsoon evenings when glare and spray compound the problem. Headlight restoration at Diamond Steam Car Wash removes oxidation mechanically and chemically, then seals lenses with UV-resistant protection to delay recurrence.</p>
+<h2>Clear Headlights for Safer Punjab Night Driving</h2>
+<p>UV exposure, road grit, and Punjab's intense sun gradually oxidise polycarbonate headlight lenses. What begins as slight yellowing progresses to cloudy, pitted surfaces that scatter light rather than projecting it down the road. Reduced night visibility increases accident risk during monsoon evenings when glare and spray compound the problem. Headlight restoration at Diamond Steam Car Wash removes oxidation mechanically and chemically, then seals lenses with UV-resistant protection to delay recurrence.</p>
 <p>Replacement headlight assemblies on modern vehicles cost thousands to tens of thousands of rupees. Professional restoration delivers dramatically improved output at a fraction of replacement cost, often exceeding the brightness of neglected lenses by 50 percent or more in independent light meter tests.</p>
 
 <h2>What Is Included</h2>
@@ -372,11 +372,11 @@ HTML,
 <li>Cleaning of headlamp surrounds and indicator sections</li>
 </ul>
 
-<h3>Why Lenses Degrade Faster in Mumbai</h3>
+<h3>Why Lenses Degrade Faster in Punjab</h3>
 <p>Year-round UV intensity, coastal salt air in western suburbs, and heat cycling from engine bay proximity accelerate polycarbonate breakdown. Vehicles parked outdoors in office complexes and residential societies without covered parking show noticeable hazing within three to five years. Once oxidation breaches the factory UV coating, degradation accelerates unless professionally treated.</p>
 
 <h2>Benefits Beyond Appearance</h2>
-<p>Restored headlights improve your ability to see pedestrians, potholes, and unmarked speed breakers during poorly lit Mumbai streets. They also ensure your vehicle presents well during resale inspection and RTO checks where severely degraded lamps may draw scrutiny. For families sharing vehicles among multiple drivers, improved lighting is a genuine safety upgrade—not cosmetic vanity.</p>
+<p>Restored headlights improve your ability to see pedestrians, potholes, and unmarked speed breakers during poorly lit Punjab streets. They also ensure your vehicle presents well during resale inspection and RTO checks where severely degraded lamps may draw scrutiny. For families sharing vehicles among multiple drivers, improved lighting is a genuine safety upgrade—not cosmetic vanity.</p>
 
 <h2>Our Restoration Process</h2>
 <p>Technicians mask surrounding paint to prevent accidental sanding contact. Progressive grit sanding removes damaged material without creating distortion. Polishing refines the surface to optical smoothness. UV sealant application is critical—unsealed restored lenses re-yellow within months. We apply professional-grade sealants rated for automotive UV exposure in Indian conditions.</p>
@@ -390,8 +390,8 @@ HTML,
         'duration_minutes' => 75,
         'is_featured' => false,
         'featured_order' => null,
-        'meta_title' => 'Headlight Restoration Mumbai | Diamond Steam',
-        'meta_description' => 'Professional headlight restoration in Mumbai. Remove yellowing, improve night visibility & apply UV sealant. Affordable & effective.',
+        'meta_title' => 'Headlight Restoration Punjab | Diamond Steam',
+        'meta_description' => 'Professional headlight restoration in Punjab. Remove yellowing, improve night visibility & apply UV sealant. Affordable & effective.',
     ],
     [
         'name' => 'Alloy Wheel Care',
@@ -399,8 +399,8 @@ HTML,
         'category' => 'exterior',
         'short_description' => 'Deep wheel cleaning, iron fallout removal, polish, and sealant. Eliminates brake dust corrosion and restores showroom wheel finish.',
         'description' => <<<'HTML'
-<h2>Professional Wheel Detailing for Mumbai Brake Dust</h2>
-<p>Alloy wheels are among the most neglected yet visually prominent components on any vehicle. Mumbai's stop-start traffic generates extreme brake dust that bonds to wheel surfaces, etching clear-coated alloys and staining bare metal finishes within weeks. Road salt mist near coastal areas accelerates corrosion on barrel faces and behind spokes where routine washing never reaches. Our Alloy Wheel Care service delivers deep cleaning, decontamination, and protection that standard car washes simply cannot provide.</p>
+<h2>Professional Wheel Detailing for Punjab Brake Dust</h2>
+<p>Alloy wheels are among the most neglected yet visually prominent components on any vehicle. Punjab's stop-start traffic generates extreme brake dust that bonds to wheel surfaces, etching clear-coated alloys and staining bare metal finishes within weeks. Road salt mist near coastal areas accelerates corrosion on barrel faces and behind spokes where routine washing never reaches. Our Alloy Wheel Care service delivers deep cleaning, decontamination, and protection that standard car washes simply cannot provide.</p>
 <p>At Diamond Steam Car Wash, wheels are removed from the vehicle only when necessary for barrel access—most services are performed safely with the wheel on, using specialised brushes, steam, and iron fallout removers that dissolve embedded particles without damaging delicate finishes.</p>
 
 <h2>What Is Included</h2>
@@ -427,23 +427,23 @@ HTML,
 
 <h2>Long-Term Wheel Health</h2>
 <p>Protected wheels resist brake dust bonding, reducing the abrasive scrubbing needed during routine washes. This preserves factory clear coat on OEM alloys and aftermarket finishes alike. Combined with Premium Steam Wash maintenance, your wheels remain a styling highlight rather than an embarrassing contrast to an otherwise clean vehicle.</p>
-<p>Ask about ceramic coating for wheels during your visit—popular among enthusiasts seeking maximum durability on vehicles tracked or driven aggressively on Mumbai-Pune expressway weekend runs.</p>
+<p>Ask about ceramic coating for wheels during your visit—popular among enthusiasts seeking maximum durability on vehicles tracked or driven aggressively on Punjab-Pune expressway weekend runs.</p>
 HTML,
         'price' => 1499,
         'duration_minutes' => 90,
         'is_featured' => false,
         'featured_order' => null,
-        'meta_title' => 'Alloy Wheel Cleaning Mumbai | Diamond Steam',
-        'meta_description' => 'Expert alloy wheel care in Mumbai. Brake dust removal, iron decon, polish & sealant. Restore shine & prevent corrosion.',
+        'meta_title' => 'Alloy Wheel Cleaning Punjab | Diamond Steam',
+        'meta_description' => 'Expert alloy wheel care in Punjab. Brake dust removal, iron decon, polish & sealant. Restore shine & prevent corrosion.',
     ],
     [
         'name' => 'Leather Conditioning',
         'slug' => 'leather-conditioning',
         'category' => 'interior',
-        'short_description' => 'Clean, nourish, and protect leather seats and trim. Prevents cracking from Mumbai heat and restores supple factory feel and matte finish.',
+        'short_description' => 'Clean, nourish, and protect leather seats and trim. Prevents cracking from Punjab heat and restores supple factory feel and matte finish.',
         'description' => <<<'HTML'
-<h2>Preserve Your Leather Interior in Mumbai Heat</h2>
-<p>Leather upholstery in Mumbai faces relentless UV through windows, extreme cabin temperatures when parked outdoors, and humidity cycles that dry natural oils within the hide. Without proper care, premium leather cracks along bolsters, fades on seat cushions, and develops a shiny patina from body oils and improper conditioners. Our Leather Conditioning service cleans gently, replenishes essential oils, and applies UV-protective products that maintain the supple, matte factory appearance luxury buyers expect.</p>
+<h2>Preserve Your Leather Interior in Punjab Heat</h2>
+<p>Leather upholstery in Punjab faces relentless UV through windows, extreme cabin temperatures when parked outdoors, and humidity cycles that dry natural oils within the hide. Without proper care, premium leather cracks along bolsters, fades on seat cushions, and develops a shiny patina from body oils and improper conditioners. Our Leather Conditioning service cleans gently, replenishes essential oils, and applies UV-protective products that maintain the supple, matte factory appearance luxury buyers expect.</p>
 <p>Diamond Steam Car Wash distinguishes between coated automotive leather, semi-aniline, and synthetic leatherette—each requires different products. Using household furniture polish or silicone-heavy dressings, common mistakes in DIY care, accelerates degradation and creates slippery, unnaturally glossy surfaces.</p>
 
 <h2>What Is Included</h2>
@@ -459,7 +459,7 @@ HTML,
 </ul>
 
 <h3>Why Conditioning Matters</h3>
-<p>Leather is skin—it needs cleaning to remove abrasive dirt and conditioning to replace oils lost to heat and friction. Dry leather loses elasticity and cracks along stress points where drivers slide in and out daily. Conditioned leather resists staining from denim dye transfer and spilled beverages, common issues in Mumbai's casual driving culture.</p>
+<p>Leather is skin—it needs cleaning to remove abrasive dirt and conditioning to replace oils lost to heat and friction. Dry leather loses elasticity and cracks along stress points where drivers slide in and out daily. Conditioned leather resists staining from denim dye transfer and spilled beverages, common issues in Punjab's casual driving culture.</p>
 
 <h2>Who Should Book</h2>
 <p>Owners of vehicles with leather seats from Maruti Suzuki Nexa to Mercedes-Benz S-Class benefit from biannual conditioning. New car buyers should condition within the first year to establish protection before damage accumulates. Pre-sale preparation absolutely requires leather care—buyers running hands across cracked bolsters negotiate aggressively.</p>
@@ -470,23 +470,23 @@ HTML,
 <p>Service completes in approximately 75 minutes for standard five-seater cabins. Larger SUVs with third-row leather and door panel coverage may require additional time quoted during inspection.</p>
 
 <h2>Maintenance Between Visits</h2>
-<p>Use only automotive leather cleaners without solvents or silicone. Wipe spills immediately—Mumbai heat sets stains within hours. Park with sunshades when possible and consider window tint within legal limits to reduce UV load. Annual or biannual professional conditioning at Diamond Steam Car Wash supplements your routine and catches problems before restoration becomes replacement.</p>
+<p>Use only automotive leather cleaners without solvents or silicone. Wipe spills immediately—Punjab heat sets stains within hours. Park with sunshades when possible and consider window tint within legal limits to reduce UV load. Annual or biannual professional conditioning at Diamond Steam Car Wash supplements your routine and catches problems before restoration becomes replacement.</p>
 HTML,
         'price' => 1799,
         'duration_minutes' => 75,
         'is_featured' => false,
         'featured_order' => null,
-        'meta_title' => 'Leather Seat Conditioning Mumbai | Diamond Steam',
-        'meta_description' => 'Professional leather cleaning & conditioning in Mumbai. Prevent cracking, restore suppleness & protect against UV damage.',
+        'meta_title' => 'Leather Seat Conditioning Punjab | Diamond Steam',
+        'meta_description' => 'Professional leather cleaning & conditioning in Punjab. Prevent cracking, restore suppleness & protect against UV damage.',
     ],
     [
         'name' => 'Monsoon Protection Package',
         'slug' => 'monsoon-protection-package',
         'category' => 'protection',
-        'short_description' => 'Pre-monsoon exterior and interior defence: paint sealant, hydrophobic glass, underbody rinse, and anti-fungal cabin treatment for Mumbai rains.',
+        'short_description' => 'Pre-monsoon exterior and interior defence: paint sealant, hydrophobic glass, underbody rinse, and anti-fungal cabin treatment for Punjab rains.',
         'description' => <<<'HTML'
-<h2>Prepare Your Vehicle for Mumbai Monsoon</h2>
-<p>Mumbai monsoon is unforgiving to vehicles. Acidic rain, flooded streets, humidity trapped in cabins, and underbody mud accelerate corrosion, electrical issues, mould growth, and paint damage within a single season. Our Monsoon Protection Package is a seasonal service designed specifically for local conditions—applied before June rains arrive to create defensive barriers that reduce monsoon damage and simplify post-season recovery.</p>
+<h2>Prepare Your Vehicle for Punjab Monsoon</h2>
+<p>Punjab monsoon is unforgiving to vehicles. Acidic rain, flooded streets, humidity trapped in cabins, and underbody mud accelerate corrosion, electrical issues, mould growth, and paint damage within a single season. Our Monsoon Protection Package is a seasonal service designed specifically for local conditions—applied before June rains arrive to create defensive barriers that reduce monsoon damage and simplify post-season recovery.</p>
 <p>Diamond Steam Car Wash developed this package after years of detailing flood-affected and mould-damaged vehicles each October. Prevention costs significantly less than correction. This comprehensive service addresses exterior paint, glass visibility, underbody exposure, and interior fungal risk in one coordinated appointment.</p>
 
 <h2>Exterior Protection Included</h2>
@@ -510,21 +510,21 @@ HTML,
 </ul>
 
 <h2>Why Pre-Monsoon Timing Matters</h2>
-<p>Sealants bond best to clean, dry paint before sustained rain exposure. Glass coatings dramatically improve visibility when monsoon downpours overwhelm standard wipers—water sheets off at driving speeds above 40 km/h, reducing reliance on wipers and improving peripheral awareness in Mumbai traffic. Underbody protection slows mud packing in chassis cavities where moisture lingers for weeks after waterlogging recedes.</p>
+<p>Sealants bond best to clean, dry paint before sustained rain exposure. Glass coatings dramatically improve visibility when monsoon downpours overwhelm standard wipers—water sheets off at driving speeds above 40 km/h, reducing reliance on wipers and improving peripheral awareness in Punjab traffic. Underbody protection slows mud packing in chassis cavities where moisture lingers for weeks after waterlogging recedes.</p>
 <p>Interior anti-fungal treatment prevents the musty odour that develops when wet footwear and damp clothes introduce moisture to carpets. Once mould establishes in padding beneath carpets, complete interior disassembly may be required for remediation—an expense this package prevents.</p>
 
 <h2>Ideal For</h2>
-<p>Every vehicle parked outdoors or in semi-open structures during monsoon should receive this package annually. Particularly important for vehicles with sunroofs, older door seals, low ground clearance susceptible to flooding, and families with children tracking moisture into cabins daily. Fleet operators preparing vehicles for monsoon duty across Mumbai and Navi Mumbai reduce seasonal breakdowns related to electrical corrosion and cabin contamination.</p>
+<p>Every vehicle parked outdoors or in semi-open structures during monsoon should receive this package annually. Particularly important for vehicles with sunroofs, older door seals, low ground clearance susceptible to flooding, and families with children tracking moisture into cabins daily. Fleet operators preparing vehicles for monsoon duty across Punjab and Matour reduce seasonal breakdowns related to electrical corrosion and cabin contamination.</p>
 
 <h2>Post-Monsoon Follow-Up</h2>
 <p>We recommend a post-monsoon inspection in October including underbody check, interior odour assessment, and sealant condition review. Many clients book Interior Deep Clean after monsoon to address accumulated contamination, followed by sealant refresh if hydrophobic performance has declined. Establishing this annual rhythm costs less than reactive repairs to corroded brake lines, failed window regulators, and permanent interior mould staining.</p>
-<p>Book before peak pre-monsoon demand in late May. Service requires approximately three and a half hours. Your vehicle enters Mumbai rains with defences specifically engineered for the city's unique severity—not generic products marketed nationally without local understanding.</p>
+<p>Book before peak pre-monsoon demand in late May. Service requires approximately three and a half hours. Your vehicle enters Punjab rains with defences specifically engineered for the city's unique severity—not generic products marketed nationally without local understanding.</p>
 HTML,
         'price' => 4499,
         'duration_minutes' => 210,
         'is_featured' => true,
         'featured_order' => 5,
-        'meta_title' => 'Monsoon Car Protection Mumbai | Diamond Steam',
-        'meta_description' => 'Pre-monsoon car protection package in Mumbai. Paint sealant, hydrophobic glass, underbody care & anti-fungal interior treatment.',
+        'meta_title' => 'Monsoon Car Protection Punjab | Diamond Steam',
+        'meta_description' => 'Pre-monsoon car protection package in Punjab. Paint sealant, hydrophobic glass, underbody care & anti-fungal interior treatment.',
     ],
 ];

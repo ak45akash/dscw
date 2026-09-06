@@ -65,12 +65,6 @@
                                     <a href="mailto:{{ $business['email'] }}" class="text-brand-700 hover:underline dark:text-brand-300">{{ $business['email'] }}</a>
                                 </li>
                             @endif
-                            @if(!empty($business['address']))
-                                <li>
-                                    <p class="font-medium text-graphite-500">Address</p>
-                                    <p class="text-graphite-700 dark:text-graphite-200">{{ $business['address'] }}</p>
-                                </li>
-                            @endif
                             @if(!empty($business['whatsapp_number']))
                                 <li>
                                     <p class="font-medium text-graphite-500">WhatsApp</p>
@@ -80,24 +74,39 @@
                         </ul>
                     </x-card>
 
+                    @if($locations->isNotEmpty())
+                        <div class="grid gap-4 sm:grid-cols-1">
+                            @foreach($locations as $location)
+                                <x-card class="h-full">
+                                    <h3 class="text-lg font-semibold">{{ $location->name }}</h3>
+                                    <p class="mt-3 text-sm leading-relaxed text-graphite-600 dark:text-graphite-300">{{ $location->fullAddress() }}</p>
+                                    @if($location->phone)
+                                        <a href="tel:{{ $location->phone }}" class="mt-3 inline-block text-sm font-medium text-brand-700 hover:underline dark:text-brand-300">{{ $location->phone }}</a>
+                                    @endif
+                                </x-card>
+                            @endforeach
+                        </div>
+                    @elseif(!empty($business['address']))
+                        <x-card>
+                            <h3 class="text-lg font-semibold">Address</h3>
+                            <p class="mt-3 text-sm text-graphite-700 dark:text-graphite-200">{{ $business['address'] }}</p>
+                        </x-card>
+                    @endif
+
                     <x-card>
                         <h3 class="text-lg font-semibold">Working Hours</h3>
                         <ul class="mt-4 space-y-2 text-sm text-graphite-600 dark:text-graphite-300">
-                            <li class="flex justify-between"><span>Monday – Saturday</span><span>8:00 AM – 8:00 PM</span></li>
-                            <li class="flex justify-between"><span>Sunday</span><span>9:00 AM – 6:00 PM</span></li>
+                            <li class="flex justify-between gap-4"><span>Monday – Saturday</span><span class="text-right">8:00 AM – 8:00 PM</span></li>
+                            <li class="flex justify-between gap-4"><span>Sunday</span><span class="text-right">9:00 AM – 6:00 PM</span></li>
                         </ul>
                     </x-card>
-
-                    <div class="aspect-video rounded-xl bg-graphite-200 dark:bg-graphite-800">
-                        <div class="flex h-full items-center justify-center text-sm text-graphite-500">Map — {{ $business['address'] ?? 'Mumbai' }}</div>
-                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     @if($faqs->isNotEmpty())
-    <section class="bg-graphite-50 py-16 dark:bg-graphite-900/50 sm:py-20">
+    <section class="bg-graphite-50 py-16 dark:bg-graphite-900 sm:py-20">
         <div class="container-site max-w-3xl">
             <x-section-heading title="Common Questions" class="mb-8" />
             <div class="space-y-4">

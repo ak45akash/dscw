@@ -11,20 +11,23 @@ class LocationSeeder extends Seeder
 {
     public function run(): void
     {
+        // Rename legacy Mumbai slugs so bookings keep their foreign keys.
+        Location::query()->where('slug', 'andheri')->update(['slug' => 'sector-66']);
+        Location::query()->where('slug', 'navi-mumbai')->update(['slug' => 'matour']);
+
         $locations = [
             [
-                'name' => 'Diamond Steam — Andheri',
-                'slug' => 'andheri',
+                'name' => 'Diamond Steam — Sector 66',
+                'slug' => 'sector-66',
                 'phone' => '+91 98765 43210',
-                'email' => 'andheri@diamondsteamcarwash.com',
-                'address' => '12 Premium Auto Lane, Near Metro Station',
-                'city' => 'Mumbai',
-                'state' => 'Maharashtra',
-                'pincode' => '400053',
+                'email' => 'sector66@diamondsteamcarwash.com',
+                'address' => 'Plot Number 589, Sector 66, Near Bestech Mall And Business Towers',
+                'city' => 'Sahibzada Ajit Singh Nagar',
+                'state' => 'Punjab',
+                'pincode' => '160062',
                 'is_default' => true,
                 'display_order' => 1,
                 'hours' => [
-                    // 0=Sun … 6=Sat
                     0 => ['10:00', '18:00'],
                     1 => ['09:00', '20:00'],
                     2 => ['09:00', '20:00'],
@@ -35,18 +38,18 @@ class LocationSeeder extends Seeder
                 ],
             ],
             [
-                'name' => 'Diamond Steam — Navi Mumbai',
-                'slug' => 'navi-mumbai',
+                'name' => 'Diamond Steam — Matour',
+                'slug' => 'matour',
                 'phone' => '+91 98765 43211',
-                'email' => 'navimumbai@diamondsteamcarwash.com',
-                'address' => 'Plot 45, Sector 17, Palm Beach Road',
-                'city' => 'Navi Mumbai',
-                'state' => 'Maharashtra',
-                'pincode' => '400703',
+                'email' => 'matour@diamondsteamcarwash.com',
+                'address' => '',
+                'city' => 'Matour',
+                'state' => 'Punjab',
+                'pincode' => '',
                 'is_default' => false,
                 'display_order' => 2,
                 'hours' => [
-                    0 => null, // closed
+                    0 => null,
                     1 => ['09:00', '19:00'],
                     2 => ['09:00', '19:00'],
                     3 => ['09:00', '19:00'],
@@ -79,12 +82,12 @@ class LocationSeeder extends Seeder
             }
         }
 
-        $andheri = Location::query()->where('slug', 'andheri')->first();
+        $primary = Location::query()->where('slug', 'sector-66')->first();
 
-        if ($andheri) {
+        if ($primary) {
             BlockedDate::query()->updateOrCreate(
                 [
-                    'location_id' => $andheri->id,
+                    'location_id' => $primary->id,
                     'date' => now()->addDays(14)->toDateString(),
                 ],
                 [

@@ -2,17 +2,22 @@
     'title',
     'subtitle' => null,
     'badge' => null,
+    'image' => 'images/hero.jpg',
+    'speed' => 0.75,
 ])
 
-<section {{ $attributes->merge(['class' => 'relative overflow-hidden bg-gradient-to-br from-brand-700 via-brand-600 to-brand-800 text-white']) }}>
-    <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 20% 20%, #38bdf8 0, transparent 40%), radial-gradient(circle at 80% 0%, #60a5fa 0, transparent 35%);"></div>
-    <div class="container-site relative py-16 sm:py-20">
+<section {{ $attributes->merge(['class' => 'relative flex min-h-[38vh] items-center overflow-hidden sm:min-h-[44vh] lg:min-h-[48vh]']) }}>
+    <x-parallax-bg :src="$image" :speed="$speed" brightness="0.45" position="center 30%" height="180%">
+        <div class="absolute inset-0 bg-gradient-to-r from-graphite-950/75 via-brand-900/55 to-brand-800/35"></div>
+    </x-parallax-bg>
+
+    <div class="container-site relative z-10 py-14 text-white sm:py-16 lg:py-20">
         @if($badge)
-            <p class="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-accent-400">{{ $badge }}</p>
+            <p class="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-accent-400 sm:text-sm">{{ $badge }}</p>
         @endif
-        <h1 class="max-w-4xl text-4xl font-bold tracking-tight sm:text-5xl">{{ $title }}</h1>
+        <h1 class="max-w-4xl text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">{{ $title }}</h1>
         @if($subtitle)
-            <p class="mt-5 max-w-3xl text-lg text-brand-100">{{ $subtitle }}</p>
+            <p class="mt-4 max-w-3xl text-base leading-relaxed text-white/90 sm:mt-5 sm:text-lg">{{ $subtitle }}</p>
         @endif
         @if(isset($actions))
             <div class="mt-8 flex flex-wrap gap-4">{{ $actions }}</div>

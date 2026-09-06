@@ -21,7 +21,7 @@ class FaqSeeder extends Seeder
             ['category' => 'Process', 'question' => 'Do I need to stay while my car is being serviced?', 'answer' => 'No, you can drop off your vehicle and return at the agreed time. For longer services like ceramic coating or PPF, we recommend scheduling a convenient drop-off. Our team will contact you when your vehicle is ready for collection.'],
             ['category' => 'Safety', 'question' => 'Is steam washing safe for all paint types?', 'answer' => 'Yes. Steam washing is safe for factory paint, clear coat, matte finishes (with appropriate products), and wrapped vehicles when performed by trained technicians. We adjust temperature and technique based on your vehicle\'s finish and condition.'],
             ['category' => 'Safety', 'question' => 'What products do you use on interiors?', 'answer' => 'We use pH-neutral, automotive-grade cleaners for fabric, leather, plastic, and glass. All products are selected for effectiveness without damaging surfaces. Leather services include conditioning to prevent cracking and fading.'],
-            ['category' => 'Location', 'question' => 'Where are you located?', 'answer' => 'Diamond Steam Car Wash is located in Mumbai, Maharashtra. Full address and directions are available on our Contact page. We serve customers across the Mumbai metropolitan area and welcome vehicles of all makes and models.'],
+            ['category' => 'Location', 'question' => 'Where are you located?', 'answer' => 'We have two centres in Punjab: Plot Number 589, Sector 66 near Bestech Mall And Business Towers, Sahibzada Ajit Singh Nagar; and Matour, Punjab. Choose either location when you book online.'],
         ];
 
         foreach ($faqs as $i => $faq) {

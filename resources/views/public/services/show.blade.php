@@ -69,7 +69,7 @@
     </section>
 
     @if($related->isNotEmpty())
-    <section class="bg-graphite-50 py-16 dark:bg-graphite-900/50 sm:py-20">
+    <section class="bg-graphite-50 py-16 dark:bg-graphite-900 sm:py-20">
         <div class="container-site">
             <x-section-heading title="Related Services" subtitle="You might also be interested in these services." class="mb-10" />
             <div class="grid gap-6 md:grid-cols-3">

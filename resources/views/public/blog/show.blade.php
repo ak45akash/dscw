@@ -1,4 +1,4 @@
-<x-layouts.public :seo-title="$seoTitle" :seo-description="$seoDescription">
+<x-layouts.public :seo-title="$seoTitle" :seo-description="$seoDescription" :seo-image="$seoImage ?? null" :og-type="$ogType ?? 'website'">
     <x-page-hero
         :badge="$post->category?->name"
         :title="$post->title"
@@ -57,7 +57,7 @@
     </article>
 
     @if($related->isNotEmpty())
-    <section class="bg-graphite-50 py-16 dark:bg-graphite-900/50 sm:py-20">
+    <section class="bg-graphite-50 py-16 dark:bg-graphite-900 sm:py-20">
         <div class="container-site">
             <x-section-heading title="Related Articles" class="mb-10" />
             <div class="grid gap-6 md:grid-cols-3">

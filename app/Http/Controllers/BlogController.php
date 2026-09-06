@@ -26,8 +26,9 @@ class BlogController extends Controller
             'categories' => $categories,
             'featured' => $featured,
             'activeCategory' => $category,
-            'seoTitle' => 'Car Care Blog & Tips | Diamond Steam Car Wash',
-            'seoDescription' => 'Expert guides on car washing, detailing, ceramic coating, PPF, and vehicle maintenance from Diamond Steam Car Wash Mumbai.',
+            'seoTitle' => 'Car Care Blog Punjab | Steam Wash & Detailing Tips',
+            'seoDescription' => 'Expert guides on steam car washing, detailing, ceramic coating, PPF, and vehicle maintenance from Diamond Steam Car Wash in Sector 66 and Matour, Punjab.',
+            'seoImage' => $featured?->featuredImageUrl() ?: asset('images/steam-wash.jpg'),
         ]);
     }
 
@@ -52,6 +53,8 @@ class BlogController extends Controller
             'related' => $related,
             'seoTitle' => $post->meta_title ?? $post->title,
             'seoDescription' => $post->meta_description ?? $post->excerpt,
+            'seoImage' => $post->featuredImageUrl() ?: asset('images/steam-wash.jpg'),
+            'ogType' => 'article',
         ]);
     }
 }

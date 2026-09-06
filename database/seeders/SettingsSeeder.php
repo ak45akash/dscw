@@ -17,7 +17,8 @@ class SettingsSeeder extends Seeder
             'tagline' => config('dscw.business.tagline'),
             'phone' => '+91 98765 43210',
             'email' => 'hello@diamondsteamcarwash.com',
-            'address' => '123 Premium Auto Lane, Mumbai, Maharashtra 400001',
+            'address' => 'Plot Number 589, Sector 66, Near Bestech Mall And Business Towers, Sahibzada Ajit Singh Nagar, Punjab',
+            'city' => 'Sahibzada Ajit Singh Nagar',
             'currency' => 'INR',
             'timezone' => 'Asia/Kolkata',
             'facebook_url' => '',
@@ -25,7 +26,7 @@ class SettingsSeeder extends Seeder
             'youtube_url' => '',
             'whatsapp_number' => '+919876543210',
         ], [
-            'business_name', 'tagline', 'phone', 'email', 'address',
+            'business_name', 'tagline', 'phone', 'email', 'address', 'city',
             'currency', 'timezone', 'facebook_url', 'instagram_url',
             'youtube_url', 'whatsapp_number',
         ]);
@@ -33,8 +34,8 @@ class SettingsSeeder extends Seeder
         $settings->set('theme', 'mode', 'system', 'string', true);
 
         $settings->setMany('seo', [
-            'meta_title' => 'Diamond Steam Car Wash | Premium Car Care & Detailing',
-            'meta_description' => 'Book premium steam car wash, detailing, ceramic coating, and paint protection services. Fast online booking with expert care.',
+            'meta_title' => 'Steam Car Wash Punjab | Diamond Steam Sector 66 & Matour',
+            'meta_description' => 'Book paint-safe steam car wash, detailing, ceramic coating, and PPF in Sector 66, SAS Nagar and Matour, Punjab. Transparent pricing and online booking.',
         ], ['meta_title', 'meta_description']);
 
         $settings->setMany('booking', [

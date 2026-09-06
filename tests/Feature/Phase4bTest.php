@@ -61,7 +61,7 @@ class Phase4bTest extends TestCase
     {
         Mail::fake();
 
-        $location = Location::query()->where('slug', 'andheri')->firstOrFail();
+        $location = Location::query()->where('slug', 'sector-66')->firstOrFail();
         $service = Service::query()->active()->orderBy('price')->firstOrFail();
         $addon = ServiceAddon::query()->create([
             'name' => 'Pet Hair Removal',
